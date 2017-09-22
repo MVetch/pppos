@@ -1,6 +1,6 @@
 <h1 style="text-align:center"><?=$result['event']['name']?></h1>
     <div class="input-group" style=" text-align:center; margin:auto; border-radius:5%">
-        <table border=1 style="margin:20px" class="table">
+        <table border=1 style="margin-top:20px; width:100%" class="table">
         <tr>
             <td>
                 Название мероприятия: 

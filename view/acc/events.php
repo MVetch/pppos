@@ -1,6 +1,11 @@
 <div style="display:none; text-align:center" id="<?=$name?>Div">
     <h2 style="text-align:center">Мероприятия</h2>
     <?if($result['count'] > 0):?>
+        <?if($settings['own']):?>
+            <div class="input-group divCenter">
+                <input type = "button" value = "Добавить" name = "add" class="button" onclick="window.location.href='/events/'">
+            </div>
+        <?endif?>
         <?foreach ($result['events'] as $event): ?>
             <div class="event-box" data-mcs-theme="dark" id="<?=$event['id']?>">
                 <li style="height:120px;">
@@ -29,11 +34,6 @@
                 </li>
             </div>
         <?endforeach?>
-        <?if($settings['own']):?>
-            <div class="input-group divCenter">
-                <input type = "button" value = "Добавить" name = "add" class="button" onclick="window.location.href='/events/'">
-            </div>
-        <?endif?>
     <?else:?>
         <?if($settings['own']):?>
             Вы не посетили ни одного мероприятия :(

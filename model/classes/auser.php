@@ -2,7 +2,7 @@
 /**
 * Общий класс для пользователей.
 */
-class AUser extends User
+class AUser
 {
 
 	function __construct(array $info){
@@ -15,19 +15,29 @@ class AUser extends User
 		    }
 		}
 	}
+	
+	public static function getInfo($id, $select = array("*"))
+	{
+		global $db;
+		return $db->Select(
+			$select,
+			"full_info",
+			array("id_student" => $id)
+		)->fetch();
+	}
 
-	public function getList($select, $ids)
+	public static function getList($select, $ids)
 	{
 		# code...
 	}
 
-	public function Add($values)
+	public static function Add($values)
 	{
 		global $db;
 		$db->Add("students", $values);
 	}
 	
-	public function getId()
+	public static function getId()
 	{
 		global $db;
 		if(isset($this)){

@@ -34,6 +34,7 @@ if(empty($result['stip'])){
 	$result['stip']['categ'] = "-";
 	$result['stip']['date_app'] = "-";
 	$result['stip']['date_end'] = "-";
+	$result['stip']['now'] = "Не выплачивается";
 } else {
 	if($result['stip']['date_end'] > date("Y-m-d")) {
 		$result['stip']['now'] = "Выплачивается";

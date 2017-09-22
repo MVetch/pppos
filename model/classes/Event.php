@@ -4,7 +4,7 @@
 */
 class Event
 {
-	public function AddParticipant($studID, $eventID, $role)
+	public static function AddParticipant($studID, $eventID, $role)
 	{
 		global $db;
 		$db->Add(
@@ -17,7 +17,7 @@ class Event
 		);
 	}
 
-	public function Add($name, $date, $place, $level, $quota, $role)
+	public static function Add($name, $date, $place, $level, $quota, $role)
 	{
 		global $db, $user;
 		if(!isset($quota) || $quota < 0) {$quota = 0;}
@@ -45,7 +45,7 @@ class Event
 		}
 	}
 
-	public function approve($id)
+	public static function approve($id)
 	{
 		global $db, $user;
 		$event = $db->Select(
@@ -82,7 +82,7 @@ class Event
 		}
 	}
 
-	public function getNew()
+	public static function getNew()
 	{
 		global $db;
 		$ret = $db->Select(

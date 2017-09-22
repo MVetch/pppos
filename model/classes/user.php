@@ -32,7 +32,7 @@ class User
 	    }
 	}
 
-	public function getInfo($id, $select = array("*"))
+	public static function getInfo($id, $select = array("*"))
 	{
 		global $db;
 		return $db->Select(
@@ -292,7 +292,7 @@ class User
 		return $this->newEventsCount;
 	}
 
-	public function LogIn($login, $password)
+	public static function LogIn($login, $password)
 	{
 		global $db;
 	    // if($login == "ultrauser" and $password == "123"){
@@ -333,7 +333,7 @@ class User
 	        Main::error('Такого пользователя не существует или Вы неправильно ввели login.');
 	    }
 	    else {
-	        if (hash_equals($myrow['password'], crypt($password, $myrow['password']))) {
+	        if (password_verify($password, $myrow['password'])) {
 	        	$savedHash = md5($myrow['password'].time());
 	        	$db->Update(
 	        		"users",
@@ -727,7 +727,7 @@ class User
 	public function ChangePassword($old, $new, $newConf, $hash)
 	{
 		global $db;
-		if (!hash_equals($this->password, crypt($old, $this->password))){
+		if (!password_verify($old, $this->password)){
 			Main::error("Неверный пароль!");
 		} else if($new != $newConf){
 	        Main::error("Пароли не совпадают!");
@@ -735,13 +735,12 @@ class User
 	    	$db->Update(
 	    		"users", 
 	    		array(
-	    			"password" => crypt($new, $hash)
+	    			"password" => password_hash($new, PASSWORD_BCRYPT)
 	    		),
 	    		array(
 	    			"id_user" => $this->id
 	    		)
 	    	);
-	    	Main::set_cookie("HPS", crypt($new, $hash));
 	    }
 	}
 }

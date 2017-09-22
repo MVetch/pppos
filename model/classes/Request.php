@@ -4,7 +4,7 @@
 */
 class Request
 {
-	public function DeleteEventById($id)
+	public static function DeleteEventById($id)
 	{
 		global $db;
 		$db->Delete(
@@ -15,7 +15,7 @@ class Request
 		);
 	}
 
-	public function DeletePostById($id)
+	public static function DeletePostById($id)
 	{
 		global $db;
 		$db->Delete(
@@ -26,7 +26,7 @@ class Request
 		);
 	}
 
-	public function DeleteEvent(int $studID, int $eventID, int $role)
+	public static function DeleteEvent(int $studID, int $eventID, int $role)
 	{
 		global $db;
 		$db->Delete(
@@ -39,7 +39,7 @@ class Request
 		);
 	}
 
-	public function DeleteNewEventById($id)
+	public static function DeleteNewEventById($id)
 	{
 		global $db;
 		$db->Delete(

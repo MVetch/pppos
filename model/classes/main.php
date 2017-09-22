@@ -75,11 +75,11 @@ class Main
 	* @param array $settings Параметры для подключения. В зависимости от этих данных может меняться контент на странице.
 	* @return array $result Полученный массив, который можно использовать далее на странице и передавать его (или его части) как параметр для следующего элемента (например, какие разделы показывать, исходя из доступных разделов меню)
 	*/
-	public function IncludeThing($type, $name, $settings = array())
+	public static function IncludeThing($type, $name, $settings = array(), $unLoged = true)
 	{
 		global $user, $db;
 		$result = array();
-		if(!isset(self::$permissions[$type][$name]) || !in_array($user->getLevel(), self::$permissions[$type][$name])){
+		if(!isset(self::$permissions[$type][$name]) || (isset($user) && !in_array($user->getLevel(), self::$permissions[$type][$name]) || !$unLoged)){
 			include $_SERVER['DOCUMENT_ROOT']."/403.php";
 		}
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/$type/model/$name.php"))
@@ -93,15 +93,16 @@ class Main
 		return $result;
 	}
 
-	public function error($error)
+	public static function error($error)
 	{
 		global $db, $user;
 		include $_SERVER['DOCUMENT_ROOT']."/headerreg.php";
         include $_SERVER['DOCUMENT_ROOT']."/view/error.php";
+        include $_SERVER['DOCUMENT_ROOT']."/footer.php";
         die;
 	}
 
-	public function error403()
+	public static function error403()
 	{
 		global $db, $user;
         include $_SERVER['DOCUMENT_ROOT']."/403.php";
@@ -109,7 +110,7 @@ class Main
 	}
 
 
-	public function errorMessage($error)
+	public static function errorMessage($error)
 	{
 		global $db, $user;
         include $_SERVER['DOCUMENT_ROOT']."/view/error.php";
@@ -117,7 +118,7 @@ class Main
         die;
 	}
 
-	public function success($text, $url)
+	public static function success($text, $url)
 	{
 		global $db, $user;
 		include_once $_SERVER['DOCUMENT_ROOT']."/header.php";
@@ -126,7 +127,7 @@ class Main
         die;
 	}
 
-	public function redirect($link)
+	public static function redirect($link)
 	{
 		echo "<META HTTP-EQUIV='REFRESH' CONTENT='0; URL=$link'>";
 		die;
@@ -137,7 +138,7 @@ class Main
 	* @param $name Имя куки (без префикса)
 	* @param $name_prefix Префикс
 	*/
-	public function get_cookie($name, $name_prefix=self::COOKIE_PREFIX)
+	public static function get_cookie($name, $name_prefix=self::COOKIE_PREFIX)
 	{
 		$name = $name_prefix."_".$name;
 		return (isset($_COOKIE[$name])? $_COOKIE[$name] : "");
@@ -153,7 +154,7 @@ class Main
 	* @param $secure Указывает на то, что значение cookie должно передаваться от клиента по защищенному HTTPS соединению
 	* @param $name_prefix Префикс к имени
 	*/
-	public function set_cookie($name, $value, $time=false, $folder="/", $domain=false, $secure=false, $name_prefix=self::COOKIE_PREFIX, $httpOnly=false)
+	public static function set_cookie($name, $value, $time=false, $folder="/", $domain=false, $secure=false, $name_prefix=self::COOKIE_PREFIX, $httpOnly=false)
 	{
 		if($time === false)
 			$time = time()+60*60*24*30; // 30 days 
@@ -165,13 +166,12 @@ class Main
 		setcookie($name, $value, $time, $folder, $domain, $secure, $httpOnly);
 	}
 
-	public function delete_cookie($name, $name_prefix=self::COOKIE_PREFIX)
+	public static function delete_cookie($name, $name_prefix=self::COOKIE_PREFIX)
 	{
-		$name = $name_prefix."_".$name;
-		setcookie($name, "", 0);
+		self::set_cookie($name, " ", time()-1000);
 	}
 
-	public function IncludeAddWindow($name, $settings = array())
+	public static function IncludeAddWindow($name, $settings = array())
 	{
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php"))
 			include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php";

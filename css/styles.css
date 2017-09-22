@@ -222,7 +222,7 @@ table.sortable tr:nth-child(1) {
 	background-color:orange;
   position: absolute;
 	color:#fff;
-  font-size:8pt;
+  font-size:7.5pt;
   font-weight: normal;
   right: -20px;
   top: -13px;
@@ -238,7 +238,7 @@ table.sortable tr:nth-child(1) {
 	align-items: center;
 	display: inline-block;
 	color:#fff;
-	font-size:7pt;
+	font-size:6pt;
   right: -7px;
   top: -4px;
   text-align:center;
@@ -480,6 +480,7 @@ table.sortable tr:nth-child(1) {
   width: 120px;
   height: 100%;
   top: 0;
+  z-index:1;
 }
 
 .request-deny {
@@ -498,7 +499,7 @@ table.sortable tr:nth-child(1) {
   height:100%;
 }
 .request-apply-button {
-  background-image: url("../images/plus.png");
+  background-image: url("../images/big-plus.png");
   background-repeat: no-repeat;
   background-position: center;
   width:100%;

@@ -87,17 +87,20 @@ else {
         )
     );
 }
+$savedHash = md5($_POST['password'].time());
+$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 $db->Add(
     "users",
     array(
         "login" => $_POST['login'],
-        "password" => crypt($_POST['password'], '$2x'),//тоже хеш должен вычисляться каким-то волшебным способом
+        "password" => $password,//тоже хеш должен вычисляться каким-то волшебным способом
         "id_user" => $id,
-        "level" => "5"
+        "level" => "5",
+        "hash" => md5($savedHash)
     )
 );
 Main::set_cookie('LOG', $db->escape($_POST['login']));
-Main::set_cookie('HPS', crypt($_POST['password'], '$2x'));
+Main::set_cookie('HPS', $savedHash);
 $_SESSION['lastpage']="reg.php";
-echo '<META HTTP-EQUIV="REFRESH" CONTENT="0; URL=/posts">';
+echo '<META HTTP-EQUIV="REFRESH" CONTENT="0; URL=/post">';
 exit();

@@ -21,22 +21,22 @@ if (document.forms.reg !== undefined){
 $(document).on('submit','form.regGroup',function(){
     document.getElementById("registration").innerHTML+="<img src='/images/loading.gif'>";
     var form = $(this)[0];
-
+    
     var name = "";
     var surname = "";
     var thirdName = "";
     var group = "";
     if (form.elements[0].value !== undefined){
-        var group = form.elements[0].value;
+        group = form.elements[0].value;
     }
     if (form.elements[1] !== undefined){
-        var surname = form.elements[1].value;
+        surname = form.elements[1].value;
     }
     if (form.elements[2] !== undefined){
-        var name = form.elements[2].value;
+        name = form.elements[2].value;
     }
     if (form.elements[3] !== undefined){
-        var thirdName = form.elements[3].value;
+        thirdName = form.elements[3].value;
     }
     $(function(){
         $.ajax({

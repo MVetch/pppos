@@ -4,7 +4,7 @@
 */
 class Task
 {
-	public function Add($name, $from, $description, $date_exp, $_for)
+	public static function Add($name, $from, $description, $date_exp, $_for)
 	{
 		global $db, $user;
 		if($user->getLevel() == 1){
@@ -21,7 +21,7 @@ class Task
 		}
 	}
 
-	public function getList()
+	public static function getList()
 	{
 		global $db;
 		$ret = $db->query('

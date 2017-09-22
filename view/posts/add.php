@@ -192,7 +192,7 @@
         else if (c.value==3//"Куратор" 
                 || c.value==4//"Староста группы" 
                 || c.value==7){//"Профгруппорг"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой группы?</h5><input class='form-control' name='comment[]' id='"+c.id+"' style='width:100%' type = 'text' placeholder='Например: СР-п-16-1' onchange='checkGroup(this)'><span id='errGroup" + c.id + "' style='color:red; font-size:10pt; max-width:20px'></span>";
+            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой группы?</h5><input id='comment"+(c.id)+"' class='form-control' name='comment[]' id='"+c.id+"' style='width:100%' type = 'text' placeholder='Например: СР-п-16-1' onchange='checkGroup(this)'><span id='errGroup" + c.id + "' style='color:red; font-size:10pt; max-width:20px'></span>";
         }
         else if (c.value==6){//"Профкурсорг"
             document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого курса?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>1 курса</option><option>2 курса</option><option>3 курса</option><option>4 курса</option><option>5 курса</option><option>1 курса магистратуры</option><option>2 курса магистратуры</option></select>";

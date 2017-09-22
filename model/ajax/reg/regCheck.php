@@ -25,6 +25,6 @@ if(isset($_POST['name']) && isset($_POST['surname'])){
 	Main::includeThing(
 		"reg",
 		$include,
-		($res->num_rows != 0)?$res->fetchAll():array()
+		($res->num_rows != 0)?$res->fetchAll():array("name" => $_POST['name'], "surname" => $_POST['surname'], "thirdName" => $_POST['thirdName'])
 	);
 }

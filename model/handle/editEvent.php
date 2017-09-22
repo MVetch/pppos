@@ -11,7 +11,7 @@ if(isset($_POST['btn'])){
     		"date" => $_POST['date'],
     		"place" => $_POST['place'],
     		"level" => $_POST['level'],
-    		"created_by" => $user->getId()
+    		"accepted_by" => $user->getId()
     	),
     	array(
     		"id_event" => $_GET['id']

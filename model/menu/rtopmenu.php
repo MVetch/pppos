@@ -9,7 +9,7 @@ $result = array(
 		"link" => "/rate"
 	)
 );
-if($user->getNumNotes()['posts'] !== false && $user->getNumNotes()['events'] !== false){
+if($user->getNumNotes()['posts'] !== false || $user->getNumNotes()['events'] !== false){
 	$result[] = array(
 		"name" => "Заявки",
 		"numReq" => $user->getNumNotes()['posts']['count'] + $user->getNumNotes()['events']['count'],

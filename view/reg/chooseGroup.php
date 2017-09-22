@@ -10,4 +10,7 @@
 <?endforeach?>
 <form method="POST" class="regGroup" name="regGroup">
     <input type="submit" class="button" name = "no" value = "Нет">
+    <input type="hidden" class="surname" class="form-control" value="<?=$_POST['surname']?>">
+    <input type="hidden" class="name" class="form-control" value="<?=$_POST['name']?>">
+    <input type="hidden" class="thirdName" class="form-control" value="<?=$_POST['thirdName']?>">
 </form>

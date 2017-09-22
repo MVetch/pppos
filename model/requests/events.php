@@ -5,7 +5,7 @@ if(isset($user->getNumNotes()['events']['notes'])){
 		"event_student_names_requests",
 		array(
 			"id" => $user->getNumNotes()['events']['notes'],
-			//"!id_student" => $user->getId()
+			"!id_student" => $user->getId()
 		)
 	)->fetchAll();
 }
