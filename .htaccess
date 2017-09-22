@@ -1,0 +1,25 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
+
+RewriteRule ^id([0-9]+)$ account.php?id=$1 [L]
+RewriteRule ^edit$ edit.php [L]
+
+RewriteRule ^event([0-9]+)$ events/info.php?id=$1 [L]
+
+RewriteRule ^post$ posts/post.php [L]
+RewriteRule ^editpost([0-9]+)/([0-9]+)$ posts/editpost.php?id=$1&post=$2 [L]
+
+RewriteRule ^exit$ exit.php [L]
+RewriteRule ^exit/$ exit.php [L]
+
+RewriteRule ^rate$ rate/rate.php [L]
+RewriteRule ^rate/$ rate/rate.php [L]
+
+RewriteRule ^rate_fac$ rate/faculty.php [L]
+RewriteRule ^rate_fac/$ rate/rate.php [L]
+
+RewriteRule ^change$ change_log.php [L]
+
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php

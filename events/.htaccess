@@ -1,0 +1,9 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^new$ add.php [L]
+RewriteRule ^search$ search.php [L]
+RewriteRule ^fill$ fill.php [L]
+RewriteRule ^requests$ requests.php [L]
+RewriteRule ^edit([0-9]+)$ edit.php?id=$1 [L]
+RewriteRule ^$ list.php [L]

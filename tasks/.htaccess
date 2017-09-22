@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^new$ new.php [L]
+RewriteRule ^check$ check.php [L]
+RewriteRule ^do$ do.php [L]
