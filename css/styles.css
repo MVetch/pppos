@@ -217,11 +217,11 @@ table.sortable tr:nth-child(1) {
 }
 .circle{
   border-radius: 50%;
-	width: 17px;
-	height: 17px;
-	background-color:orange;
+  width: 17px;
+  height: 17px;
+  background-color:orange;
   position: absolute;
-	color:#fff;
+  color:#fff;
   font-size:7.5pt;
   font-weight: normal;
   right: -20px;
@@ -231,14 +231,14 @@ table.sortable tr:nth-child(1) {
 
 .lcircle{
   border-radius: 50%;
-	width: 15px;
-	height: 15px;
-	background-color:orange;
-	position:absolute;
-	align-items: center;
-	display: inline-block;
-	color:#fff;
-	font-size:6pt;
+  width: 15px;
+  height: 15px;
+  background-color:orange;
+  position:absolute;
+  align-items: center;
+  display: inline-block;
+  color:#fff;
+  font-size:6pt;
   right: -7px;
   top: -4px;
   text-align:center;
@@ -314,6 +314,16 @@ table.sortable tr:nth-child(1) {
 :-ms-input-placeholder {  
   text-align: center; 
 }
+.avatar-photo {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;    
+    max-height: 100%;
+    right: 0;
+    left: 0;
+}
 
 .user-photo{
   width:27px;
@@ -332,6 +342,7 @@ table.sortable tr:nth-child(1) {
   border: 5px orange solid;
   overflow:hidden;
 }
+
 
 .button {
   padding: 5px 10px;

@@ -1,14 +1,31 @@
 <?
 /**
-* 
+* Класс результата выборки из базы данных.
 */
 class DBResult
 {
 
+	/**
+	 * Стандартный объект mysqli_result. Некоторые фукнции наследуются именно оттуда.
+	 * @var mysqli_result
+	 */
 	private $mysqli_result;
+	/**
+	 * Количество страниц, на которые разбилась выборка, если вообще разбивалась.
+	 * @var int 
+	 */
 	public $num_pages;
+	/**
+	 * Общее количество строк в выборке без разбиения на страницы.
+	 * @var int
+	 */
 	public $all_rows;
 
+	/**
+	 * Конструктор
+	 * @param mysqli_result $res       стандартный объект mysqli_result
+	 * @param mixed $paginated количество записей на одной странице при разбиении
+	 */
 	function __construct(mysqli_result $res, $paginated) {
 		$this->mysqli_result = $res;
 		if($paginated > 0) {
@@ -30,11 +47,20 @@ class DBResult
         return $this->mysqli_result->$name;
     }
 
+	/**
+	 * Выбирает следующую строку из выборки
+	 * @return array ассоциативный массив с получившимися значениями
+	 */
 	public function fetch()
 	{
 		return $this->fetch_assoc();
 	}
 
+	/**
+	 * Записывает сразу все строки в один массив для дальнейшей обработки
+	 * @param  string $field единственное поле, которое записать в массив. Если не указан, то массив будет состоять из массивов со всеми полями
+	 * @return array получившийся массив
+	 */
 	public function fetchAll(string $field="")
 	{
 		$ret = array();
@@ -51,6 +77,11 @@ class DBResult
 		return $ret;
 	}
 
+	/**
+	 * Разбивает выборку на подвыборки из массивов с определенным количеством результатов в каждой
+	 * @param  integer $perPage количество результатов в одной подвыборки
+	 * @return array получившийся массив
+	 */
 	public function fetchPaginated($perPage = 20)
 	{
 		$i = 0;
@@ -62,7 +93,11 @@ class DBResult
 		return $ret;
 	}
 
-	public function GeneratePageNav($page)
+	/**
+	 * Генерирует навигационную панель для вывода разбитой на страницы выборки
+	 * @param int $page текущая страница
+	 */
+	public function GeneratePageNav(int $page)
 	{
 		$nav = '<div class="divCenter">';
 		if($this->num_pages > 1){

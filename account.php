@@ -1,7 +1,7 @@
 <?
 include "header.php";
 if(isset($_POST['change'])){
-    $user->ChangePassword($_POST['oldPass'], $_POST['newPass'], $_POST['newPassConf'], $user->getHash());
+    $user->ChangePassword($_POST['oldPass'], $_POST['newPass'], $_POST['newPassConf']);
 }
 if($user->getId() == $_GET['id'])
     $is_mine=true;

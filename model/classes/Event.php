@@ -1,10 +1,16 @@
 <?
 /**
-* 
+* Класс для обработки мероприятий
 */
 class Event
 {
-	public static function AddParticipant($studID, $eventID, $role)
+	/**
+	 * Добавить запись об участии студента на мероприятии
+	 * @param int $studID  ИД студента
+	 * @param int $eventID ИД мероприятия
+	 * @param int $role    ИД роли из БД
+	 */
+	public static function AddParticipant(int $studID, int $eventID, int $role)
 	{
 		global $db;
 		$db->Add(
@@ -17,7 +23,16 @@ class Event
 		);
 	}
 
-	public static function Add($name, $date, $place, $level, $quota, $role)
+	/**
+	 * Добавляет заявку на добавление нового мероприятия
+	 * @param string $name  название мероприятия
+	 * @param string $date  дата мероприятия
+	 * @param string $place место проведения
+	 * @param int    $level ИД уровня из БД
+	 * @param int    $quota квота
+	 * @param int    $role  ИД роли из БД (организатор или ответственный от ЛГТУ)
+	 */
+	public static function Add(string $name, string $date, string $place, int $level, int $quota, int $role)
 	{
 		global $db, $user;
 		if(!isset($quota) || $quota < 0) {$quota = 0;}
@@ -45,7 +60,12 @@ class Event
 		}
 	}
 
-	public static function approve($id)
+	/**
+	 * Подтверждает мероприятие
+	 * @param  int    $id ИД записи в БД
+	 * @return mixed ИД новой записи с мероприятием в случае успешного подтверждения, иначе false
+	 */
+	public static function approve(int $id)
 	{
 		global $db, $user;
 		$event = $db->Select(
@@ -82,6 +102,10 @@ class Event
 		}
 	}
 
+	/**
+	 * Получает список заявок на добавление новых мероприятий
+	 * @return array массив с заявками
+	 */
 	public static function getNew()
 	{
 		global $db;

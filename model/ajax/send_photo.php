@@ -2,7 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 
 if(isset($_FILES['upload'])){
-    $id = AUser::getId();
+    $id = User::ID();
     if($_FILES['upload']['size']<1*1024*1024){
         if($_FILES['upload']['type']=="image/png" || $_FILES['upload']['type']=="image/jpeg" || $_FILES['upload']['type']=="image/gif"){
             $uploaddir = $_SERVER['DOCUMENT_ROOT'].AVATAR_DIR;

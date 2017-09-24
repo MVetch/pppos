@@ -4,20 +4,44 @@
 */
 class DB extends mysqli
 {
-	public function __construct($serverName, $login, $pass, $db)
+	/**
+	 * Стандартный конструктор, только со сменой кодировки.
+	 * @param string $serverName имя хоста
+	 * @param string $login      логин для БД
+	 * @param string $pass       пароль от БД
+	 * @param string $db         название БД
+	 */
+	public function __construct(string $serverName, string $login, string $pass, string $db)
 	{
 		parent::__construct($serverName, $login, $pass, $db);
 		parent::query("SET NAMES 'utf8';");
 	}
 
-	private $queries;
+	/**
+	 * Тексты всех запросов
+	 * @var array
+	 */
+	private $queries = [];
+
+	/**
+	 * Количество запросов при загрузке страницы
+	 * @var integer
+	 */
 	public $queriesCount = 0;
+
+	/**
+	 * Время выполнения всех запросов при загрузке страницы
+	 * @var integer
+	 */
 	public $executionTime = 0;
 
 	/**
-	* @param string $query
-	* @param bool $error_log
-	*/
+	 * Посылает запрос в базу данных, здесь так же ведется статистика запросов.
+	 * @param  string  $query     текст запроса
+	 * @param  boolean $paginate  необходимо ли разбивать на страницы результат запроса (необходимо при большой выборке. Автоматически передается true, если используется функция @ref Select() и там указан параметр LIMIT). По умолчанию - false
+	 * @param  boolean $error_log необходимо ли вести учет ошибок для данного запроса. По умолчанию - true
+	 * @return DBResult в случае, если запрос прошел успешно, иначе возвращается false
+	 */
 	public function query($query, $paginate = false, $error_log = true)
 	{
 		$this->queries[] = $query;
@@ -30,6 +54,9 @@ class DB extends mysqli
 		else self::throw_error($query);
 	}
 
+	/**
+	 * Выводит на экран все выполненные запросы на момент вызова функции. Используется для дебага запросов и их результатов
+	 */
 	public function ListAllQueries()
 	{
 		foreach ($this->queries as $query) {
@@ -38,12 +65,14 @@ class DB extends mysqli
 	}
 
 	/**
-	* Функция делает запрос в базу данных с заданными параметрами. Запрещается использовать для выборки, в которой участвует более чем 1 таблица. Для этого необходимо использовать функцию @ref query()
-	* @param array $select Поля для выбора
-	* @param string $from Таблица, из которой идет выбор
-	* @param array $where Ассоциативный массив, где ключами являются поля, а значениями необходимые для отсеивания значения в соответствующих полях (могут быть массивы для сравнения на равенство).
-	*/
-	public function Select($select, $from, $where = array(), $order_by = array(), $pagination = array())
+	 * Функция делает запрос в базу данных с заданными параметрами. Запрещается использовать для выборки, в которой участвует более чем 1 таблица. Для этого необходимо использовать функцию @ref query()
+	 * @param array $select     поля для выбора
+	 * @param string $from       таблица, из которой идет выбор
+	 * @param array  $where      ассоциативный массив, где ключами являются поля, а значениями необходимые для отсеивания значения в соответствующих полях (могут быть массивы для сравнения на равенство)
+	 * @param array  $order_by   ассоциативный массив, где ключами являются поля по которым необходимо сортировать выборку, значениями могут быть ASC или DESC
+	 * @param array  $pagination массив из двух значений, аналог параметра LIMIT в SQL запросе. Первое - номер строки, с которой необходимо выбирать элементы, второе - количетсво элементов для выбора. При передаче этого параметра, выборка автоматически разбивается на страницы.
+	 */
+	public function Select(array $select, string $from, $where = array(), $order_by = array(), $pagination = array())
 	{
 		$begin = "SELECT ";
 		if(empty($select)){
@@ -66,12 +95,23 @@ class DB extends mysqli
 		return $this->query($begin.implode(", ", $select)." FROM ".$from.$this->GenerateWherePart($where).$order.$limit, $limitedBy);
 	}
 
-	public function Delete($from, $where)
+	/**
+	 * Удаляет значения из таблицы, которые подходят под определенные условия
+	 * @param string $from  название таблицы
+	 * @param array  $where условия для удаления строк
+	 */
+	public function Delete(string $from, array $where)
 	{
 		$this->query("DELETE FROM ".$from.$this->GenerateWherePart($where));
 	}
 
-	public function Update($table, $set, $where)
+	/**
+	 * Обновляет значения в таблице
+	 * @param string $table название таблицы
+	 * @param array  $set   ассоциативный массив с новыми значениями
+	 * @param array  $where условия для изменения строк
+	 */
+	public function Update(string $table, array $set, array $where)
 	{
 		$setVal = array();
 		foreach ($set as $key => $value) {
@@ -79,8 +119,13 @@ class DB extends mysqli
 		}
 		$this->query("UPDATE ".$table." SET ".implode(", ", $setVal).$this->GenerateWherePart($where));
 	}
-
-	public function Add($table, $insertValues)
+	
+	/**
+	 * Добавляет новую запись в таблицу
+	 * @param string $table        название таблицы
+	 * @param array  $insertValues ассоциативный массив со значениями для добавления
+	 */
+	public function Add(string $table, array $insertValues)
 	{
 		if(count($insertValues) == 0){
 			return;
@@ -88,7 +133,11 @@ class DB extends mysqli
 		$query = "INSERT INTO ".$table."(".implode(", ", array_keys($insertValues)).") VALUES ('".implode("', '", $insertValues)."')";
 		$this->query($query, false);
 	}
-
+	
+	/**
+	 * Записывает в таблицу с ошибками последнюю, пересылает на страничку с котиком
+	 * @param  string $query текст запроса, после которго произошла ошибка
+	 */
 	public function throw_error($query = "")
 	{
 		global $user;
@@ -113,20 +162,29 @@ class DB extends mysqli
 	    ', false, false);
 	    die('<META HTTP-EQUIV="REFRESH" CONTENT="0; URL=/ups.php">');
 	}
-
+	
+	/**
+	 * Экранирует символы для дальнейшего запроса в БД. Может принимать массив значений, в таком случае экранирует символы в каждом значении массива
+	 * @param  mixed $value строка или массив из строк, в которой нужно проэкранировать символы
+	 * @return mixed возвращает полученную строку или массив из строк с экранированными символами
+	 */
 	public function escape($value)
 	{
 		if(is_array($value)){
-			for($i = 0, $cnt = count($value); $i<$cnt; $i++) {
-				$value[$i] = parent::real_escape_string(test_input($value[$i]));
+			foreach ($value as $k => $v) {
+				$value[$k] = parent::real_escape_string(test_input($value[$k]));
 			}
 		} else {
 			$value = parent::real_escape_string(test_input($value));
 		}
 		return $value;
 	}
-
-	public function GenerateWherePart($where)
+	
+	/**
+	 * Генерирует часть запроса с условиями WHERE
+	 * @param array $where ассоциативный массив с условиями
+	 */
+	public function GenerateWherePart(array $where)
 	{
 		$query = "";
 		if(!empty($where)){

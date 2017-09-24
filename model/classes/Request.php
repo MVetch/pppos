@@ -1,10 +1,14 @@
 <?
 /**
-* 
+* Класс для обработки заявок
 */
 class Request
 {
-	public static function DeleteEventById($id)
+	/**
+	 * Удаляет заявку на посещение мероприятия
+	 * @param int $id ИД записи в БД
+	 */
+	public static function DeleteEventById(int $id)
 	{
 		global $db;
 		$db->Delete(
@@ -15,7 +19,11 @@ class Request
 		);
 	}
 
-	public static function DeletePostById($id)
+	/**
+	 * Удаляет заявку на должность
+	 * @param int $id ИД записи в БД
+	 */
+	public static function DeletePostById(int $id)
 	{
 		global $db;
 		$db->Delete(
@@ -26,6 +34,12 @@ class Request
 		);
 	}
 
+	/**
+	 * Удаляет заявку на посещение мероприятия
+	 * @param int $studID  ИД студента
+	 * @param int $eventID ИД мероприятия
+	 * @param int $role    ИД роли из БД
+	 */
 	public static function DeleteEvent(int $studID, int $eventID, int $role)
 	{
 		global $db;
@@ -39,7 +53,11 @@ class Request
 		);
 	}
 
-	public static function DeleteNewEventById($id)
+	/**
+	 * Удаляет заявку на добавление нового мероприятия
+	 * @param int $id ИД записи в БД
+	 */
+	public static function DeleteNewEventById(int $id)
 	{
 		global $db;
 		$db->Delete(

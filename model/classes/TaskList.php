@@ -1,10 +1,15 @@
 <?
 /**
-* 
+* Класс для обработки файлов для выполнения заданий
 */
 class TaskList
 {
-	public static function Add($from, $task)
+	/**
+	 * Добавляет файл на сервер и оставляет соответствующую запись в БД
+	 * @param string $from от кого пришел файл (здесь может быть название факультета, направления и т.п.)
+	 * @param int $task [description]
+	 */
+	public static function Add(string $from, int $task)
 	{
 		global $db;
 		$result['lastTry'] = $db->Select(

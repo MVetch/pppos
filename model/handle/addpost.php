@@ -1,7 +1,7 @@
 <?
 if(isset($_POST['registration'])){
     include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-    $id = AUser::getId();
+    $id = User::ID();
     for($i=0, $cnt=count($_POST['currole']); $i <= $cnt; $i++){
         if(!empty($_POST['currole'][$i])){
             if(empty($_POST['fadedates'][$i]) || empty($_POST['fadedatey'][$i])){

@@ -4,7 +4,7 @@ include_once "php/functions.php";
 spl_autoload_register(function ($class_name) {
     include_once 'classes/'.$class_name . '.php';
 });
-$db = new DB('localhost', 'ufb79156_pppos', 'admin123', 'ufb79156_pppos');
+$db = new DB('localhost', 'root', '', 'pppos');
 define("AVATAR_DIR", "/uploads/avatars/");
 define("FORM_HANDLER_DIR", "/model/handle/");
 define("LIST_DIR", "/uploads/lists/");

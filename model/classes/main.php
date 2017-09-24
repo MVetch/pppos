@@ -6,6 +6,10 @@ class Main
 {
 	const COOKIE_PREFIX = "PPPOS";
 
+	/**
+	 * Здесь указаны уровни пользователей, которым доступен тот или иной компонент 
+	 * @var array
+	 */
 	public static $permissions = array(
 		"events" => array(
 			"add" => array(1,2,3,4,5),
@@ -69,11 +73,11 @@ class Main
 	);
 
 	/**
-	* Подключает часть страницы типа $type (например: menu, requests) с именем $name. Это основная функция для отображения конетента страницы. Меню, разделы, отдельные страницы строятся с помощью этой функции. В файле /<B>model</B>/$type/$name.php выстраевается итоговый массив, который затем передается файлу /<B>view</B>/$type/$name.php для отображения итоговой части страницы. 
-	* @param string $type Тип подключаемой части.
-	* @param string $name Название подключаемой части.
-	* @param array $settings Параметры для подключения. В зависимости от этих данных может меняться контент на странице.
-	* @return array $result Полученный массив, который можно использовать далее на странице и передавать его (или его части) как параметр для следующего элемента (например, какие разделы показывать, исходя из доступных разделов меню)
+	* Подключает часть страницы типа $type (например: menu, requests) с именем $name. Это основная функция для отображения контента страницы. Меню, разделы, отдельные страницы строятся с помощью этой функции. В файле /<B>model</B>/$type/$name.php выстраевается итоговый массив, который затем передается файлу /<B>view</B>/$type/$name.php для отображения итоговой части страницы. 
+	* @param string $type тип подключаемой части.
+	* @param string $name название подключаемой части.
+	* @param array $settings параметры для подключения. В зависимости от этих данных может меняться контент на странице.
+	* @return array $result полученный массив, который можно использовать далее на странице и передавать его (или его части) как параметр для следующего элемента (например, какие разделы показывать, исходя из доступных разделов меню)
 	*/
 	public static function IncludeThing($type, $name, $settings = array(), $unLoged = true)
 	{
@@ -93,7 +97,11 @@ class Main
 		return $result;
 	}
 
-	public static function error($error)
+	/**
+	 * Выводит пользователю сообщение об ошибке с возможностью вернуться на предыдующую страницу
+	 * @param  string $error текст сообщения
+	 */
+	public static function error(string $error)
 	{
 		global $db, $user;
 		include $_SERVER['DOCUMENT_ROOT']."/headerreg.php";
@@ -102,6 +110,9 @@ class Main
         die;
 	}
 
+	/**
+	 * Симуляция 403 ошибки
+	 */
 	public static function error403()
 	{
 		global $db, $user;
@@ -110,7 +121,11 @@ class Main
 	}
 
 
-	public static function errorMessage($error)
+	/**
+	 * Выводит пользователю сообщение об ошибке
+	 * @param string $error текст сообщения
+	 */
+	public static function errorMessage(string $error)
 	{
 		global $db, $user;
         include $_SERVER['DOCUMENT_ROOT']."/view/error.php";
@@ -118,7 +133,12 @@ class Main
         die;
 	}
 
-	public static function success($text, $url)
+	/**
+	 * Выводит пользователю сообщение об успешной операции и пересылает его на другую страницу
+	 * @param  string $text текст сообщения
+	 * @param  string $url  URL страницы, на которую нужно перенаправить пользователя
+	 */
+	public static function success(string $text, string $url)
 	{
 		global $db, $user;
 		include_once $_SERVER['DOCUMENT_ROOT']."/header.php";
@@ -127,7 +147,11 @@ class Main
         die;
 	}
 
-	public static function redirect($link)
+	/**
+	 * Пересылает пользователя на указанную страницу
+	 * @param  string $link URL страницы, на которую нужно перенаправить пользователя
+	 */
+	public static function redirect(string $link)
 	{
 		echo "<META HTTP-EQUIV='REFRESH' CONTENT='0; URL=$link'>";
 		die;
@@ -135,8 +159,8 @@ class Main
 
 	/**
 	* Возвращает куку по имени
-	* @param $name Имя куки (без префикса)
-	* @param $name_prefix Префикс
+	* @param $name имя куки (без префикса)
+	* @param $name_prefix префикс
 	*/
 	public static function get_cookie($name, $name_prefix=self::COOKIE_PREFIX)
 	{
@@ -145,14 +169,14 @@ class Main
 	}
 
 	/**
-	* Устанавливает куку
-	* @param $name Имя куки
-	* @param $value	Значение куки
-	* @param $time Дата смерти куки
-	* @param $folder Директория, по которой она доступна
-	* @param $domain Домен, по которому она доступна
-	* @param $secure Указывает на то, что значение cookie должно передаваться от клиента по защищенному HTTPS соединению
-	* @param $name_prefix Префикс к имени
+	* Устанавливает куку. При не указаной дате смерти куки, она ставится на 30 дней
+	* @param $name имя куки
+	* @param $value	значение куки
+	* @param $time дата смерти куки
+	* @param $folder директория, по которой она доступна
+	* @param $domain домен, по которому она доступна
+	* @param $secure указывает на то, что значение cookie должно передаваться от клиента по защищенному HTTPS соединению
+	* @param $name_prefix префикс к имени
 	*/
 	public static function set_cookie($name, $value, $time=false, $folder="/", $domain=false, $secure=false, $name_prefix=self::COOKIE_PREFIX, $httpOnly=false)
 	{
@@ -166,12 +190,22 @@ class Main
 		setcookie($name, $value, $time, $folder, $domain, $secure, $httpOnly);
 	}
 
-	public static function delete_cookie($name, $name_prefix=self::COOKIE_PREFIX)
+	/**
+	 * Удаляет куку  с указанным именем
+	 * @param $name имя куки
+	 * @param $name_prefix префикс к имени
+	 */
+	public static function delete_cookie(string $name, string $name_prefix=self::COOKIE_PREFIX)
 	{
 		self::set_cookie($name, " ", time()-1000);
 	}
 
-	public static function IncludeAddWindow($name, $settings = array())
+	/**
+	 * Подключает на страницу дополнительное всплывающее окошко. Верстка внутреннего наполнения этого окна задается в файле "/view/addWindow/$name.php". На самой странице необходимо иметь кнопку или другой триггер для появления на экране этого окна. В вызываемой javascript функции должна присутствовать строка "document.getElementById(<b>$name</b>).style.display ='block';"
+	 * @param string $name     название страницы с версткой
+	 * @param array  $settings параметры, передаваемые для генерации внутреннего наполнения окошка
+	 */
+	public static function IncludeAddWindow(string $name, $settings = array())
 	{
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php"))
 			include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php";

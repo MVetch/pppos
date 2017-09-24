@@ -2,9 +2,12 @@
 /**
 * Общий класс для пользователей.
 */
-class AUser
+class AUser extends User
 {
-
+	/**
+	 * Конструктор, создающий объект из массива
+	 * @param array $info ассоциативный массив, где ключ - название соответствуещего столбца в БД.
+	 */
 	function __construct(array $info){
 		foreach ($info as $key => $value)
 		{
@@ -16,6 +19,11 @@ class AUser
 		}
 	}
 	
+	/**
+	 * Получает информацию из бд об определенном пользователе
+	 * @param  int $id     ИД пользователя
+	 * @param  array  $select необходимые поля. 
+	 */
 	public static function getInfo($id, $select = array("*"))
 	{
 		global $db;
@@ -31,25 +39,18 @@ class AUser
 		# code...
 	}
 
-	public static function Add($values)
+	/**
+	 * Добавляет нового студента в базу данных. Это НЕ самостоятельная регистрация студента.
+	 * @param array $values ассоциативный массив. Ключи - названия столбцов из таблицы студентов.
+	 * @param array $group  ассоциативный массив. Ключи - названия столбцов из связующей таблицы студентов-групп.
+	 */
+	public static function Add(array $values, array $group)
 	{
 		global $db;
 		$db->Add("students", $values);
-	}
-	
-	public static function getId()
-	{
-		global $db;
-		if(isset($this)){
-			if(!isset($this->id))
-				return false;
-			return $this->id;
-		} else {
-			return $db->Select(
-				array("id_user"),
-				"users",
-				array("login" => Main::get_cookie("LOG"), "hash" => md5(Main::get_cookie("HPS")))
-			)->fetch()['id_user'];
-		}
+    	$id = $db->insert_id;
+    	$group['id_student'] = $id;
+		$db->Add("stud_group", $group);
+		return $id;
 	}
 }

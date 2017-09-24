@@ -1,10 +1,18 @@
 <?
 /**
-* 
+* Класс для обработки заданий
 */
 class Task
 {
-	public static function Add($name, $from, $description, $date_exp, $_for)
+	/**
+	 * Добавляет новое задание
+	 * @param string $name        название задания
+	 * @param int    $from        ИД пользователя, создавшего задание
+	 * @param string $description описание
+	 * @param string $date_exp    крайний день сдачи выполненного задания
+	 * @param int    $_for        числовой показатель, означающий для кого предназначено задание {2, 3, 5}. 2 - профоргам, 3 - руководителям, 2+3=<b>5</b> - для тех и тех
+	 */
+	public static function Add(string $name, int $from, string $description, string $date_exp, int $_for)
 	{
 		global $db, $user;
 		if($user->getLevel() == 1){
@@ -21,6 +29,10 @@ class Task
 		}
 	}
 
+	/**
+	 * Получает список заданий
+	 * @return array массив из заданий, каждое из которых представляет массив со всеми нужными значениями
+	 */
 	public static function getList()
 	{
 		global $db;

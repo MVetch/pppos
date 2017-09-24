@@ -1,7 +1,7 @@
 <?
 if (isset($_POST['send'])){
     include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-    $id = AUser::getId();
+    $id = User::ID();
     function dieda($error) {
         echo "Вы неправильно заполнили форму. ";
         echo "И вот ваши ошибки: <br /><br />";

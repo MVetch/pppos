@@ -4,7 +4,9 @@
 */
 class User
 {
-
+	/**
+	 * Конструктор. Собирает основную информацию о пользователе и доступные заявки
+	 */
 	function __construct()
 	{
 		global $db;
@@ -27,12 +29,17 @@ class User
 			$this->password = $params['password'];
 			$this->level = $params['level'];
 			$this->photo = $params['photo'];
-			$this->hash = "$2x";
 	        $this->CountNumNotes();
 	    }
 	}
 
-	public static function getInfo($id, $select = array("*"))
+	/**
+	 * Собирает основную информацию о пользователе по его ИД
+	 * @param  int    $id     ИД пользователя
+	 * @param  array  $select необходимые поля
+	 * @return array        массив с полученными значениями
+	 */
+	public static function getInfo(int $id, $select = array("*"))
 	{
 		global $db;
 		return $db->Select(
@@ -42,40 +49,134 @@ class User
 		)->fetch();
 	}
 
+	/**
+	 * ИД пользователя
+	 * @var int
+	 */
 	protected $id;
+	/**
+	 * Фамилия
+	 * @var string
+	 */
 	protected $surname;
+	/**
+	 * Имя
+	 * @var string
+	 */
 	protected $name;
+	/**
+	 * Отчетство
+	 * @var string
+	 */
 	protected $thirdName;
+	/**
+	 * Логин
+	 * @var string
+	 */
 	protected $login;
+	/**
+	 * Зашифрованный пароль
+	 * @var string
+	 */
 	protected $password;
+	/**
+	 * Хэш авторизации
+	 * @var string
+	 */
 	protected $hash;
+	/**
+	 * Уровень доступа
+	 * @var int
+	 */
 	protected $level;
+	/**
+	 * Группа
+	 * @var string
+	 */
 	protected $groups;
+	/**
+	 * Факультет
+	 * @var string
+	 */
 	protected $faculty;
+	/**
+	 * Форма обучения
+	 * @var string
+	 */
 	protected $form;
+	/**
+	 * E-mail
+	 * @var string
+	 */
 	protected $email;
+	/**
+	 * Коэффициент стипендии
+	 * @var string
+	 */
 	protected $coef;
+	/**
+	 * Телефон
+	 * @var string
+	 */
 	protected $phone;
+	/**
+	 * Список из ИД мероприятий, за которые ответсвеннен текущий пользователь
+	 * @var array
+	 */
 	protected $eventsResponsible;
+	/**
+	 * Количество мероприятий, за которые ответсвеннен текущий пользователь
+	 * @var int
+	 */
 	protected $eventsResponsibleCount;
+	/**
+	 * Список из ИД мероприятий, которые посетил текущий пользователь (не используется)
+	 * @var array
+	 */
 	protected $eventsVisited;
+	/**
+	 * Список из ИД соц.стипендий, относящихся к текущему пользователю (не используется)
+	 * @var array
+	 */
 	protected $socStips;
+	/**
+	 * Список из ИД соц.поддержек, относящихся к текущему пользователю (не используется)
+	 * @var array
+	 */
 	protected $socSups;
+	/**
+	 * Заявки/оповещения
+	 * @var array
+	 */
 	protected $numNotes;
 
+	/**
+	 * Название файла с аватаркой
+	 * @var string
+	 */
 	public $photo;
 
 	public function getId()
 	{
 		return $this->id;
 	}
-
-	public function setId($id)
+	
+	/**
+	 * Возращает ИД текущего авторизованного пользователя
+	 */
+	public static function ID()
 	{
-		$this->id = $id;
-		return $this;
+		global $db;
+		return $db->Select(
+			array("id_user"),
+			"users",
+			array("login" => Main::get_cookie("LOG"), "hash" => md5(Main::get_cookie("HPS")))
+		)->fetch()['id_user'];
 	}
 
+	/**
+	 * @return string фамилия пользователя
+	 */
 	public function getSurname()
 	{
 		global $db;
@@ -85,12 +186,19 @@ class User
 		return $this->surname;
 	}
 
+	/**
+	 * Устанавливает фамилию пользователя
+	 * @param $surname нужная фамилия
+	 */
 	public function setSurname($surname)
 	{
 		$this->surname = $surname;
 		return $this;
 	}
 
+	/**
+	 * @return string имя пользователя
+	 */
 	public function getName()
 	{
 		global $db;
@@ -100,12 +208,19 @@ class User
 		return $this->name;
 	}
 
+	/**
+	 * Устанавливает имя пользователя
+	 * @param $name нужное имя
+	 */
 	public function setName($name)
 	{
 		$this->name = $name;
 		return $this;
 	}
 
+	/**
+	 * @return string отчество пользователя
+	 */
 	public function getThirdName()
 	{
 		global $db;
@@ -115,38 +230,61 @@ class User
 		return $this->thirdName;
 	}
 	
+	/**
+	 * Устанавливает отчество пользователя
+	 * @param $thirdName нужное отчество
+	 */
 	public function setThirdName($thirdName)
 	{
 		$this->thirdName = $thirdName;
 		return $this;
 	}
 
+	/**
+	 * @return string ФИО пользователя
+	 */
 	public function getFullName()
 	{
 		return $this->getSurname()." ".$this->getName()." ".$this->getThirdName();
 	}
 
+	/**
+	 * @return string ФИ пользователя
+	 */
 	public function getSurnameName()
 	{
 		return $this->getSurname()." ".$this->getName();
 	}
 
+	/**
+	 * @return string группа пользователя
+	 */
 	public function getGroups()
 	{
 		return $this->groups;
 	}
 
+	/**
+	 * Устанавливает группу пользователя
+	 * @param $groups нужная группа
+	 */
 	public function setGroups($groups)
 	{
 		$this->groups = $groups;
 		return $this;
 	}
 
+	/**
+	 * @return array массив с количеством каждого вида заявок
+	 */
 	public function getNumNotes()
 	{
 		return $this->numNotes;
 	}
 
+	/**
+	 * @return string форма обучения студента
+	 */
 	public function getForm()
 	{
 		global $db;
@@ -156,12 +294,19 @@ class User
 		return $this->form;
 	}
 	
+	/**
+	 * Устанавливает форму обучения
+	 * @param string $form нужная форма
+	 */
 	public function setForm($form)
 	{
 		$this->form = $form;
 		return $this;
 	}
 
+	/**
+	 * @return int коэффициент стипендии
+	 */
 	public function getCoef()
 	{
 		global $db;
@@ -171,12 +316,19 @@ class User
 		return $this->coef;
 	}
 	
+	/**
+	 * Устанавливает коэффициент стипендии
+	 * @param string $coef нужный коэффициент стипендии
+	 */
 	public function setCoef($coef)
 	{
 		$this->coef = $coef;
 		return $this;
 	}
 
+	/**
+	 * @return string телефон
+	 */
 	public function getPhone()
 	{
 		global $db;
@@ -186,12 +338,19 @@ class User
 		return $this->phone;
 	}
 	
+	/**
+	 * Устанавливает телефон
+	 * @param string $phone нужный телефон
+	 */
 	public function setPhone($phone)
 	{
 		$this->phone = $phone;
 		return $this;
 	}
 
+	/**
+	 * @return string e-mail
+	 */
 	public function getEmail()
 	{
 		global $db;
@@ -201,12 +360,19 @@ class User
 		return $this->email;
 	}
 	
+	/**
+	 * Устанавливает e-mail
+	 * @param string $email нужный e-mail
+	 */
 	public function setEmail($email)
 	{
 		$this->email = $email;
 		return $this;
 	}
 
+	/**
+	 * @return string путь к файлу для отображения как аватарки
+	 */
 	public function getPhotoFileName()
 	{
 		if(!empty($this->photo)){
@@ -222,11 +388,17 @@ class User
 		return $this->photo;
 	}
 
+	/**
+	 * @return string хэш авторизации
+	 */
 	public function getHash()
 	{
 		return $this->hash;
 	}
 
+	/**
+	 * @return string факультет пользователя
+	 */
 	public function getFaculty()
 	{
 		global $db;
@@ -247,17 +419,27 @@ class User
 		return $ret;
 	}
 
+	/**
+	 * @return int уровень доступа пользователя
+	 */
 	public function getLevel()
 	{
 		return $this->level;
 	}
 	
+	/**
+	 * Устанавливает уровень доступа пользователя
+	 * @param string $level нужный уровень доступа пользователя
+	 */
 	public function setLevel($level)
 	{
 		$this->level = $level;
 		return $this;
 	}
 
+	/**
+	 * @return int количество мероприятий, за которые пользователь ответственный
+	 */
 	public function getEventsResponsibleCount()
 	{
 		if(!isset($this->eventsResponsibleCount) or empty($this->eventsResponsibleCount))
@@ -265,6 +447,9 @@ class User
 		return $this->eventsResponsibleCount;
 	}
 
+	/**
+	 * @return array список из ИД мероприятий, за которые пользователь ответственный
+	 */
 	public function getEventsResponsible()
 	{
 		if(!isset($this->eventsResponsible) or empty($this->eventsResponsible))
@@ -272,6 +457,9 @@ class User
 		return $this->eventsResponsible;
 	}
 
+	/**
+	 * @return array список из ИД заявок на новые мероприятия
+	 */
 	public function getNewEvents()
 	{
 		if(!isset($this->newEvents)){
@@ -282,6 +470,9 @@ class User
 		return $this->newEvents;
 	}
 
+	/**
+	 * @return int количество заявок на новые мероприятия
+	 */
 	public function getNewEventsCount()
 	{
 		if(!isset($this->newEventsCount)){
@@ -292,7 +483,12 @@ class User
 		return $this->newEventsCount;
 	}
 
-	public static function LogIn($login, $password)
+	/**
+	 * Авторизует пользователя
+	 * @param string $login    логин
+	 * @param string $password пароль
+	 */
+	public static function LogIn(string $login, string $password)
 	{
 		global $db;
 	    // if($login == "ultrauser" and $password == "123"){
@@ -355,6 +551,9 @@ class User
 	    }
 	}
 
+	/**
+	 * @return array массив со списком мероприятий, за которые пользователь ответственный, а так же их количество
+	 */
 	public function CountEventsResponsible()
 	{
 		global $db;
@@ -381,6 +580,9 @@ class User
         return $ret;
 	}
 
+	/**
+	 * @return array массив со списком из ИД заявок на должности, а так же их количество
+	 */
 	public function getNumPostNotes()
 	{
 		global $db;
@@ -434,6 +636,9 @@ class User
 		return $return;
 	}
 
+	/**
+	 * @return array массив со списком из ИД заявок на посещение мероприятий, а так же их количество
+	 */
 	public function getNumEventNotes()
 	{
 		global $db;
@@ -468,6 +673,9 @@ class User
 		return $return;
 	}
 
+	/**
+	 * @return array массив со списком из ИД оповещений о заданиях, а так же их количество
+	 */
 	public function getNumTaskNotes()
 	{
 		global $db;
@@ -513,6 +721,9 @@ class User
 		return $return;
 	}
 
+	/**
+	 * @return array массив со списком из ИД оповещений о соц.выплатах, а так же их количество
+	 */
 	public function getNumSocNotes()
 	{
 		global $db;
@@ -649,6 +860,9 @@ class User
 		return $return;
 	}
 
+	/**
+	 * @return array массив со всеми заявками/оповещениями, разбитыми по категориями
+	 */
 	public function CountNumNotes()
 	{
 		$this->numNotes = $this->getNumSocNotes();
@@ -710,6 +924,7 @@ class User
 
 	/**
 	 * Завершить должность. В БД ставиться запись о том, что сегодня студент закончил пребывание на должности (отмечается семестр и год)
+	* @param int $id ИД записи в БД.
 	 */
 	public function EndPost($id)
 	{
@@ -724,7 +939,13 @@ class User
 			array("id"=>$id, "id_student" => $this->getId()));
 	}
 
-	public function ChangePassword($old, $new, $newConf, $hash)
+	/**
+	 * Меняет пароль для текущего пользователя
+	 * @param string $old     старый пароль
+	 * @param string $new     новый пароль
+	 * @param string $newConf подтверждение нового пароля
+	 */
+	public function ChangePassword($old, $new, $newConf)
 	{
 		global $db;
 		if (!password_verify($old, $this->password)){

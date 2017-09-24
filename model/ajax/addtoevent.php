@@ -1,6 +1,6 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-$id = AUser::getId();
+$id = User::ID();
 if($id && $db->Select(
         array("*"),
         "temp_table_events",
