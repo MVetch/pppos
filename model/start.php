@@ -10,6 +10,7 @@ define("FORM_HANDLER_DIR", "/model/handle/");
 define("LIST_DIR", "/uploads/lists/");
 define("PAGINATION_PER_PAGE", 20);
 define("RATING_TOP", 50);
+define("MAX_PHOTO_IN_MB", 5);
 
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);

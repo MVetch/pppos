@@ -7,7 +7,7 @@
             <input type="file" id="upload" name="uploadfile" onchange="uploadPhoto(this.files[0])">
             <span>
                 <div style="font-size:11px; padding:10px 0" id="warning">
-                    (Файл должен быть в одном из следующих форматов: PNG, JPG, JPEG, GIF; и не более 1МБ)
+                    (Файл должен быть в одном из следующих форматов: PNG, JPG, JPEG, GIF; и не более <?=MAX_PHOTO_IN_MB?>МБ)
                 </div>
             </span>
         </div>

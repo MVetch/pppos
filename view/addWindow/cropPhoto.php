@@ -1,0 +1,1 @@
+<img src="<?=$settings['filename']?>">
