@@ -24,7 +24,7 @@ class AUser extends User
 	 * @param  int $id     ИД пользователя
 	 * @param  array  $select необходимые поля. 
 	 */
-	public static function getInfo($id, $select = array("*"))
+	public static function getInfo(int $id, $select = array("*"))
 	{
 		global $db;
 		return $db->Select(

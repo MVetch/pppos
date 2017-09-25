@@ -980,7 +980,7 @@ label {
 }
 
 img {
-  max-width: 100%;
+  /*max-width: 100%;*/
 }
 
 input,
@@ -1166,4 +1166,16 @@ label.forcheckbox {
 
 tr.border-bottom {
   border-bottom: 1px solid black;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.undraggable {
+  user-drag: none; 
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
 }
