@@ -11,7 +11,9 @@ if(isset($_FILES['upload'])){
             $filename = $uploaddir.$seed.'.'.$fn[count($fn)-1];
             $image = new Image();
             if (move_uploaded_file($_FILES['upload']['tmp_name'], $filename)) {
-                Main::IncludeAddWindow("cropPhoto", array("show" => true, "filename" => AVATAR_DIR.$seed.'.'.$fn[count($fn)-1]));
+                $fnToLoad = AVATAR_DIR.$seed.'.'.$fn[count($fn)-1];
+                include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/cropPhoto.php";
+                //Main::IncludeAddWindow("cropPhoto", array("show" => true, "filename" => AVATAR_DIR.$seed.'.'.$fn[count($fn)-1]));
 
                 // $image -> load($filename);
                 // $image -> resizeToWidth(200);

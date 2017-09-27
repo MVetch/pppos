@@ -141,6 +141,9 @@ function uploadPhoto(file){
             xhr.onreadystatechange=function(){
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     document.getElementById('warning').innerHTML = xhr.responseText;
+                    document.getElementById("photo-box").style.width = document.getElementById("image").width*2.5 + "px";
+                    document.getElementById("photo-box").style.height = document.getElementById("image").height*2.5 + "px";
+                    document.getElementById("imageInside").style.width = document.getElementById("image").width*2.5 + "px";
                 } else {
                   document.getElementById('warning').innerHTML = "error " + this.status;
                 }
