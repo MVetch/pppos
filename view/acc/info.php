@@ -121,6 +121,9 @@
             }
         });
     });
+    $("#image").on("resize", function(){
+        document.getElementById("imageInside").style.width = document.getElementById("image").style.width;
+    });
 </script>
 
 <hr>
