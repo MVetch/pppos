@@ -122,7 +122,7 @@ class Main
 
 
 	/**
-	 * Выводит пользователю сообщение об ошибке
+	 * Выводит пользователю сообщение об ошибке при обработке на уже загруженной странице
 	 * @param string $error текст сообщения
 	 */
 	public static function errorMessage(string $error)
@@ -130,6 +130,16 @@ class Main
 		global $db, $user;
         include $_SERVER['DOCUMENT_ROOT']."/view/error.php";
         include $_SERVER['DOCUMENT_ROOT']."/footer.php";
+        die;
+	}
+
+	/**
+	 * Выводит пользователю сообщение об ошибке при асинхронном запросе (просто текст)
+	 * @param string $error текст сообщения
+	 */
+	public static function errorAjax(string $error)
+	{
+        include $_SERVER['DOCUMENT_ROOT']."/view/error.php";
         die;
 	}
 

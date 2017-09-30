@@ -1,9 +1,30 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 $image = new Image();
-$filename = "/uploads/avatars/_X-JefsJaxg.jpg";
-$image->load($_POST['file']);
-$image->crop($_POST['x'], $_POST['y'], $_POST['size'], $_POST['size']);
-$image -> save($_POST['file']);
+$id = User::ID();
+$filename = $_POST['file'];
+if(file_exists($_SERVER['DOCUMENT_ROOT'].$filename)){
+	$image->load($_SERVER['DOCUMENT_ROOT'].$filename);
+	$image->crop((int)$_POST['x'], (int)$_POST['y'], (int)$_POST['size'], (int)$_POST['size']);
+	$image->resizeToWidth(200);
+	$image->save($_SERVER['DOCUMENT_ROOT'].$filename);
+
+	$uploaddir = $_SERVER['DOCUMENT_ROOT'].AVATAR_DIR;
+	$oldImage = $db->Select(
+	    array("photo"),
+	    "students",
+	    array("id_student" => $id)
+	)->fetch()['photo'];
+	if(file_exists($uploaddir.$oldImage)){
+	    unlink($uploaddir.$oldImage);
+	} elseif(file_exists($uploaddir.$id.'.'.$oldImage)){
+	    unlink($uploaddir.$id.'.'.$oldImage);
+	}
+	$db->Update(
+	    "students",
+	    array("photo" => substr($filename, strlen(AVATAR_DIR))),
+	    array("id_student" => $id)
+	);
+	Main::redirect('/id'.$id);
+}
 ?>
-<img src="<?=$filename?>">

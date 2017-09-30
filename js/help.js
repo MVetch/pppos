@@ -141,9 +141,7 @@ function uploadPhoto(file){
             xhr.onreadystatechange=function(){
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     document.getElementById('warning').innerHTML = xhr.responseText;
-                    document.getElementById("photo-box").style.width = ((document.getElementById("add-window").offsetWidth - 2) * 0.8) + "px";
-                    document.getElementById("photo-box").style.height = ((document.getElementById("add-window").offsetHeight - 2) * 0.8) + "px";
-                    document.getElementById("imageInside").style.width = ((document.getElementById("add-window").offsetWidth - 2) * 0.8) + "px";
+                    setTimeout(kek, 200);
                 } else {
                   document.getElementById('warning').innerHTML = "error " + this.status;
                 }
@@ -156,6 +154,18 @@ function uploadPhoto(file){
         else document.getElementById('warning').innerHTML =  'Этот формат не поддерживается. Если вы уверены, что это хорошо бы смотрелось у вас на аватарке, <a href="contact.php">напишите нам</a>';
     }
     else document.getElementById('warning').innerHTML =  'Слишком большой файл';
+}
+
+function kek(){
+    console.log(document.getElementById('image').width);
+    if(document.getElementById('image').height == 0){
+        setTimeout(kek, 200);
+    } else {
+        document.getElementById("photo-box").style.width = document.getElementById('image').width + "px";
+        document.getElementById("photo-box").style.height = document.getElementById('image').height + "px";
+        document.getElementById("imageInside").style.width = document.getElementById('image').width + "px";
+        document.getElementById("image").style.width = document.getElementById('image').width + "px";
+    }
 }
 
 req = function(tag){
