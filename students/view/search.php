@@ -1,9 +1,6 @@
 <div style="margin:auto; text-align:center">
     <h1>Поиск студента</h1>
-    <h4>Здесь вы можете найти нужного вам студента.<br> Если Вы не знаете точных данных студента, можете воспользоваться дополнительными параметрами поиска.</h4>  
-    <div id="button" style="display:none; position:auto; margin:auto">
-        <label for="button" style="font-size:25px">Поиск</label><input type="button" id="button" onclick="showHide()" value="&#9660;">
-    </div>
+    <h4>Здесь вы можете найти нужного вам студента.<br> Если Вы не знаете точных данных студента, можете воспользоваться дополнительными параметрами поиска.</h4>
     
     <form name="form1" method="get" action="" onSubmit = "isEmpty(this); return false;">
         <input name="search" type="text" id="search_fio" class = "form-control" placeholder="ФАМИЛИЯ ИМЯ ОТЧЕСТВО">
@@ -46,7 +43,7 @@
                             $student['photo'] = "no_photo.png";
                         }
                         ?>
-                        <img src="<?=AVATAR_DIR?><?=$student['photo']?>" style="height:100%;width:100%" class="avatar">
+                        <img src="<?=auto_version(AVATAR_DIR.$student['photo'])?>" style="height:100%;width:100%" class="avatar">
                     </div>
                     <div style="margin-left:7px;">
                         <div class="event-name"><?=$student['surname']?> <?=$student['name']?> <?=$student['thirdName']?></div>

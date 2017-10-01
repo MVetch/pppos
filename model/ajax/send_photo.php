@@ -21,10 +21,10 @@ $id = User::ID();
 $uploaddir = $_SERVER['DOCUMENT_ROOT'].AVATAR_DIR;
 $fn = explode(".", $_FILES['upload']['name']);
 $seed = md5($id.time());
-$filename = $uploaddir.$seed.'.'.$fn[count($fn)-1];
+$filename = strtolower($uploaddir.$seed.'.'.$fn[count($fn)-1]);
 if (!move_uploaded_file($_FILES['upload']['tmp_name'], $filename)) {
     Main::errorAjax('Возможная атака с помощью файловой загрузки!\n');
 }
-$fnToLoad = AVATAR_DIR.$seed.'.'.$fn[count($fn)-1];
+$fnToLoad = strtolower(AVATAR_DIR.$seed.'.'.$fn[count($fn)-1]);
 include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/cropPhoto.php";
 ?>
