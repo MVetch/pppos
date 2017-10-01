@@ -46,7 +46,7 @@
                             $student['photo'] = "no_photo.png";
                         }
                         ?>
-                        <img src="<?=AVATAR_DIR?><?=$student['photo']?>" style="height:100%" class="avatar">
+                        <img src="<?=AVATAR_DIR?><?=$student['photo']?>" style="height:100%;width:100%" class="avatar">
                     </div>
                     <div style="margin-left:7px;">
                         <div class="event-name"><?=$student['surname']?> <?=$student['name']?> <?=$student['thirdName']?></div>
