@@ -2,7 +2,7 @@
     <a style = "padding:15px">
 	    <div style="display:inline-block; vertical-align:super"><?=$user->getName() ?></div>
 	    <div style="display:inline-block; position:relative">
-			<img src="<?=auto_version(AVATAR_DIR.$user->getPhotoFileName())?>" class = "user-photo">
+			<img src="<?=AVATAR_DIR.$user->getPhotoFileName()?>" class = "user-photo">
             <?if(($settings['requests']['events']['count'] + $settings['requests']['posts']['count'])>0):?>
                 <div class="lcircle">
                     <div style="text-align:center; margin:auto"><?=($settings['requests']['events']['count'] + $settings['requests']['posts']['count'])?></div>
