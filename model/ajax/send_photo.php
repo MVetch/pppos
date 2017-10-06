@@ -18,13 +18,13 @@ if($image->getWidth() < 200 || $image->getHeight() < 200 || !between($image->get
 }
 
 $id = User::ID();
-$uploaddir = $_SERVER['DOCUMENT_ROOT'].AVATAR_DIR;
+$uploaddir = $_SERVER['DOCUMENT_ROOT'].TEMP_AVATAR_DIR;
 $fn = explode(".", $_FILES['upload']['name']);
 $seed = md5($id.time());
 $filename = strtolower($uploaddir.$seed.'.'.$fn[count($fn)-1]);
 if (!move_uploaded_file($_FILES['upload']['tmp_name'], $filename)) {
     Main::errorAjax('Возможная атака с помощью файловой загрузки!\n');
 }
-$fnToLoad = strtolower(AVATAR_DIR.$seed.'.'.$fn[count($fn)-1]);
+$fnToLoad = strtolower(TEMP_AVATAR_DIR.$seed.'.'.$fn[count($fn)-1]);
 include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/cropPhoto.php";
 ?>

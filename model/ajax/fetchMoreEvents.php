@@ -1,5 +1,5 @@
 <?include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-$user = new User();
+$id = User::ID();
 $result['events'] = $db->Select(
 	array("*"),
 	"event_names_resp",
@@ -7,11 +7,13 @@ $result['events'] = $db->Select(
 	array("date" => "DESC"),
 	array($_POST['er'] * PAGINATION_PER_PAGE, PAGINATION_PER_PAGE)
 )->fetchAll();
-
+//$db->ListAllQueries();
+//dump(count($result['events']));
+//dump($result['events']);
 $res = $db->Select(
 	array("id_event"),
 	"event_student",
-	array("id_student" => $user->getId())
+	array("id_student" => $id)
 );
 
 $result['checkedIn'] = array();
@@ -22,7 +24,7 @@ while($list = $res->fetch())
 $res = $db->Select(
 	array("id_event"),
 	"temp_table_events",
-	array("id_student" => $user->getId())
+	array("id_student" => $id)
 );
 
 while($list = $res->fetch())

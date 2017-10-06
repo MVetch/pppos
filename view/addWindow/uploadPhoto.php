@@ -3,8 +3,10 @@
 <div class="uploadfile">
     <form name="upload">
         <div style="display:inline-block;">
-            <div class="button" onclick="this.nextElementSibling.click()" style="width: 70%; margin: auto;">Выберите файл</div>
-            <input type="file" id="upload" name="uploadfile" onchange="uploadPhoto(this.files[0])">
+            <div id="uploadButton">
+                <div class="button" onclick="this.nextElementSibling.click()" style="width: 70%; margin: auto;">Выберите файл</div>
+                <input type="file" id="upload" name="uploadfile" onchange="uploadPhoto(this.files[0])">
+            </div>
             <span>
                 <div style="font-size:11px; padding:10px 0" id="warning">
                     Файл должен быть в одном из следующих форматов: PNG, JPG, JPEG, GIF и не более <?=MAX_PHOTO_IN_MB?>МБ.<br> 

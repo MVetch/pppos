@@ -6,6 +6,7 @@ spl_autoload_register(function ($class_name) {
 });
 $db = new DB('localhost', 'root', '', 'pppos');
 define("AVATAR_DIR", "/uploads/avatars/");
+define("TEMP_AVATAR_DIR", "/uploads/avatars_temp/");
 define("FORM_HANDLER_DIR", "/model/handle/");
 define("LIST_DIR", "/uploads/lists/");
 define("PAGINATION_PER_PAGE", 20);

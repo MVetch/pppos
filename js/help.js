@@ -141,6 +141,7 @@ function uploadPhoto(file){
             xhr.onreadystatechange=function(){
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     document.getElementById('warning').innerHTML = xhr.responseText;
+                    document.getElementById('uploadButton').innerHTML = "";
                     setTimeout(kek, 200);
                 } else {
                   document.getElementById('warning').innerHTML = "error " + this.status;

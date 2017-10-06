@@ -1,7 +1,7 @@
 <div id="<?=$name?>Div" style="position:relative;">
     <div style = "width:210px; display:inline-block">
         <div style = "position:relative" class="avatar">
-            <img src="<?=auto_version(AVATAR_DIR.$settings['user']['photo'])?>" class="avatar-photo">
+            <img src="<?=AVATAR_DIR.$settings['user']['photo']?>" class="avatar-photo">
         </div>
         <?if($settings['own']):?>
             <div style = "position:relative; top:10px; text-align:center">
