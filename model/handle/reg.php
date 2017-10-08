@@ -2,16 +2,16 @@
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 if(isset($_REQUEST['magistratura'])) $res=1; else $res=0;
 if(test_input($_POST['password']) !== test_input($_POST['password_conf'])) {
-    Main::error('Пароли не совпадают <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reg.php"/>');
+    Main::error('Пароли не совпадают <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
 }
 elseif(preg_match("/[^0-9]/", test_input($_POST['phone']))){
-    Main::error('Телефон должен состоять из цифр. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reg.php"/>');
+    Main::error('Телефон должен состоять из цифр. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
 }
 elseif(preg_match("/[^A-Za-z0-9]/", test_input($_POST['login']))){
-    Main::error('Логин должен состоять только из цифр или латинских букв. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reg.php"/>');
+    Main::error('Логин должен состоять только из цифр или латинских букв. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
 }
 elseif(!preg_match("/[A-Za-zА-Яа-я0-9]+@+[A-Za-zА-Яа-я0-9]+\.+[A-Za-zА-Яа-я0-9]/", test_input($_POST['email']))){
-    Main::error('E-mail имеет неверный формат. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reg.php"/>');
+    Main::error('E-mail имеет неверный формат. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
 }
 
 if(isset($_POST['id'])){
