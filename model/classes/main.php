@@ -32,8 +32,8 @@ class Main
 		),
 		"menu" => array(
 			"lMenu" => array(1,2,3,4,5),
-			"rtopmenu" => array(1,2,3,4,5),
-			"topmenu" => array(1,2,3,4,5),
+			"rtopmenu" => array(null, 1,2,3,4,5),
+			"topmenu" => array(null, 1,2,3,4,5),
 		),
 		"posts" => array(
 			"add" => array(1,2,3,4,5),
@@ -79,11 +79,11 @@ class Main
 	* @param array $settings параметры для подключения. В зависимости от этих данных может меняться контент на странице.
 	* @return array $result полученный массив, который можно использовать далее на странице и передавать его (или его части) как параметр для следующего элемента (например, какие разделы показывать, исходя из доступных разделов меню)
 	*/
-	public static function IncludeThing($type, $name, $settings = array(), $unLoged = true)
+	public static function IncludeThing($type, $name, $settings = array())
 	{
 		global $user, $db;
 		$result = array();
-		if(!isset(self::$permissions[$type][$name]) || (isset($user) && !in_array($user->getLevel(), self::$permissions[$type][$name]) || !$unLoged)){
+		if(!isset(self::$permissions[$type][$name]) || (isset($user) && !in_array($user->getLevel(), self::$permissions[$type][$name]))){
 			include $_SERVER['DOCUMENT_ROOT']."/403.php";
 		}
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/$type/model/$name.php"))

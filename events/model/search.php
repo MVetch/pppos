@@ -28,7 +28,7 @@ if (isset($_GET['search'])){
             $order = array("date" => "DESC");
             break;
         case 'По ответственному':
-            $order = array("respFio" => "ASC");
+            $order = array("fioResp" => "ASC");
             break;
         default:
             $order = array();

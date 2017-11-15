@@ -1214,3 +1214,7 @@ tr.border-bottom {
   left: 0;
 }
 
+.decree {
+  text-align: justify;
+  text-indent: 20px;
+}

@@ -18,7 +18,8 @@ class Event
 			array(
 				"id_student" => $studID,
 				"id_event" => $eventID,
-				"id_role" => $role
+				"id_role" => $role,
+				"accepted_by" => User::ID()
 			)
 		);
 	}

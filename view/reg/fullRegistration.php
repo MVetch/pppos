@@ -115,7 +115,7 @@
                 <td style="width:8%">+7</td>
                 <td><input required="required" type="text" name="phone" class="form-control" maxlength="10" oninput="checkNumber(this)"></td>
                 <td style="width:2px"></td>
-                <td><input required="required" type="date" id="datepicker" name="birth" max="1999-12-31" class="form-control"></td>
+                <td><input required="required" type="date" id="datepicker" name="birth" max="<?=(date('o')-14)?>-12-31" class="form-control"></td>
             </tr>
         </table>
         
@@ -154,7 +154,7 @@
         <table style="margin:auto;">
             <tr>
                 <td></td>
-                <td><input type = "checkbox" required="required"/> Cогласен(a) на обработку персональных данных</td>
+                <td><input type = "checkbox" required="required"/> Cогласен(a) на <i style="text-decoration: underline;cursor: pointer;" onclick="document.getElementById('persData').style.display = 'block'">обработку персональных данных</i></td>
             </tr>
         </table>
         <br/>

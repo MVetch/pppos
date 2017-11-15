@@ -62,9 +62,10 @@ if(isset($_POST['id'])){
             "name" => $_POST['name']
         )
     );
+    $id = $_POST['id'];
 }
 else {
-    AUser::Add(
+    $id = AUser::Add(
         array(
             "surname" => $_POST['surname'],
             "name" => $_POST['name'],
@@ -74,13 +75,8 @@ else {
             "phone_number" => '8'.$_POST['phone'],
             "email" => $_POST['email'],
             "form_edu" => $_POST['budget']
-        )
-    );
-    $id = $db->insert_id;
-    $db->Add(
-        "stud_group",
+        ),
         array(
-            "id_student" => $id,
             "id_group" => $_POST['group'],
             "year" => $_POST['step'],
             "magistratura" => $res
