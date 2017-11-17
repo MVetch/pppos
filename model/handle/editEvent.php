@@ -8,9 +8,11 @@ if(isset($_POST['btn'])){
     	"events",
     	array(
     		"name" => $_POST['name'],
-    		"date" => $_POST['date'],
+            "date" => $_POST['date'],
+            "date_end" => $_POST['date_end'],
     		"place" => $_POST['place'],
-    		"level" => $_POST['level'],
+            "level" => $_POST['level'],
+            "in_zachet" => isset($_POST['zachet']),
     		"accepted_by" => $user->getId()
     	),
     	array(

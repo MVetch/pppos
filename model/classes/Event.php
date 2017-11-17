@@ -31,12 +31,13 @@ class Event
 	 * @param string $place место проведения
 	 * @param int    $level ИД уровня из БД
 	 * @param int    $quota квота
+	 * @param int    $zachet идет в зачетку активиста или нет
 	 * @param int    $role  ИД роли из БД (организатор или ответственный от ЛГТУ)
 	 */
-	public static function Add(string $name, string $date, string $place, int $level, int $quota, int $role)
+	public static function Add(string $name, string $date, string $date_end, string $place, int $level, int $quota, int $zachet, int $role)
 	{
 		global $db, $user;
-		if(!isset($quota) || $quota < 0) {$quota = 0;}
+		if(!isset($quota) || $quota < 0) $quota = 0;
 		if($db->Select(
 			array("*"),
 			"events",
@@ -50,9 +51,11 @@ class Event
 				array(
 					"name" => $name,
 					"date" => $date,
+					"date_end" => $date_end,
 					"place" => $place,
 					"level" => $level,
 					"quota" => $quota,
+					"in_zachet" => $zachet,
 					"created_by" => $user->getId(),
 					'role' => $role
 				)
@@ -89,9 +92,11 @@ class Event
 				array(
 					"name" => $event['name'],
 					"date" => $event['date'],
+					"date_end" => $event['date_end'],
 					"place" => $event['place'],
 					"level" => $event['level'],
 					"quota" => $event['quota'],
+					"in_zachet" => $event['in_zachet'],
 					"accepted_by" => $user->getId()
 				)
 			);
@@ -117,5 +122,16 @@ class Event
 		$return['count'] = $ret->num_rows;
 		$return['events'] = $ret->fetchAll("id_event");
 		return $return;
+	}
+
+	/**
+	 * Удаляет мероприятие
+	 * int $id ИД мероприятия
+	 */
+	public static function Delete($id)
+	{
+		global $db;
+		$db->Delete("event_student", array("id_event" => $id));
+		$db->Delete("events", array("id_event" => $id));
 	}
 }

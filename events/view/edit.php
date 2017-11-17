@@ -4,11 +4,27 @@
         <p>Название</p>
         <input required type="text" name="name" class="form-control" value="<?=$result['event']['name']?>"><br>
         
-        <p>Дата (дд.мм.гггг)</p>
-        <input required type="date" name="date" class="form-control" value="<?=$result['event']['date']?>"><br>
+        <table class="table">
+            <tr>
+                <td>
+                    Дата
+                </td>
+                <td>
+                    Дата конца (если длилось более 1 дня)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input required type="date" name="date" class="form-control" value="<?=$result['event']['date']?>">
+                </td>
+                <td>
+                    <input type="date" name="date_end" class="form-control"<?if($result['event']['date_end'] != '0000-00-00'):?> value="<?=$result['event']['date_end']?>"<?endif?>>
+                </td>
+            </tr>
+        </table>
         
         <p>Место (город, улица или кабинет)</p>
-        <input required type="text" name="place" class="form-control" value="<?=$result['event']['place']?>"><br>
+        <input type="text" name="place" class="form-control" value="<?=$result['event']['place']?>"><br>
         
         <p>Ответственный/организатор</p>
         <table style="width:100%; margin:auto">
@@ -16,7 +32,7 @@
                 <td style="width:30%">
                     <select name="role" class="form-control" style="width:90%" onchange="replaceName(this)" id="role">
                         <option value = "5">ответственный от ЛГТУ</option>
-                        <option value = "2">организатор</option>
+                        <option value = "2"<?if(isset($result['event']['fioOrg'])):?> selected<?endif?>>организатор</option>
                     </select>
                 </td>
                 <td>
@@ -26,7 +42,7 @@
                         <option id="<?=$student['id_student']?>"><?=$student['surname']?> <?=$student['name']?> <?if(!empty($student['thirdName'])):?><?=$student['thirdName']?> <?endif?>(<?=$student['groups']?>)</option>
                     <? endforeach ?>
                     </datalist>
-                    <input type="hidden" name="id_student" id="id_student" value="<?=(isset($result['event']['idResp'])?$result['event']['idResp']:$result['event']['idOrg'])?>">
+                    <input type="hidden" name="id_student" id="id_student" value="<?=(isset($result['event']['idOrg'])?$result['event']['idOrg']:$result['event']['idResp'])?>">
                 </td>
             </tr>
         </table>
@@ -39,10 +55,11 @@
                 <option value = <?=$level['id_level']?> <?if($level['id_level'] == $result['event']['level']):?> selected<?endif?>><?=$level['name']?></option>
             <?endforeach?>
         </select>
+        <input type="checkbox" name="zachet" id="zachet" class="checkbox" <?if($result['event']['in_zachet']):?> checked<?endif?>><label for="zachet" class="forcheckbox">Включается в зачетку активиста</label><br>
         <input type="submit" name="btn" value="Подтвердить" class="button">
     </form>
 </div>
-<script>        
+<script>
 
 $(window).load(replaceName(document.getElementById("role")));
 

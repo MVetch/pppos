@@ -12,6 +12,7 @@ $result['event'] = [
 	"id" => $participants[0]['id_event'],
 	"name" => $participants[0]['eventName'],
 	"date" => $participants[0]['date'],
+	"date_end" => $participants[0]['date_end'],
 	"place" => $participants[0]['place'],
 	"level" => $participants[0]['level'],
 	"fioResp" => $participants[0]['fioResp'],

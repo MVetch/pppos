@@ -54,17 +54,15 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
                             array(
                                 "userLevel" => $user->getLevel(),
                                 "requests" => $user->getNumNotes()
-                            ),
-                            true
+                            )
                         )?>
-                        <?if($user->getId() !== null) Main::IncludeThing(
+                        <?Main::IncludeThing(
                             "menu",
                             "rtopmenu", 
                             array(
                                 "userId" => $user->getId(),
                                 "requests" => $user->getNumNotes()
-                            ),
-                            true
+                            )
                         )?>
                 	</ul>
                 </nav><!-- primary-navigation -->
