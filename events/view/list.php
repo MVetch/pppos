@@ -9,9 +9,16 @@
                 <li style="height:120px; position: relative;">
                 	<div onclick="window.location.href='/event<?=$event['id_event']?>'">
 	                    <div class="date-box">
-	                        <div style="font-size:35px;margin:0"><?=substr($event['date'],8,2)?></div>
-	                        <p style="font-size:18px;margin:0"><?=get_month_name($event['date'])?></p>
-	                        <p style="font-size:12px;margin:0"><?=substr($event['date'],0,4)?></p>
+                            <?if($event['date_end'] == "0000-00-00"):?>
+    	                        <div style="font-size:35px;margin:0"><?=substr($event['date'],8,2)?></div>
+    	                        <p style="font-size:18px;margin:0"><?=get_month_name($event['date'])?></p>
+    	                        <p style="font-size:12px;margin:0"><?=substr($event['date'],0,4)?></p>
+                            <?else:?>
+                                <div style="font-size:25px;margin:0"><?=substr($event['date'],8,2)?>.<?=substr($event['date'],5,2)?></div>
+                                <div style="font-size:25px;margin:0;line-height: 0.001">-</div>
+                                <p style="font-size:25px;margin:0"><?=substr($event['date_end'],8,2)?>.<?=substr($event['date_end'],5,2)?></p>
+                                <p style="font-size:12px;margin:0"><?=substr($event['date'],0,4)?></p>
+                            <?endif?>
 	                    </div>
 	                    <div style="margin-left:107px">
 	                        <div class="event-name"><?=$event['name']?></div>

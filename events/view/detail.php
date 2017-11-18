@@ -14,7 +14,7 @@
                 Уровень мероприятия: 
             </td>
              <td>
-                <?=$result['event']['level']?>
+                <?=$result['event']['level_name']?>
             </td>
         </tr>
         <tr>
@@ -73,12 +73,12 @@
         </tr>
         </table>
         <?if($user->getLevel()<5 and $user->getLevel() != 3 || $result['isResponsible']):?>
-            <input type="button" onclick="window.location.href='/events/edit<?=$result['event']['id']?>'" value="Изменить" class="button">
+            <input type="button" onclick="window.location.href='/events/edit<?=$result['event']['id_event']?>'" value="Изменить" class="button">
         <?endif?>
         <?if($user->getLevel() == 1):?>
-            <input type="button" onclick="window.location.href='/events/delete<?=$result['event']['id']?>'" value="Удалить" class="button">
+            <input type="button" onclick="window.location.href='/events/delete<?=$result['event']['id_event']?>'" value="Удалить" class="button">
         <?endif?>
         <?if(!$result['checkedIn']):?>
-            <br><br><input type="button" onclick="getElementById('chooseLevel').style.display='block'; getElementById('id_event').value='<?=$result['event']['id']?>'" value="Записаться на это мероприятие" class="button">
+            <br><br><input type="button" onclick="getElementById('chooseLevel').style.display='block'; getElementById('id_event').value='<?=$result['event']['id_event']?>'" value="Записаться на это мероприятие" class="button">
         <?endif?>
     </div>

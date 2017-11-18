@@ -5,6 +5,7 @@ $eventVisits = $db->Select(
 		"id",
 		"eventName",
 		"date",
+		"date_end",
 		"place",
 		"role",
 		"level",

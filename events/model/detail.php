@@ -8,23 +8,16 @@ $participants = $db->Select(
 	array("id_event" => $_GET['id'])
 )->fetchAll();
 
-$result['event'] = [
-	"id" => $participants[0]['id_event'],
-	"name" => $participants[0]['eventName'],
-	"date" => $participants[0]['date'],
-	"date_end" => $participants[0]['date_end'],
-	"place" => $participants[0]['place'],
-	"level" => $participants[0]['level'],
-	"fioResp" => $participants[0]['fioResp'],
-	"idResp" => $participants[0]['idResp'],
-	"fioOrg" => $participants[0]['fioOrg'],
-	"idOrg" => $participants[0]['idOrg'],
-	"quota" => $participants[0]['quota']
-];
+$result['event'] = $db->Select(
+	array(),
+	"event_names_resp",
+	array("id_event" => $_GET['id'])
+)->fetch();
+
 $result['participants'] = [];
 $result['orgGroup'] = [];
 $result['orgGroupHelpers'] = [];
-$result['isResponsible'] = ($participants[0]['idResp'] == $user->getId() || $participants[0]['idOrg'] == $user->getId());
+$result['isResponsible'] = ($result['event']['idResp'] == $user->getId() || $result['event']['idOrg'] == $user->getId());
 $result['checkedIn'] = false;
 
 foreach ($participants as $student) {
