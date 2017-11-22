@@ -21,5 +21,7 @@ RewriteRule ^rate_fac/$ rate/rate.php [L]
 
 RewriteRule ^change$ change_log.php [L]
 
+RewriteRule ^login/forgot$ forgot.php [L]
+
 ErrorDocument 404 /404.php
 ErrorDocument 403 /403.php

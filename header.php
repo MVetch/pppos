@@ -44,7 +44,7 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
         <header id="masthead" class="site-header navbar-fixed-top">
             <div class="row" style="max-width:1024px;margin:auto">
             	<div class="logo navbar-brand">
-            		<img src="/images/Logo.png" style="height:64px;width:auto" onclick="window.location.href='/index.php'">
+            		<img src="/images/Logo.png" style="height:64px;width:auto;cursor: pointer;" onclick="window.location.href='/index.php'">
             	</div><!-- end logo -->
             	<nav class="site-navigation" role="navigation" style="height:1px;">
             		<ul>

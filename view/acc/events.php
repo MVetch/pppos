@@ -13,7 +13,7 @@
                         <div class="date-box">
                             <?if($event['date_end'] == "0000-00-00"):?>
                                 <div style="font-size:35px;margin:0"><?=substr($event['date'],8,2)?></div>
-                                <p style="font-size:18px;margin:0"><?=get_month_name($event['date'])?></p>
+                                <p style="font-size:18px;margin:0;text-transform: uppercase;"><?=get_month_name($event['date'])?></p>
                                 <p style="font-size:12px;margin:0"><?=substr($event['date'],0,4)?></p>
                             <?else:?>
                                 <div style="font-size:25px;margin:0"><?=substr($event['date'],8,2)?>.<?=substr($event['date'],5,2)?></div>

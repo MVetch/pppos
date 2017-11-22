@@ -1,5 +1,5 @@
 <h1>Вход</h1>
-<form method="post" action="/model/handle/enter.php">
+<form method="post" action="<?=FORM_HANDLER_DIR."enter.php"?>">
     <table class = "table">
         <tr>
             <td style="width:20%"><label>Логин</label></td>
@@ -10,6 +10,9 @@
             <td><input required="required" name="password" id="password" type="password" maxlength="15" class="form-control" style="width:80%"></td>
         </tr>
     </table>
+    <!-- <p style="margin-top: -20px">
+        <a href="/login/forgot">Забыли пароль?</a>
+    </p> -->
     <p>
         <input type="submit" class="button" name="submit" value="Войти" style="width:60%">
     </p>

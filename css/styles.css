@@ -1086,6 +1086,7 @@ textarea.form-control {
   position: relative;
   display: table;
   border-collapse: separate;
+  margin: auto;
 }
 
 .input-group .form-control {
