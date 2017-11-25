@@ -10,9 +10,9 @@
             <td><input required="required" name="password" id="password" type="password" maxlength="15" class="form-control" style="width:80%"></td>
         </tr>
     </table>
-    <!-- <p style="margin-top: -20px">
+    <p style="margin-top: -20px">
         <a href="/login/forgot">Забыли пароль?</a>
-    </p> -->
+    </p>
     <p>
         <input type="submit" class="button" name="submit" value="Войти" style="width:60%">
     </p>

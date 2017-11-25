@@ -3,8 +3,6 @@
 <form method="post" action="<?=FORM_HANDLER_DIR?>forgotPass.php">
 	<p>Укажите e-mail, который указывали при регистрации. На него будет выслано письмо с дальнейшими инструкциями.</p>
 	<input type="text" name="email" class="form-control" placeholder="e-mail">
-	<p>Или просто логин.</p>
-	<input type="text" name="login" class="form-control" placeholder="логин">
 	<button class="button">Послать письмо</button>
 </form>
 </div>

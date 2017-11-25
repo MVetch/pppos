@@ -148,10 +148,10 @@ class Main
 	 * @param  string $text текст сообщения
 	 * @param  string $url  URL страницы, на которую нужно перенаправить пользователя
 	 */
-	public static function success(string $text, string $url)
+	public static function success(string $text, string $url, int $time = 2, bool $unloged = false)
 	{
 		global $db, $user;
-		include_once $_SERVER['DOCUMENT_ROOT']."/header.php";
+		if($unloged) include_once $_SERVER['DOCUMENT_ROOT']."/headerreg.php"; else include_once $_SERVER['DOCUMENT_ROOT']."/header.php";
         include $_SERVER['DOCUMENT_ROOT']."/view/success.php";
         include $_SERVER['DOCUMENT_ROOT']."/footer.php";
         die;

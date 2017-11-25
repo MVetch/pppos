@@ -964,5 +964,29 @@ class User
 	    	);
 	    }
 	}
+
+	/**
+	 * Меняет пароль для пользователя, который хочет его восстановить. Соответственно сравнивать старый пароль не нужно и так же нельзя использовать эту функцию для простой смены пароля.
+	 * @param string $new     новый пароль
+	 * @param string $newConf подтверждение нового пароля
+	 * @param string $hash хэш для подтверждения пользователя
+	 */
+	public function RecoverPassword($new, $newConf, $hash)
+	{
+		global $db;
+		if($new != $newConf){
+	        Main::error("Пароли не совпадают!");
+	    } else {
+	    	$db->Update(
+	    		"users", 
+	    		array(
+	    			"password" => password_hash($new, PASSWORD_BCRYPT)
+	    		),
+	    		array(
+	    			"hash" => $hash
+	    		)
+	    	);
+	    }
+	}
 }
 ?>
