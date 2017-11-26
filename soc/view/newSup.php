@@ -33,7 +33,7 @@
         </select>
         <div id="reason" style="display: none">
             <h4>Причина</h4>
-            <input type="text" name="reason" class="form-control" required="required">
+            <input type="text" name="reason" class="form-control">
         </div>
         <input type="hidden" name="id_student" id="id_student">
         <input type="submit" class = "button" name="btn" value = "Добавить">

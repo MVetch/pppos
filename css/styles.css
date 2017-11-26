@@ -488,7 +488,7 @@ table.sortable tr:nth-child(1) {
 
 .request-deny, .request-apply {
   position: absolute;
-  width: 120px;
+  width: 12.5%;
   height: 100%;
   top: 0;
   z-index:1;

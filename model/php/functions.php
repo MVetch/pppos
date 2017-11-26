@@ -164,4 +164,24 @@ function auto_version($file)
   $mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
   return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file);
 }
+
+function mb_ucfirst($str){
+    $i = 0;
+    $forbidden = [
+        " ",
+        ",",
+        ".",
+        "/",
+        "\\"
+    ];
+    while(in_array($str[$i], $forbidden)){
+        $i++;
+    }
+    return mb_strtoupper(mb_substr($str, $i, 1)).mb_substr($str,$i+1);
+}
+
+function surnameNO($name){
+    $name = explode(" ", $name);
+    return $name[0]." ".mb_substr($name[1], 0, 1).".".(isset($name[2])?mb_substr($name[2], 0, 1).".":'');
+}
 ?>

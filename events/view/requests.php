@@ -5,7 +5,7 @@
 			<div class="request-holder" id='newevent<?=$request['id_event']?>'>
 				<div class="request-deny"><input type="button" name="refuse" value="" class="cancelbtn request-deny-button" onclick="handleRequest('newevent', 'deny', <?=$request['id_event']?>)"></div>
 				<div class="request-apply"><input type="button" name="apply" value="" class="button request-apply-button" onclick="handleRequest('newevent', 'apply', <?=$request['id_event']?>)"></div>
-				<div style="width:80%; margin:auto">
+				<div style="width:75%; margin:auto">
     				<div class="request-from"><?=$request['event']?></div>
     				<div class="request-detail"><?=get_date($request['date'])?><?if($request['date_end'] !== "0000-00-00"):?> - <?=get_date($request['date_end'])?><?endif?></div>
     				<div class="request-detail"><?=$request['place']?></div>
