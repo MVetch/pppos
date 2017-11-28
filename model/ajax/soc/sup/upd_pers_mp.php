@@ -22,6 +22,7 @@
             array(
                 "id_student" => $id_student,
                 "date_app" => $_POST['dz'],
+                "date_end" => $_POST['do'],
                 "id_categ" => $_POST['categ'],
                 "status" => $_POST['status'],
             ),

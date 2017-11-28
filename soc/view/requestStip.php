@@ -136,11 +136,4 @@
             });
         });
     }
-    
-    function convDateBack(date) {
-        return date.substring(6) + "-" + date.substring(3,5) + "-" + date.substring(0,2)
-    }
-    function get_date(date) {
-        return date.substring(8) + "." + date.substring(5, 7) + "." + date.substring(0, 4);
-    }
 </script>

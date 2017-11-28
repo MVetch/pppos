@@ -2,8 +2,8 @@
 include_once $_SERVER['DOCUMENT_ROOT']."/model/php/functions.php";
 include $_SERVER['DOCUMENT_ROOT']."/model/classes/DBResult.php";
 include $_SERVER['DOCUMENT_ROOT']."/model/classes/DB.php";
-//$db = new DB("localhost", "root", "", "pppos");
-$db = new DB("localhost", "ufb79156_pppos", "admin123", "ufb79156_pppos");
+$db = new DB("localhost", "root", "", "pppos");
+//$db = new DB("localhost", "ufb79156_pppos", "admin123", "ufb79156_pppos");
 include $_SERVER['DOCUMENT_ROOT']."/model/classes/Main.php";
 include $_SERVER['DOCUMENT_ROOT']."/model/classes/User.php";
 define("AVATAR_DIR", "/uploads/avatars/");
@@ -84,6 +84,35 @@ $mat_pod = $db->query("
         mat_support_categories.id_categ = mat_support.id_categ AND
         MONTH(mat_support.payday) = $month_needed AND
         YEAR(mat_support.payday) = $year_needed ".($user->getLevel() == 2?"AND full_info.faculty = '".$user->getFaculty()."'":"")."
+    WHERE
+        NOT mat_support.status = 3
+");
+$mat_pod_refused = $db->query("
+    SELECT
+        concat(
+            full_info.surname,
+            ' ',
+            full_info.name,
+            ' ',
+            full_info.thirdName
+        ) AS fio,
+        full_info.groups AS gruppa,
+        mat_support_categories.name_rp,
+        mat_support_categories.name
+    FROM
+        mat_support
+    JOIN
+        full_info
+    ON
+        full_info.id_student = mat_support.id_student
+    JOIN
+        mat_support_categories
+    ON
+        mat_support_categories.id_categ = mat_support.id_categ AND
+        MONTH(mat_support.payday) = $month_needed AND
+        YEAR(mat_support.payday) = $year_needed ".($user->getLevel() == 2?"AND full_info.faculty = '".$user->getFaculty()."'":"")."
+    WHERE
+        mat_support.status = 3
 ");
 
 //----------------Шапка---------------------//
@@ -141,7 +170,7 @@ $section->writeText('
     3. Рассмотрение вопроса и принятие решения об увеличении государственной социальной стипендии нуждающимся студентам первого и второго курсов.
         
     I. СЛУШАЛИ: '.$fac_query['fio_z_rp'].' – заместителя '.(in_array($fac_query['name'], ["ИМ", "МИ"])?'директора института':'декана факультета').' по внеучебной работе о рассмотрении заявлений об оказании материальной поддержки обучающимся.
-    На момент '.$na_moment.' г. представлено '.$mat_pod->num_rows.' заявлений. Все обучающиеся, предоставившие заявления обучаются на бюджетной основе.
+    На момент '.$na_moment.' г. представлено '.($mat_pod->num_rows + $mat_pod_refused->num_rows).' заявлений. Все обучающиеся, предоставившие заявления обучаются на бюджетной основе.
 
     ВЫСТУПИЛИ: Заместитель '.(in_array($fac_query['name'], ["ИМ", "МИ"])?'директора института':'декана факультета').' '.$fac_query['fio_z'].'
     Рассмотрены  заявления следующих обучающихся:
@@ -153,6 +182,10 @@ $i=1;
 while($list_mat_pod = $mat_pod->fetch()){
     $otn = in_array(substr($list_mat_pod['name_rp'],0,1), [" ", ","])?'Относится к категории обучающихся':'';//относится
     $section->writeText("    ".$i.'. '.$list_mat_pod['fio'].', гр. '.$list_mat_pod['gruppa'].'. Предоставлено заявление, к которому приложены документы, подтверждающие причину обращения и справки. '.$otn.$list_mat_pod['name_rp'].'.', $font, $simpleFormat);
+    $i++;
+}
+while($list_mat_pod = $mat_pod_refused->fetch()){
+    $section->writeText("    ".$i.'. '.$list_mat_pod['fio'].', гр. '.$list_mat_pod['gruppa'].'. Предоставлено заявление с неполным пакетом документов/не относится к категории нуждающихся.', $font, $simpleFormat);
     $i++;
 }
 
@@ -215,6 +248,36 @@ $soc_stip = $db->query("
         ) AS fio,
         full_info.groups AS gruppa,
         soc_stip_categories.name_rp,
+        soc_stip_categories.name,
+        soc_stip.date_app,
+        soc_stip.date_end
+    FROM
+        soc_stip
+    JOIN
+        full_info
+    ON
+        full_info.id_student = soc_stip.id_student
+    JOIN
+        soc_stip_categories
+    ON
+        soc_stip_categories.id_categ = soc_stip.id_categ AND
+        MONTH(soc_stip.date_app) = $month_needed AND
+        YEAR(soc_stip.date_app) = $year_needed ".($user->getLevel() == 2?"AND full_info.faculty = '".$user->getFaculty()."'":"")."
+    WHERE
+        NOT soc_stip.status = 3
+");
+
+$soc_stip_refused = $db->query("
+    SELECT
+        concat(
+            full_info.surname,
+            ' ',
+            full_info.name,
+            ' ',
+            full_info.thirdName
+        ) AS fio,
+        full_info.groups AS gruppa,
+        soc_stip_categories.name_rp,
         soc_stip_categories.name
     FROM
         soc_stip
@@ -228,12 +291,14 @@ $soc_stip = $db->query("
         soc_stip_categories.id_categ = soc_stip.id_categ AND
         MONTH(soc_stip.date_app) = $month_needed AND
         YEAR(soc_stip.date_app) = $year_needed ".($user->getLevel() == 2?"AND full_info.faculty = '".$user->getFaculty()."'":"")."
+    WHERE
+        soc_stip.status = 3
 ");
 
 $section->writeText('
     II. СЛУШАЛИ: '.$fac_query['fio_z_rp'].' – заместителя '.(in_array($fac_query['name'], ["ИМ", "МИ"])?'директора института':'декана факультета').' по внеучебной работе о рассмотрении заявлений студентов о назначении государственной социальной стипендии.
 
-    На момент '.$na_moment.' г. представлено '.$soc_stip->num_rows.' заявлений. Все обучающиеся, предоставившие заявления обучаются на бюджетной основе.
+    На момент '.$na_moment.' г. представлено '.($soc_stip->num_rows + $soc_stip_refused->num_rows).' заявлений. Все обучающиеся, предоставившие заявления обучаются на бюджетной основе.
 
     ВЫСТУПИЛИ: Заместитель '.(in_array($fac_query['name'], ["ИМ", "МИ"])?'директора института':'декана факультета').' по внеучебной работе '.$fac_query['fio_z'].'
     Рассмотрены заявления следующих студентов:
@@ -244,7 +309,11 @@ $section->writeText('
 $i=1;
 while($list_soc_stip = $soc_stip->fetch()){
     $otn = in_array(substr($list_soc_stip['name_rp'],0,1), [" ", ","])?'Относится к категории обучающихся':'';//относится
-    $section->writeText("    ".$i.'. '.$list_soc_stip['fio'].', гр. '.$list_soc_stip['gruppa'].'. Предоставлено заявление, к которому приложены документы, подтверждающие причину обращения и справки. '.$otn.$list_soc_stip['name_rp'].'.', $font, $simpleFormat);
+    $section->writeText("    ".$i.'. '.$list_soc_stip['fio'].', гр. '.$list_soc_stip['gruppa'].'. Предоставлено заявление, к которому приложены документы, подтверждающие причину обращения и справки. '.$otn.$list_soc_stip['name_rp'].'. Срок назначения с '.get_date($list_soc_stip['date_app']).' по '.get_date($list_soc_stip['date_end']).'', $font, $simpleFormat);
+    $i++;
+}
+while($list_soc_stip = $soc_stip_refused->fetch()){
+    $section->writeText("    ".$i.'. '.$list_soc_stip['fio'].', гр. '.$list_soc_stip['gruppa'].'. Предоставлено заявление с неполным пакетом документов/не относится к категории нуждающихся.', $font, $simpleFormat);
     $i++;
 }
 

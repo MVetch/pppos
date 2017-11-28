@@ -3,8 +3,8 @@
     <h1>Социальные стипендии</h1>
     <table border = 1 style = "text-align:center" class = "sortable table" id="sor">
         <tr>
-            <th id="sortable" style="width:23%"><div class = "sortimg">ФИО</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-            <th id="sortable" style="width:23%"><div class = "sortimg">Дата заявления</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+            <th id="sortable" style="width:15%"><div class = "sortimg">ФИО</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+            <th id="sortable" style="width:30%"><div class = "sortimg">Промежуток выплаты</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
             <th id="sortable" style="width:23%"><div class = "sortimg">Статус</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
             <th id="sortable" style="width:23%"><div class = "sortimg">Категория</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
             <td></td>
@@ -19,17 +19,48 @@
                     </div>
                 </td>
                 <td>
-                    <div id = sdz<?=$stip['id_socstip']?>>
+                    <div style="display: inline-block;">c</div>
+                    <div id = sdz<?=$stip['id_socstip']?> style="display: inline-block;">
                         <p id = psdz<?=$stip['id_socstip']?>><?=get_date($stip['date_app'])?></p>
-                    </div></td>
+                    </div>
+                    <div>
+                        <table class="table" style="margin: auto; background-color: transparent;width: auto">
+                            <tr style="background-color: transparent;">
+                                <td><div style="display: inline-block;">по</div></td>
+                                <td>
+                                    <?if($stip['date_end'] == '0000-00-00'):?>
+                                        <div id = sdo<?=$stip['id_socstip']?> style="display: inline-block;width: 90%">
+                                            <table>
+                                                <tr style="background-color: transparent;" id="not_sort">
+                                                    <td>
+                                                        <input id = sido<?=$stip['id_socstip']?> type = "date" name="data_ok" min="<?=$stip['date_app']?>" class="form-control" style="display: inline-block;margin-bottom: 0">
+                                                    </td>
+                                                    <td>
+                                                        <input class="galochka button" id="<?=$stip['id_socstip']?>" type="button" onclick = "set_do(this)" style="display: inline-block; margin: 0 10px">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    <?else:?>
+                                        <div id = sdos<?=$stip['id_socstip']?> style="display: inline-block;">
+                                            <p id = psdos<?=$stip['id_socstip']?>><?=get_date($stip['date_end'])?></p>
+                                        </div>
+                                    <?endif?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
                 <td>
                     <div id = sss<?=$stip['id_socstip']?>>
                         <p id = psss<?=$stip['id_socstip']?>><?=$stip['status']?></p>
-                    </div></td>
+                    </div>
+                </td>
                 <td>
                     <div id = sks<?=$stip['id_socstip']?>>
                         <p id = psks<?=$stip['id_socstip']?>><?=$stip['categ']?></p>
-                    </div></td>
+                    </div>
+                </td>
                 <td>
                     <div id = supdBut<?=$stip['id_socstip']?>>
                         <p id = psupdBut<?=$stip['id_socstip']?>>
@@ -260,6 +291,10 @@
         temp = document.getElementById('psdz'+id).innerHTML;
         document.getElementById("psdz" + id).innerHTML = "<input type = 'date' id = 'sidz" + id + "' class='form-control' max='<?=$now?>'>";
         document.getElementById("sidz" + id).value = convDateBack(temp);
+
+        temp = document.getElementById('psdos'+id).innerHTML;
+        document.getElementById("psdos" + id).innerHTML = "<input type = 'date' id = 'sidos" + id + "' class='form-control'>";
+        document.getElementById("sidos" + id).value = convDateBack(temp);
         
         temp = document.getElementById('psss'+id).innerHTML;
         document.getElementById("psss" + id).innerHTML = temp=='отказано'?"<select name='status' id = 'sstatus" + id + "' class='form-control'>"+
@@ -309,18 +344,41 @@
                     fio:document.getElementById("sifio" + tag.id).value,
                     id_student:document.getElementById("id_student").value,
                     dz:document.getElementById("sidz" + tag.id).value,
+                    do:document.getElementById("sidos" + tag.id).value,
                     status:statusId,
                     categ:kategId,
                 },
                 success: function(data){
                     document.getElementById("psfio" + tag.id).innerHTML = document.getElementById("sifio" + tag.id).value;
                     document.getElementById("psdz" + tag.id).innerHTML = get_date(document.getElementById("sidz" + tag.id).value);
+                    document.getElementById("psdos" + tag.id).innerHTML = get_date(document.getElementById("sidos" + tag.id).value);
                     document.getElementById("psss" + tag.id).innerHTML = status;
                     document.getElementById("psks" + tag.id).innerHTML = kateg;
                     document.getElementById("supdBut" + tag.id).innerHTML = data + "<p id = psupdBut"+tag.id+"><input type='button' class = 'edit button toDisable' onclick = 'updateStip("+tag.id+")'></p>";
                     for(var i=0; i<buttons.length; i++) {
                         buttons[i].style.display = 'block';
                     }
+                }
+            });
+        });
+    }
+    function set_do(tag) {
+        //document.getElementById("supdBut"+tag.id).innerHTML = "<img src=\"/images/loading.gif\" style=\"width:40px; height:40px\">";
+        
+        $(function(){
+            $.ajax({
+                type: "POST",
+                url: '/model/ajax/soc/stip/set_do.php',
+                data: {
+                    id:tag.id,
+                    do:document.getElementById("sido" + tag.id).value
+                },
+                success: function(data){
+                    if(data == "")
+                        document.getElementById("sdo" + tag.id).innerHTML = get_date(document.getElementById("sido" + tag.id).value);
+                    else
+                        document.getElementById("sdo" + tag.id).innerHTML += "<br>" + data;
+                    //document.getElementById("supdBut"+tag.id).innerHTML = "<input class='galochka button' id='" + tag.id + "' type='button' onclick = 'updatePersStip(this)'>"
                 }
             });
         });
