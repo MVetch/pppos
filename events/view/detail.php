@@ -1,11 +1,11 @@
 <h1 style="text-align:center"><?=$result['event']['name']?></h1>
     <div class="input-group" style=" text-align:center; margin:auto; border-radius:5%">
-        <table border=1 style="margin-top:20px; width:100%" class="table">
+        <table border=1 style="margin: 20px auto; width:100%;" class="table">
         <tr>
-            <td>
+            <td style="width: 40%">
                 Название мероприятия: 
             </td>
-             <td>
+            <td style="width: 60%">
                 <?=$result['event']['name']?>
             </td>
         </tr>
@@ -13,7 +13,7 @@
             <td>
                 Уровень мероприятия: 
             </td>
-             <td>
+            <td>
                 <?=$result['event']['level_name']?>
             </td>
         </tr>
@@ -21,7 +21,7 @@
             <td>
                 Квота: 
             </td>
-             <td>
+            <td>
                 <?=$result['event']['quota']?>
             </td>
         </tr>
@@ -29,7 +29,7 @@
             <td>
                 Дата: 
             </td>
-             <td>
+            <td>
                 <?=get_date($result['event']['date'])?><?if($result['event']['date_end'] !== "0000-00-00"):?> - <?=get_date($result['event']['date_end'])?><?endif?>
             </td>
         </tr>

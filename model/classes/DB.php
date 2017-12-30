@@ -81,9 +81,11 @@ class DB extends mysqli
 		$order = '';
 		if(count($order_by) > 0){
 			$order .= " ORDER BY ";
+			$temp_order = [];
 			foreach ($order_by as $key => $value) {
-				$order .= " ".$key." ".$value;
+				$temp_order[] = $key." ".$value;
 			}
+			$order .= implode(", ", $temp_order);
 		}
 		$limit = '';
 		$limitedBy = false;
@@ -195,9 +197,15 @@ class DB extends mysqli
 				$first = substr($key, 0, 1);
 				switch ($first) {
 					case '>':
+						if(substr($key, 1, 1) == "<"){
+							$key = substr($key, 2);
+							$first .= "<";
+							break;
+						}
 					case '<':
 						if(substr($key, 1, 1) == "="){
 							$key = substr($key, 2);
+							$first .= "=";
 							break;
 						}
 					case '~':
@@ -222,6 +230,8 @@ class DB extends mysqli
 						$value = $this->escape($value);
 						$query .= $key." = '".$value."'";
 					}
+				} elseif($first == "><") {
+					$query .= $key." BETWEEN '".$value[0]."' AND '".$value[1]."'";
 				} else {
 					$query .= $key.$first.'"'.$value.'"';
 				}

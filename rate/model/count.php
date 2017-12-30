@@ -225,3 +225,5 @@ $result['top'] = $db->query('
     LIMIT 0,'.RATING_TOP.'
 ')->fetchAll();
 $sum=0;
+foreach($result['posts'] as $post) $sum+=$post['score'];
+foreach($result['events'] as $event) $sum+=$event['score'];

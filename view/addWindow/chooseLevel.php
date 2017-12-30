@@ -2,7 +2,7 @@
 <form method="post" class="addtoevent">
 	<input type="hidden" name="id" id="id_event">
 	<div style="margin-bottom: 10px">
-		<select name="role">
+		<select name="role" class="form-control" style="width: 50%">
 			<?foreach($settings['roles'] as $role):?>
 				<option value="<?=$role['id_role']?>"><?=$role['name']?></option>
 			<?endforeach?>

@@ -1,20 +1,6 @@
 <?
 $eventVisits = $db->Select(
 	array(
-		"id_event",
-		"id",
-		"eventName",
-		"date",
-		"date_end",
-		"place",
-		"role",
-		"level",
-		"fioResp",
-		"idResp",
-		"fioOrg",
-		"idOrg",
-		"student_name",
-		"id_student"
 	),
 	"all_events_visits_with_resp",
 	array(

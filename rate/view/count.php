@@ -1,11 +1,16 @@
 <div class="divCenter">
+    <div>
+        <h1>Итоговый рейтинг: <?=$sum?></h1>
+        <input type="button" class = "button" onclick="window.location.href='/GenerateExcel945.php'" value="Сделать отчет по 945">
+    </div>
+    <hr>
     <?if(count($result['posts'])>0):?>
         <h2>Мои должности</h2>
-        <?foreach($result['posts'] as $post): $sum+=$post['score']?>
+        <?foreach($result['posts'] as $post):?>
             <div class="event-box" style="height:auto; min-height:0; margin-top: 20px" data-mcs-theme="dark" id="events">
                 <li style="height:120px;">
                     <?if($post['date_out_sem']+$post['date_out_y'] != 0):?>
-                        <div class="date-box">
+                        <div class="date-box"<?if($post['date_out_sem']+$post['date_out_y'] == $semester+$year_begin_edu-1):?> style = "background-color:red"<?endif?>>
                             <div style="font-size:35px;margin:0"><?=$post['date_out_sem']?></div>
                             <p style="font-size:18px;margin:0">СЕМЕСТР</p>
                             <p style="font-size:12px;margin:0"><?=$post['date_out_y']?> - <?=($post['date_out_y']+1)?></p>
@@ -33,7 +38,7 @@
     <?endif?>
     <?if(count($result['events'])>0):?>
         <h2>Мои мероприятия</h2>
-        <?foreach($result['events'] as $event): $sum+=$event['score']?>
+        <?foreach($result['events'] as $event):?>
             <div class="event-box" style="height:auto; min-height:0; margin-top: 20px" data-mcs-theme="dark" id="events">
                 <li style="height:120px;" onclick="window.location.href='/event<?=$event['id_event']?>'">
                     <div class="date-box"<?=($event['date'] >= $this_sem_start?'style="background-color:green"':($event['date'] < $prev_sem_start?'style="background-color:red"':''))?>>
@@ -57,7 +62,6 @@
     <?else:?>
         За мероприятия нет баллов
     <?endif?>
-    <h1>Итоговый рейтинг: <?=$sum?></h1>
 </div>
 <hr>
 

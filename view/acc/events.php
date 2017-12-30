@@ -24,7 +24,10 @@
                         </div>
                         <div class="event-info">
                             <div class="event-name"><?=$event['eventName']?></div>
-                            <div class="event-level"><?=$event['level']?></div>
+                            <div class="event-level"><?=$event['level']?>
+                            <?if($event['in_zachet'] == 1):?>
+                                (идет в зачетку активиста)
+                            <?endif?></div>
                             <div style="font-size:12px">
                                 Ответственный: <?if(isset($event['idOrg'])):?><a href="/id<?=$event['idOrg']?>"><?=$event['fioOrg']?></a><?elseif(isset($event['idResp'])):?><a href="/id<?=$event['idResp']?>"><?=$event['fioResp']?></a><?endif?>
                             </div>

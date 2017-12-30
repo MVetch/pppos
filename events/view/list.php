@@ -26,6 +26,9 @@
 	                        <div style="font-size:12px">
 	                            Ответственный: <?if(isset($event['idOrg'])):?><a href="/id<?=$event['idOrg']?>"><?=$event['fioOrg']?></a><?elseif(isset($event['idResp'])):?><a href="/id<?=$event['idResp']?>"><?=$event['fioResp']?></a><?endif?>
 	                        </div>
+                            <?if($event['in_zachet'] == 1):?>
+                                <div style="font-size:12px">Идет в зачетку активиста</div>
+                            <?endif?>
 	                    </div>
                     </div>
                     <?if(!in_array($event['id_event'], $result['checkedIn'])):?>

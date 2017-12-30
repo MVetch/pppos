@@ -53,7 +53,6 @@ if(isset($_POST['id'])){
             "rating" => $_POST['rating'],
             "date_birth" => $_POST['birth'],
             "phone_number" => '8'.$_POST['phone'],
-            "email" => $_POST['email'],
             "form_edu" => $_POST['budget']
         ),
         array(
@@ -73,7 +72,6 @@ else {
             "rating" => $_POST['rating'],
             "date_birth" => $_POST['birth'],
             "phone_number" => '8'.$_POST['phone'],
-            "email" => $_POST['email'],
             "form_edu" => $_POST['budget']
         ),
         array(
@@ -90,6 +88,7 @@ $db->Add(
     array(
         "login" => $_POST['login'],
         "password" => $password,//тоже хеш должен вычисляться каким-то волшебным способом
+        "email" => $_POST['email'],
         "id_user" => $id,
         "level" => "5",
         "hash" => md5($savedHash)

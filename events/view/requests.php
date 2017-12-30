@@ -18,5 +18,7 @@
 			</div>
 			<div id="<?=$request['id_event']?>"></div>
 		<?endforeach?>
+	<?else:?>
+		<h4>Новых заявок нет.</h4>
 	<?endif?>
 </div>

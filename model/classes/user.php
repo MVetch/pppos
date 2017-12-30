@@ -162,7 +162,7 @@ class User
 	}
 	
 	/**
-	 * Возращает ИД текущего авторизованного пользователя
+	 * Возращает ИД текущего авторизованного пользователя (статическая функция, для созданного объекта нужно пользоваться @ref getId())
 	 */
 	public static function ID()
 	{
@@ -355,7 +355,7 @@ class User
 	{
 		global $db;
 		if(!isset($this->email)){
-			$this->email = $db->Select(array("email"), "students", array("id_student" => $this->id))->fetch()['email'];
+			$this->email = $db->Select(array("email"), "users", array("id_user" => $this->id))->fetch()['email'];
 		}
 		return $this->email;
 	}

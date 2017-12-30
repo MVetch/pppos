@@ -26,7 +26,7 @@ $email_to = $_user['email'];
 $email_subject = "Запрос на восстановление пароля";
 $email_message = "
 	Вы запросили восстановление пароля на сайте <a href = 'http://xn--c1anddibeiyke.xn--p1acf'>профкомлгту.рус</a>. Если на самом деле Вы это не делали, просто проигнорируйте это письмо.\n
-	Чтобы восстановить пароль, перейдите <a href='http://xn--c1anddibeiyke.xn--p1acf/login/change.php?uid=".$_user['hash']."'>по этой ссылке</a> и установите новый пароль.
+	Чтобы восстановить пароль, перейдите <a href='http://xn--c1anddibeiyke.xn--p1ai/login/change.php?uid=".$_user['hash']."'>по этой ссылке</a> и установите новый пароль.
 ";
 $headers = array(
     "From: ".NOREPLY_EMAIL,

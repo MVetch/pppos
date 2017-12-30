@@ -2,9 +2,12 @@
 $page_start = microtime(true);
 include_once "php/functions.php";
 spl_autoload_register(function ($class_name) {
-    include_once 'classes/'.$class_name . '.php';
+	if(file_exists($_SERVER['DOCUMENT_ROOT'].'/model/classes/'.$class_name.'.php')){
+    	include_once 'classes/'.$class_name.'.php';
+	}
 });
-$db = new DB('localhost', 'root', '', 'pppos');
+//$db = new DB('localhost', 'root', '', 'pppos');
+$db = new DB('localhost', 'ufb79156_pppos', 'admin123', 'ufb79156_pppos');
 define("AVATAR_DIR", "/uploads/avatars/");
 define("TEMP_AVATAR_DIR", "/uploads/avatars_temp/");
 define("FORM_HANDLER_DIR", "/model/handle/");
