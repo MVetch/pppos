@@ -601,7 +601,7 @@ class User
                       posts_student.id_student = '.$this->getId().' AND 
                       posts_student.id_post IN(9, 10, 11) AND 
                       NOT temp_table_posts.id_student = '.$this->getId().' 
-			    ');//TODO добавить сюда условие, чтобы свои заявки не подбирались
+			    ');
 				break;
 			case 2:
 				$ret = $db->query('
@@ -620,14 +620,14 @@ class User
                       groups.faculty = "'.$this->getFaculty().'" AND
                       NOT temp_table_posts.id_post = 12 AND 
                       NOT temp_table_posts.id_student = '.$this->getId().' 
-			    ');//TODO добавить сюда условие, чтобы свои заявки не подбирались
+			    ');
 			    break;
 			case 1:
 			    $ret = $db->Select(
 			    	array("id"), 
 			    	"temp_table_posts",
 			    	["!id_student" => $this->getId()]
-			    );//TODO добавить сюда условие, чтобы свои заявки не подбирались
+			    );
 				break;
 			default:
 				return false;
