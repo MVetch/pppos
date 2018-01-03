@@ -62,7 +62,7 @@ function endPost(tag) {
 showFN = function(input){
     var file = input.files[0];
     document.getElementById('warning' + input.alt).innerHTML = file.name.replace(/[^a-zA-Zа-яА-Я0-9_.() ]/g, "");
-}
+};
     
 subm = function(form) {
     var input = form.elements.uploadfile;
@@ -71,7 +71,7 @@ subm = function(form) {
       uploadF(file, form.elements.id.value);
     }
     return false;
-}
+};
 
 
 uploadF = function(file, id){
@@ -97,14 +97,14 @@ uploadF = function(file, id){
             
             xhr.upload.onprogress = function(event) {
                 document.getElementById('warning' + id).innerHTML = '<div>' + (event.loaded*100/event.total).toString() + '%</div>';
-            }
+            };
             xhr.onreadystatechange=function(){
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     document.getElementById('warning' + id).innerHTML = xhr.responseText;
                 } else {
                   document.getElementById('warning' + id).innerHTML = "error " + this.status;
                 }
-            }
+            };
             xhr.open('POST', '/model/ajax/send_list.php', true);
             var fd = new FormData();
             fd.append('upload', file);
@@ -116,7 +116,7 @@ uploadF = function(file, id){
         }
     }
     else document.getElementById('warning' + id).innerHTML = 'Слишком большой файл';
-}
+};
 
 function uploadPhoto(file){
     if(file.size<1*1024*1024){
@@ -137,7 +137,7 @@ function uploadPhoto(file){
             
             xhr.upload.onprogress = function(event) {
                 document.getElementById('warning').innerHTML = '<div>' + (event.loaded*100/event.total).toString() + '%</div>';
-            }
+            };
             xhr.onreadystatechange=function(){
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     document.getElementById('warning').innerHTML = xhr.responseText;
@@ -146,7 +146,7 @@ function uploadPhoto(file){
                 } else {
                   document.getElementById('warning').innerHTML = "error " + this.status;
                 }
-            }
+            };
             xhr.open('POST', '/model/ajax/send_photo.php', true);
             var fd = new FormData();
             fd.append('upload', file);
@@ -178,7 +178,7 @@ req = function(tag){
         document.getElementById('prof').required = true;
         document.getElementById('ruk').required = true;
     }
-}
+};
 
 var activeFac = "nothing";
 function check_fac(fac){
@@ -249,12 +249,12 @@ checkfDate = function(tag){
     if(document.getElementById("t").value != "" && document.getElementById("f").value > tag.value){
         document.getElementById("f").value = tag.value;
     }
-}
+};
 checktDate = function(tag){
     if(document.getElementById("t").value < tag.value){
         document.getElementById("t").value = tag.value;
     }
-}
+};
 
 jQuery.fn.sortElements = (function(){
     var sort = [].sort;
