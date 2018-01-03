@@ -597,9 +597,10 @@ class User
                     JOIN
                       posts_student
                     ON
-                      temp_table_posts.comment = posts_student.comment 
-                      AND posts_student.id_student = '.$this->id.' 
-                      AND posts_student.id_post IN(9, 10, 11)
+                      temp_table_posts.comment = posts_student.comment AND 
+                      posts_student.id_student = '.$this->getId().' AND 
+                      posts_student.id_post IN(9, 10, 11) AND 
+                      NOT temp_table_posts.id_student = '.$this->getId().' 
 			    ');//TODO добавить сюда условие, чтобы свои заявки не подбирались
 				break;
 			case 2:
@@ -617,13 +618,15 @@ class User
                     ON
                       stud_group.id_group = groups.id_group AND
                       groups.faculty = "'.$this->getFaculty().'" AND
-                      NOT temp_table_posts.id_post = 12
+                      NOT temp_table_posts.id_post = 12 AND 
+                      NOT temp_table_posts.id_student = '.$this->getId().' 
 			    ');//TODO добавить сюда условие, чтобы свои заявки не подбирались
 			    break;
 			case 1:
 			    $ret = $db->Select(
 			    	array("id"), 
-			    	"temp_table_posts"
+			    	"temp_table_posts",
+			    	["!id_student" => $this->getId()]
 			    );//TODO добавить сюда условие, чтобы свои заявки не подбирались
 				break;
 			default:
@@ -652,7 +655,7 @@ class User
                 	"temp_table_events",
                 	array(
                 		"id_event" => $events['events'],
-						//"!id_student" => $this->getId()
+						"!id_student" => $this->getId()
                 	)
                 );
 			} elseif($this->level == 5) {
@@ -661,7 +664,8 @@ class User
 		} else {
 			$ret = $db->Select(
 		    	array("*"), 
-		    	"temp_table_events"
+		    	"temp_table_events",
+			    ["!id_student" => $this->getId()]
 		    );//заявки на мероприятия
 		}
 		if(isset($ret)){
