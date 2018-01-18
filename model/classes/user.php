@@ -520,7 +520,8 @@ class User
 	    	FROM 
 	    		users 
 	    	WHERE 
-	    		users.login = "'.$db->escape($login).'"
+	    		users.login = "'.$db->escape($login).'" OR
+	    		users.email = "'.$db->escape($login).'"
 	    '); //Тут еще должен извлекаться хеш (у каждого уникальный, построенный по некоему волшебному принципу)
 	    $myrow = $result->fetch();
 	    $hash = "$2x";
@@ -531,15 +532,15 @@ class User
 	    else {
 	        if (password_verify($password, $myrow['password'])) {
 	        	$savedHash = md5($myrow['password'].time());
-	        	$db->Update(
-	        		"users",
-	        		array(
-	        			"hash" => md5($savedHash)
-	        		),
-	        		array(
-	        			"login" => $login
-	        		)
-	        	);
+	        	$db->query("
+	        		UPDATE
+	        			users
+	        		SET
+	        			hash = '".md5($savedHash)."'
+	        		WHERE
+	        			login = '$login' OR 
+	        			email = '$login'
+	        	");
 	            Main::set_cookie('LOG', $myrow['login'], time()+(86400*365), "/");
 	            Main::set_cookie('HPS', $savedHash, time()+(86400*365), "/");
 	            echo '<META HTTP-EQUIV="REFRESH" CONTENT="0; URL=/id'.$myrow['id_user'].'">';
@@ -975,7 +976,7 @@ class User
 	 * @param string $newConf подтверждение нового пароля
 	 * @param string $hash хэш для подтверждения пользователя
 	 */
-	public function RecoverPassword($new, $newConf, $hash)
+	public static function RecoverPassword($new, $newConf, $hash)
 	{
 		global $db;
 		if($new != $newConf){

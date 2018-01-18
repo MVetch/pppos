@@ -57,6 +57,7 @@ class Main
 			"newSup" => array(1,2),
 			"requestStip" => array(1,2),
 			"requestSup" => array(1,2),
+			"calcStip" => array(null,1,2,3,4,5),
 		),
 		"students" => array(
 			"add" => array(1,2,3,4,5),

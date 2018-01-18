@@ -2,3 +2,4 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^request$ request.php [L]
+RewriteRule ^calc$ calc.php [L]

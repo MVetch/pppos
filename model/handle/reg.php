@@ -45,6 +45,9 @@ if(isset($_POST['id'])){
 if($db->Select(array("*"), "users", array("login" => $_POST['login']))->num_rows > 0){
     Main::error('Такой логин уже существует. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
 }
+if($db->Select(array("*"), "users", array("email" => $_POST['email']))->num_rows > 0){
+    Main::error('Такой e-mail уже зарегистрирован. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/reg.php"/>');
+}
 
 if(isset($_POST['id'])){
     $db->Update(

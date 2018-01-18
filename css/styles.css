@@ -135,7 +135,7 @@ table.sortable tr:nth-child(1) {
   background-position: center;
 }
 
-.white-krestik, .krestik{
+.white-krestik, .krestik, .plusik, .white-plusik{
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
@@ -148,6 +148,14 @@ table.sortable tr:nth-child(1) {
 
 .white-krestik {
   background-image: url("/images/krestikW.png");
+}
+
+.plusik{
+    background-image: url("/images/plusik.png");
+}
+
+.white-plusik{
+    background-image: url("/images/plusikW.png");
 }
 
 .messages {
