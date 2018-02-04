@@ -34,7 +34,7 @@ require_once "model/start.php";
         </script>
 	<header id="masthead" class="site-header navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="row" style="max-width:1024px;margin:auto; height: 64px">
+			<div class="row" style="max-width:1024px;margin:auto; height: 63px">
 				<div class="logo navbar-brand">
 					<img src="/images/header-logo.png" style="width:60px;">
 				</div><!-- end logo -->

@@ -114,32 +114,33 @@ class DBResult
 				$output['page'] = 2;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>2</a> ';
 			}
-			// if(in_array($curPage, [2,3,4])){
-			// 	$output['page'] = 3;
-			// 	$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>3</a> ';
-			// 	if($curPage >= 3){
-			// 		$output['page'] = 4;
-			// 		$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>4</a> ';
-			// 		if($curPage == 4){
-			// 			$output['page'] = 5;
-			// 			$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>5</a> ';
-			// 		}
-			// 	}
-			// }
 			if($curPage > 4) {
 				$nav .= ' ... ';
-				$output['page'] = $curPage - 1;
-				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage - 1).'</a> ';
-				$output['page'] = $curPage;
-				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage).'</a> ';
-				$output['page'] = $curPage + 1;
-				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage + 1).'</a> ';
+				if ($curPage < $this->num_pages - 3) {
+					$output['page'] = $curPage - 1;
+					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage - 1).'</a> ';
+					$output['page'] = $curPage;
+					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage).'</a> ';
+					$output['page'] = $curPage + 1;
+					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage + 1).'</a> ';
+					$nav .= ' ... ';
+					$output['page'] = $this->num_pages - 1;
+					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages - 1).'</a> ';
+					$output['page'] = $this->num_pages;
+					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages).'</a> ';
+				} else {
+					for ($i = $curPage - 1; $i < $this->num_pages + 1; $i++) { 
+						$output['page'] = $i;
+						$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.$i.'</a> ';
+					}
+				}
+			} else {
+				$nav .= ' ... ';
+				$output['page'] = $this->num_pages - 1;
+				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages - 1).'</a> ';
+				$output['page'] = $this->num_pages;
+				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages).'</a> ';
 			}
-			if($curPage < $this->num_pages - 2) $nav .= ' ... ';
-			$output['page'] = $this->num_pages - 1;
-			$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages - 1).'</a> ';
-			$output['page'] = $this->num_pages;
-			$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages).'</a> ';
 			$nav .= '</div>';
 		} else {
 			$nav .= '<div class="divCenter">';

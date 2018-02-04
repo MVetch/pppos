@@ -54,7 +54,7 @@ body {
   position:relative;
   min-height:100%;
   font-family: apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.5384615385;
   color: #333333;
   background-color: #fff;
@@ -94,6 +94,7 @@ table.sortable tr:nth-child(1) {
   min-height:0;
   max-height:400px;
   position:relative;
+  width: 90%;
   bottom:0px;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -893,13 +894,12 @@ label {
   margin: 0;
   list-style: none;
 }
-.site-navigation li {
+.site-navigation li:not(.rtopmenu) {
   display: inline-block;
   position: relative;
   min-width: 130px;
 }
 .site-navigation li a {
-  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
@@ -911,7 +911,7 @@ label {
   text-align: center;
 }
 
-.site-navigation li:hover, .submenu li:hover {
+.site-navigation li:hover:not(.rtopmenu), .submenu li:hover {
   background-color: orange;
   text-decoration: none;
 }
@@ -1226,4 +1226,26 @@ tr.border-bottom {
 .decree {
   text-align: justify;
   text-indent: 20px;
+}
+
+.rtopmenu, .rtopmenu:hover {
+  border-top: 63px solid #151726;
+  border-left: 40px solid transparent;  
+  height: 0;
+  float:right;
+  position: relative;
+  min-width: 200px;
+}
+
+.rtopmenu:hover{
+  border-top-color: orange;
+}
+
+.small-arrow-down {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }

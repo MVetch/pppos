@@ -1,6 +1,11 @@
 <div class="divCenter" id="searchToHide">
     <h1>Поиск мероприятия</h1>
-    <h4>Здесь вы можете интересущее мероприятие.<br> Вы можете воспользоваться поиском не только по названию, но и по дополнительным параметрам.</h4><br>
+    <h4>Здесь вы можете интересущее мероприятие.<br> Вы можете воспользоваться поиском не только по названию, но и по дополнительным параметрам.</h4>
+    
+    <?if($user->getLevel() == 1):?>
+    <button class="button" onclick="window.location.href = 'GenerateEventList.php'">Выгрузить все мероприятия</button>
+    <?endif?>
+    <br><br>
     <form name="form1" method="get">
         <table class="table divCenter" style="width:50%">
             <tr class="border-bottom">

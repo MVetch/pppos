@@ -1,7 +1,11 @@
 <div style="margin:auto; text-align:center">
     <h1>Поиск студента</h1>
     <h4>Здесь вы можете найти нужного вам студента.<br> Если Вы не знаете точных данных студента, можете воспользоваться дополнительными параметрами поиска.</h4>
-    
+
+    <?if($user->getLevel() == 1):?>
+    <button class="button" onclick="window.location.href = 'GenerateStudentList.php'">Получить список всех зарегистрированных студентов</button>
+    <?endif?>
+
     <form name="form1" method="get" action="" onSubmit = "isEmpty(this); return false;">
         <input name="search" type="text" id="search_fio" class = "form-control" placeholder="ФАМИЛИЯ ИМЯ ОТЧЕСТВО">
         <div class = "searchSelect">

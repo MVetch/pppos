@@ -7,7 +7,7 @@
         <!-- <div id="evcont"> -->
         <?foreach($result['events'] as $event):?>
             <div class="event-box" data-mcs-theme="dark" id="events">
-                <li style="height:120px; position: relative;">
+                <li style="height:120px;">
                 	<div onclick="window.location.href='/event<?=$event['id_event']?>'">
 	                    <div class="date-box">
                             <?if($event['date_end'] == "0000-00-00"):?>
@@ -33,8 +33,8 @@
 	                    </div>
                     </div>
                     <?if(!in_array($event['id_event'], $result['checkedIn'])):?>
-	                    <div style="position:absolute; bottom:10px; right: 10px;">
-	                    	<button name = "add" class="cancelbtn" onclick="updateAddWindow('chooseLevel', <?=$event['id_event']?>);">+</button>
+	                    <div>
+	                    	<button style="position:absolute; bottom:10px; right: 10px;" name = "add" class="cancelbtn" onclick="updateAddWindow('chooseLevel', <?=$event['id_event']?>);">+</button>
 	                    </div>
 	                <?endif?>
                 </li>

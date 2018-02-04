@@ -58,7 +58,7 @@ $active_sheet->getPageMargins()->setRight(0.75);
 $active_sheet->getPageMargins()->setLeft(0.75);
 $active_sheet->getPageMargins()->setBottom(1);
 //Название листа
-$active_sheet->setTitle("Рейтинг на 945");	
+$active_sheet->setTitle("Рейтинг на 945");
 //Шапа и футер 
 $active_sheet->getHeaderFooter()->setOddHeader("&CШапка");	
 $active_sheet->getHeaderFooter()->setOddFooter('&L&B'.$active_sheet->getTitle().'&RСтраница &P из &N');
