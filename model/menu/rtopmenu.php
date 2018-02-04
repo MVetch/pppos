@@ -5,7 +5,7 @@ $result = array(
 		"link" => "/id".$settings['userId']
 	),
 	array(
-		"name" => "945",
+		"name" => "ПГАС",
 		"link" => "/rate"
 	)
 );

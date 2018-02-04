@@ -3,9 +3,10 @@
     <h3>Здесь вы можете ознакомиться со всеми мероприятиями</h3>
 </div>
 <div>
-    <div class="event-box" data-mcs-theme="dark" id="events">
-        <div id="evcont">
-            <?foreach($result['events'] as $event):?>
+    <?=$result['pageNav']?>
+        <!-- <div id="evcont"> -->
+        <?foreach($result['events'] as $event):?>
+            <div class="event-box" data-mcs-theme="dark" id="events">
                 <li style="height:120px; position: relative;">
                 	<div onclick="window.location.href='/event<?=$event['id_event']?>'">
 	                    <div class="date-box">
@@ -37,10 +38,11 @@
 	                    </div>
 	                <?endif?>
                 </li>
-            <?endforeach?>
-            <div id="load"></div>
-        </div>
-    </div>
+            </div>
+        <?endforeach?>
+        <!-- <div id="load"></div> -->
+        <!-- </div> -->
+    <?=$result['pageNav']?>
 </div>
 
 <script>

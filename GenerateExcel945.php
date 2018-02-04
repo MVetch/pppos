@@ -274,8 +274,8 @@ else {
     $year_begin_edu = $year-1;
     $semester=2;
 }
-// $semester = 2;
-// $year_begin_edu = 2016;
+$semester = 1;
+$year_begin_edu = 2017;
 $this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
 $this_sem_end = $semester==1?($year_begin_edu + 1).'-01-31':($year_begin_edu+1).'-08-31';
 $prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';
@@ -369,8 +369,8 @@ $result_posts = $db->Select(
 	"rating_posts",
 	[
 		"id_student" => $user->getId(),
-		"date_out_sem" => [0, ($semester==1?2:1)],
-		"date_out_y" => [0, ($semester==1?($year_begin_edu-1):$year_begin_edu)]
+		"date_out_sem" => ($semester==1?2:1),
+		"date_out_y" => ($semester==1?($year_begin_edu-1):$year_begin_edu)
 	]
 )->fetchAll();
 $result_events = $db->Select(

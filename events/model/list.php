@@ -1,12 +1,20 @@
 <?
+if($settings['pagination']){
+    $page = isset($_GET['page'])?($_GET['page']):1;
+    $limit = array(($page - 1) * PAGINATION_PER_PAGE, PAGINATION_PER_PAGE);
+} else {
+    $limit = array();
+}
 
 $res = $db->Select(
 	array("*"),
 	"event_names_resp",
 	array(),
 	array("date" => "DESC"),
-	array(0, PAGINATION_PER_PAGE)
+	$limit//array(0, PAGINATION_PER_PAGE)
 );
+$result['pageNav'] = $settings['pagination']?$res->GeneratePageNav($page):'';
+
 $result['allEvents'] = $res->all_rows;
 $result['events'] = $res->fetchAll();
 

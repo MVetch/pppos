@@ -426,6 +426,18 @@ class User
 	{
 		return $this->level;
 	}
+	/**
+	 * @return int уровень доступа пользователя
+	 */
+	public static function LEVEL()
+	{
+		global $db;
+		return $db->Select(
+			array("level"),
+			"users",
+			array("login" => Main::get_cookie("LOG"), "hash" => md5(Main::get_cookie("HPS")))
+		)->fetch()['level'];
+	}
 	
 	/**
 	 * Устанавливает уровень доступа пользователя

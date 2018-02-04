@@ -72,7 +72,7 @@
             </td>
         </tr>
         </table>
-        <?if($user->getLevel()<5 and $user->getLevel() != 3 || $result['isResponsible']):?>
+        <?if($result['isResponsible']):?>
             <input type="button" onclick="window.location.href='/events/edit<?=$result['event']['id_event']?>'" value="Изменить" class="button">
         <?endif?>
         <?if($user->getLevel() == 1):?>
