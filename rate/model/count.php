@@ -3,12 +3,12 @@ $temp = semesterFromDate();
 $semester = $temp['semester'];
 $year_begin_edu = $temp['year_begin_edu'];
 
-$this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
-$this_sem_end = $semester==1?($year_begin_edu+1).'-01-31':($year_begin_edu+1).'-08-31';
-$prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';
-$prev_sem_end = $semester==2?($year_begin_edu+1).'-01-31':$year_begin_edu.'-08-31';
-$prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-09-01':$year_begin_edu.'-02-01';
-$prev_prev_sem_end = $semester==1?$year_begin_edu.'-01-31':$year_begin_edu.'-08-31';
+$this_sem_start = $semester==1?$year_begin_edu.'-08-01':($year_begin_edu+1).'-02-01';
+$this_sem_end = $semester==1?($year_begin_edu+1).'-01-31':($year_begin_edu+1).'-07-31';
+$prev_sem_start = $semester==2?$year_begin_edu.'-08-01':$year_begin_edu.'-02-01';
+$prev_sem_end = $semester==2?($year_begin_edu+1).'-01-31':$year_begin_edu.'-07-31';
+$prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-08-01':$year_begin_edu.'-02-01';
+$prev_prev_sem_end = $semester==1?$year_begin_edu.'-01-31':$year_begin_edu.'-07-31';
 $sum=0;
 
 /*vvvvvvvvvv Расчет баллов за должности vvvvvvvvv*/

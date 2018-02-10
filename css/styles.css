@@ -326,14 +326,14 @@ table.sortable tr:nth-child(1) {
   text-align: center; 
 }
 .avatar-photo {
-    display: block;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;    
-    max-height: 100%;
-    right: 0;
-    left: 0;
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;    
+  max-height: 100%;
+  right: 0;
+  left: 0;
 }
 
 .user-photo{
@@ -498,7 +498,7 @@ table.sortable tr:nth-child(1) {
   border-radius: 15px;
   border: 2px solid black;
   box-shadow: 5px 5px 15px gray;
-  padding-top: 55px;
+  padding-top: 115px;
 }
 
 .request-holder:nth-child(2n+1){
@@ -521,12 +521,12 @@ table.sortable tr:nth-child(1) {
 
 .request-deny {
   right: 85px;
-  top: 5px;
+  bottom: 5px;
 }
 
 .request-apply {
   right: 5px;
-  top: 5px;
+  bottom: 5px;
 }
 
 .request-deny-button, .request-apply-button {
@@ -545,15 +545,14 @@ table.sortable tr:nth-child(1) {
   background-image: url("../images/big-plus.png");
 }
 
-.request-from, .request-what, .request-detail{
+.request-from, .request-what, .request-detail, .request-faculty{
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .request-from {
-  text-align: center;
   font-weight: bolder;
-  font-size: 14pt;
+  font-size: 12pt;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -561,10 +560,26 @@ table.sortable tr:nth-child(1) {
 
 .request-what {
   font-size: 14pt;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .request-detail{
   font-size: 13pt;
+}
+.request-faculty{
+  font-size: 10pt;
+}
+
+.request-photo {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:inline-block;
+  top:3px;
+  position:relative;
+  margin-left:5px;
 }
 
 @keyframes expand {

@@ -393,7 +393,7 @@ LEFT JOIN
                         posts_student.date_in_sem = 1,
                         CONCAT(
                             posts_student.date_in_y,
-                            '-09-01'
+                            '-08-01'
                         ),
                         CONCAT(
                             posts_student.date_in_y+1,
@@ -412,7 +412,7 @@ LEFT JOIN
                             posts_student.date_out_sem = 2,
                             CONCAT(
                                 posts_student.date_out_y+1,
-                                '-08-31'
+                                '-07-31'
                             ),
                             CURDATE()
                         )
@@ -424,7 +424,7 @@ LEFT JOIN
                         posts_student.date_in_sem = 1,
                         CONCAT(
                             posts_student.date_in_y,
-                            '-09-01'
+                            '-08-01'
                         ),
                         CONCAT(
                             posts_student.date_in_y+1,
@@ -540,7 +540,7 @@ LEFT JOIN
                     posts_student.date_in_sem = 1,
                     CONCAT(
                         posts_student.date_in_y,
-                        '-09-01'
+                        '-08-01'
                     ),
                     CONCAT(
                         posts_student.date_in_y+1,
@@ -559,7 +559,7 @@ LEFT JOIN
                         posts_student.date_out_sem = 2,
                         CONCAT(
                             posts_student.date_out_y+1,
-                            '-08-31'
+                            '-07-31'
                         ),
                         CURDATE()
                     )
@@ -571,7 +571,7 @@ LEFT JOIN
                     posts_student.date_in_sem = 1,
                     CONCAT(
                         posts_student.date_in_y,
-                        '-09-01'
+                        '-08-01'
                     ),
                     CONCAT(
                         posts_student.date_in_y+1,
@@ -734,7 +734,7 @@ LEFT JOIN
                                 posts_student.date_out_sem = 2,
                                 CONCAT(
                                     posts_student.date_out_y+1,
-                                    '-08-31'
+                                    '-07-31'
                                 ),
                                 CURDATE()
                             )
@@ -777,7 +777,7 @@ LEFT JOIN
                 posts_student.date_in_sem = 1,
                 CONCAT(
                     posts_student.date_in_y,
-                    '-09-01'
+                    '-08-01'
                 ),
                 CONCAT(
                     posts_student.date_in_y+1,
@@ -811,7 +811,7 @@ LEFT JOIN
                         posts_student.date_in_sem = 1,
                         CONCAT(
                             posts_student.date_in_y,
-                            '-09-01'
+                            '-08-01'
                         ),
                         CONCAT(
                             posts_student.date_in_y+1,

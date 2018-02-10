@@ -6,22 +6,37 @@ class User
 {
 	/**
 	 * Конструктор. Собирает основную информацию о пользователе и доступные заявки
+	 * @param  $id ИД нужного пользователя. Если нужен текущий, то в этот параметр ничего не передавать.
 	 */
-	function __construct()
+	function __construct($id = 0)
 	{
 		global $db;
-		$params = $db->query('
-		    SELECT 
-		        * 
-		    FROM 
-		        users
-		    JOIN
-		        students 
-		    ON
-		        students.id_student = users.id_user AND
-		        users.login = "'.$db->escape(Main::get_cookie("LOG")).'" AND
-		        users.hash = "'.md5($db->escape(Main::get_cookie("HPS"))).'"
-		')->fetch_assoc();
+		if($id > 0){
+			$params = $db->query('
+			    SELECT 
+			        * 
+			    FROM 
+			        users
+			    JOIN
+			        students 
+			    ON
+			        students.id_student = users.id_user AND
+			        students.id_student = '.$id.'
+			')->fetch_assoc();
+		} else {
+			$params = $db->query('
+			    SELECT 
+			        * 
+			    FROM 
+			        users
+			    JOIN
+			        students 
+			    ON
+			        students.id_student = users.id_user AND
+			        users.login = "'.$db->escape(Main::get_cookie("LOG")).'" AND
+			        users.hash = "'.md5($db->escape(Main::get_cookie("HPS"))).'"
+			')->fetch_assoc();
+		}
 		if(!empty($params)){
 			$this->id = $params['id_student'];
 			$this->name = $params['name'];

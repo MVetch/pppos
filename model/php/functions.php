@@ -184,4 +184,18 @@ function surnameNO($name){
     $name = explode(" ", $name);
     return $name[0]." ".mb_substr($name[1], 0, 1).".".(isset($name[2])?mb_substr($name[2], 0, 1).".":'');
 }
+
+function getAvatarPath(string $photo, int $id){
+    if(!empty($photo)){
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$photo)){
+        } elseif(file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$id.".".$photo)){
+            $photo = $id.".".$photo;
+        } else {
+            $photo = "no_photo.png";
+        }
+    } else {
+        $photo = "no_photo.png";
+    }
+    return AVATAR_DIR.$photo;
+}
 ?>
