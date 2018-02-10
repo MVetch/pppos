@@ -132,10 +132,10 @@ function semesterFromDate($month = false, $year = false) {
     if(!$year){
         $year = date("Y");
     }
-    if($month>=9 and $month<=12){
+    if($month>=8 and $month<=12){
       $year_begin_edu = $year;//год, в котором начался учебный
       $semester=1;
-    } else if ($month<=2){
+    } else if ($month < 2){
         $year_begin_edu = $year-1;//год, в котором начался учебный
         $semester=1;
     } else {

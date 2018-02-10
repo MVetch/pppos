@@ -1,20 +1,8 @@
 <?
-$now = new DateTime();
-$month = $now->format("m");
-$year = $now->format("Y");
-$day = $now->format("d");
-if($month>=9 and $month<=12){
-    $year_begin_edu = $year;//год, в котором начался учебный
-    $semester=1;
-}
-else if ($month<=2){
-    $year_begin_edu = $year-1;//год, в котором начался учебный
-    $semester=1;
-}
-else {
-    $year_begin_edu = $year-1;
-    $semester=2;
-}
+$temp = semesterFromDate();
+$semester = $temp['semester'];
+$year_begin_edu = $temp['year_begin_edu'];
+
 $this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
 $this_sem_end = $semester==1?($year_begin_edu+1).'-01-31':($year_begin_edu+1).'-08-31';
 $prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';

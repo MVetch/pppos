@@ -101,7 +101,7 @@ class DBResult
 	{
 		$nav = '';
 		parse_str($_SERVER['QUERY_STRING'], $output);
-		if($this->num_pages > 4){
+		if($this->num_pages > 6){
 			$nav .= '<div class="divCenter">';
 			if($curPage < 5){
 				for ($i=1; $i < $curPage + 2; $i++) { 

@@ -13,7 +13,7 @@ if($_FILES['upload']['type']!="image/png" && $_FILES['upload']['type']!="image/j
 
 $image = new Image();
 $image->load($_FILES['upload']['tmp_name']);
-if($image->getWidth() < 200 || $image->getHeight() < 200 || !between($image->getHeight()/$image->getWidth(), 0.5, 2)){
+if($image->getWidth() < 200 || $image->getHeight() < 200 || !between($image->getHeight()/$image->getWidth(), 0.3, 3)){
     Main::errorAjax('Размеры фотографии не соответствуют требованиям');
 }
 

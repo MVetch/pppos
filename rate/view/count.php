@@ -1,5 +1,6 @@
 <div class="divCenter">
     <div>
+        <h5>Сейчас <?=$semester?> семестр <?=$year_begin_edu?> - <?=($year_begin_edu+1)?> учебного года</h5>
         <h1>Итоговый рейтинг: <?=$sum?></h1>
         <input type="button" class = "button" onclick="window.location.href='/GenerateExcel945.php'" value="Сформировать отчет о своем рейтинге">
         <?if($user->getLevel() == 1):?>

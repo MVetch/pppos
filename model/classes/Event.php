@@ -46,6 +46,7 @@ class Event
 				"date" => $date
 			)
 		)->num_rows == 0) { //Если такое мероприятие не записывали
+			if($date_end <= $date) $date_end = '';
 			$db->Add(
 				"temp_events",
 				array(

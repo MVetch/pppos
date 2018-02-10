@@ -2,7 +2,7 @@
     include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
     
     if(!empty($_POST['id_student']))
-        $id_student = $db->real_escape_string(test_input($_POST['id_student']));
+        $id_student = $db->escape($_POST['id_student']);
     else {
         $id_student = $db->Select(
             array("id_student"), 
