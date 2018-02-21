@@ -121,10 +121,12 @@ $students = $db->query('
     ) AS mer
     ON 
         mer.id_student = students.id_student
+    WHERE
+        students.id_student NOT IN(1,156,189,309,326)
     ORDER BY
         score 
     DESC
-    LIMIT 0,'.RATING_TOP.'
+    
 ')->fetchAll();
 
 $objPHPExcel = new PHPExcel();

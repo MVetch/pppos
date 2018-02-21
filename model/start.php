@@ -7,6 +7,7 @@ define("LIST_DIR", "/uploads/lists/");
 define("PAGINATION_PER_PAGE", 20);
 define("RATING_TOP", 50);
 define("MAX_PHOTO_IN_MB", 5);
+define("MAX_FILE_IN_MB", 5);
 define("NOREPLY_EMAIL", "profcom@xn--c1anddibeiyke.xn--p1ai");
 
 include_once "php/functions.php";

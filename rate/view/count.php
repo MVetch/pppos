@@ -4,7 +4,7 @@
         <h1>Итоговый рейтинг: <?=$sum?></h1>
         <input type="button" class = "button" onclick="window.location.href='/GenerateExcel945.php'" value="Сформировать отчет о своем рейтинге">
         <?if($user->getLevel() == 1):?>
-        <button class="button" onclick="window.location.href = 'GenerateStudentRatingList.php'">Рейтинг первых <?=RATING_TOP?> активистов</button>
+        <button class="button" onclick="window.location.href = 'GenerateStudentRatingList.php'">Рейтинг всех активистов</button>
         <?endif?>
     </div>
     <hr>

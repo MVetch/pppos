@@ -645,8 +645,7 @@ class User
                       groups
                     ON
                       stud_group.id_group = groups.id_group AND
-                      groups.faculty = "'.$this->getFaculty().'" AND
-                      NOT temp_table_posts.id_post = 12 AND 
+                      groups.faculty = "'.$this->getFaculty().'" AND 
                       NOT temp_table_posts.id_student = '.$this->getId().' 
 			    ');
 			    break;
@@ -680,7 +679,7 @@ class User
 			if($events['count'] > 0){//если ответственный за мероприятие хоть одно
 				$ret = $db->Select(
 					array("id"),
-                	"temp_table_events",
+                	"event_student_requests",
                 	array(
                 		"id_event" => $events['events'],
 						"!id_student" => $this->getId()
@@ -692,7 +691,7 @@ class User
 		} else {
 			$ret = $db->Select(
 		    	array("*"), 
-		    	"temp_table_events",
+		    	"event_student_requests",
 			    ["!id_student" => $this->getId()]
 		    );//заявки на мероприятия
 		}
@@ -782,30 +781,30 @@ class User
                 CASE
                     WHEN 
                         (
-                            EXTRACT(MONTH FROM NOW()) BETWEEN 03 AND 08 AND
+                            EXTRACT(MONTH FROM NOW()) BETWEEN 02 AND 07 AND
                             (
                                 (
-                                    EXTRACT(MONTH FROM mat_support.payday) BETWEEN 09 AND 12 AND
+                                    EXTRACT(MONTH FROM mat_support.payday) BETWEEN 08 AND 12 AND
                                     YEAR(mat_support.payday) = YEAR(NOW())-1
                                 )
                                 OR
                                 (
-                                    EXTRACT(MONTH FROM mat_support.payday) BETWEEN 01 AND 02 AND
+                                    EXTRACT(MONTH FROM mat_support.payday) = 01 AND
                                     YEAR(mat_support.payday) = YEAR(NOW())
                                 )
                             )
                         )
                         OR
                         (
-                            EXTRACT(MONTH FROM mat_support.payday) BETWEEN 03 AND 08 AND
+                            EXTRACT(MONTH FROM mat_support.payday) BETWEEN 02 AND 07 AND
                         	(
                              	(
-                                    EXTRACT(MONTH FROM NOW()) BETWEEN 09 AND 12 AND
+                                    EXTRACT(MONTH FROM NOW()) BETWEEN 08 AND 12 AND
                                 	YEAR(mat_support.payday) = YEAR(NOW())
                                 )
                                 OR
                                 (
-                                	EXTRACT(MONTH FROM NOW()) BETWEEN 01 AND 02 AND
+                                	EXTRACT(MONTH FROM NOW()) = 01 AND
                                     YEAR(mat_support.payday) = YEAR(NOW())-1
                                 )
                             )

@@ -126,13 +126,14 @@ class Event
 	}
 
 	/**
-	 * Удаляет мероприятие
+	 * Удаляет мероприятие, все посещения этого мероприятия и все заявки на него
 	 * int $id ИД мероприятия
 	 */
 	public static function Delete($id)
 	{
 		global $db;
 		$db->Delete("event_student", array("id_event" => $id));
+		$db->Delete("temp_table_events", array("id_event" => $id));
 		$db->Delete("events", array("id_event" => $id));
 	}
 }

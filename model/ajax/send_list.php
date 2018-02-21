@@ -1,7 +1,7 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 if(isset($_FILES['upload'])){
-    if($_FILES['upload']['size']<1*1024*1024){
+    if($_FILES['upload']['size']<MAX_FILE_IN_MB*1024*1024){
         if($_FILES['upload']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
         || $_FILES['upload']['type']=="application/vnd.ms-excel" 
         || $_FILES['upload']['type']=="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -31,7 +31,7 @@ if(isset($_FILES['upload'])){
             }
             TaskList::Add($result['_from'], $_POST['id']);
         }
-        else echo 'Этот формат не поддерживается. Если вы уверены, что это удобно было бы проверять КМС, <a href="/contact">напишите нам</a>';
+        else echo 'Этот формат не поддерживается. Если вы уверены, что это удобно было бы проверять КМС, <a href="/contact/">напишите нам</a>';
     }
     else echo'Слишком большой файл';
 }

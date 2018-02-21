@@ -180,64 +180,75 @@
             document.getElementById("indateYear" + (c.id).toString()).required=false;
         else
             document.getElementById("indateYear" + (c.id).toString()).required=true;
-        if (c.value==8//"Староста этажа" 
-            || c.value==1//"Председатель профбюро" 
-            || c.value==2//"Заместитель председателя профбюро" 
-            || c.value==5//"Старший куратор" 
-            || c.value==16//"Физорг" 
-            || c.value==18//"Наставник факультета"
-            || c.value==17){//"Наставник старшего куратора"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого факультета?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ФАИ</option><option>ФИТ</option><option>ИМ</option><option>МИ</option><option>ФТФ</option><option>ФГСНиП</option><option>ЭФ</option><option>ИСФ</option></select>";
-        }
-        else if (c.value==3//"Куратор" 
-                || c.value==4//"Староста группы" 
-                || c.value==7){//"Профгруппорг"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой группы?</h5><input id='comment"+(c.id)+"' class='form-control' name='comment[]' id='"+c.id+"' style='width:100%' type = 'text' placeholder='Например: СР-п-16-1' onchange='checkGroup(this)'><span id='errGroup" + c.id + "' style='color:red; font-size:10pt; max-width:20px'></span>";
-        }
-        else if (c.value==6){//"Профкурсорг"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого курса?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>1 курса</option><option>2 курса</option><option>3 курса</option><option>4 курса</option><option>5 курса</option><option>1 курса магистратуры</option><option>2 курса магистратуры</option></select>";
-        }
-        else if (c.value==9){//"Руководитель сектора"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого сектора?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
-            <?foreach ($result['сектор'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            "</select>";
-        }
-        else if (c.value==10){//"Руководитель направления"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого направления?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
-            <?foreach ($result['направление'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            "</select>";
-        }
-        else if (c.value==11){//"Руководитель РГ"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой РГ?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
-            <?foreach ($result['рг'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            "</select>";
-        }
-        else if (c.value==12//"Активист направления/сектора/РГ"
-                ||c.value==13){//"Ответственный на факультете"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого направления/сектора/РГ?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
-            <?foreach ($result['сектор'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            <?foreach ($result['направление'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            <?foreach ($result['рг'] as $post):?>
-                "<option><?=$post?></option>" +
-            <?endforeach?>
-            "</select>";
-        }
-        else if (c.value==14//"Председатель ППО"
-                || c.value==15){//"Заместитель председателя ППО"
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой организации?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ЛГТУ</option></select>";
-        }
-        else{
-            document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Дополнение</h5><select id='comment"+(c.id)+"' class='form-control' id='comment"+(c.id)+"' name='comment[]' style='width:80%'></select>";
+        switch(Number(c.value)){
+            case 8://"Староста этажа" 
+            case 1://"Председатель профбюро" 
+            case 2://"Заместитель председателя профбюро" 
+            case 5://"Старший куратор" 
+            case 16://"Физорг" 
+            case 18://"Наставник факультета"
+            case 17://"Наставник старшего куратора"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого факультета?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ФАИ</option><option>ФИТ</option><option>ИМ</option><option>МИ</option><option>ФТФ</option><option>ФГСНиП</option><option>ЭФ</option><option>ИСФ</option></select>";
+                break;
+            case 3://"Куратор" 
+            case 4://"Староста группы" 
+            case 7://"Профгруппорг"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой группы?</h5>"+
+                    "<input class='form-control' name='comment[]' id='"+c.id+"' style='width:100%' type = 'text' placeholder='Например: СР-п-16-1' onchange='checkGroup(this)'>"+
+                    "<span id='errGroup" + c.id + "' style='color:red; font-size:10pt; max-width:20px'></span>";
+                break;
+            case 6://"Профкурсорг"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого курса?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>1 курса</option><option>2 курса</option><option>3 курса</option><option>4 курса</option><option>5 курса</option><option>1 курса магистратуры</option><option>2 курса магистратуры</option></select>";
+                break;
+            case 9://"Руководитель сектора"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого сектора?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
+                <?foreach ($result['сектор'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                "</select>";
+                break;
+            case 10://"Руководитель направления"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого направления?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
+                <?foreach ($result['направление'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                "</select>";
+                break;
+            case 11://"Руководитель РГ"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой РГ?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
+                <?foreach ($result['рг'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                "</select>";
+                break;
+            case 12://"Активист направления/сектора/РГ"
+            case 13://"Ответственный на факультете"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого направления/сектора/РГ?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
+                <?foreach ($result['сектор'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                <?foreach ($result['направление'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                <?foreach ($result['рг'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                "</select>";
+                break;
+            case 14://"Председатель ППО"
+            case 15://"Заместитель председателя ППО"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какой организации?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ЛГТУ</option></select>";
+                break;
+            case 27://"Руководитель сектора общежития"
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого сектора?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'>"+
+                <?foreach ($result['общежитие'] as $post):?>
+                    "<option><?=$post?></option>" +
+                <?endforeach?>
+                "</select>";
+                break;
+            default:
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Дополнение</h5><select id='comment"+(c.id)+"' class='form-control' id='comment"+(c.id)+"' name='comment[]' style='width:80%'></select>";
+                break;
         }
         document.getElementById("comment_"+ (c.id).toString()).innerHTML+=
             "<br><h5>Дата ухода (если ушли с должности)</h5>"+

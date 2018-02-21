@@ -24,21 +24,18 @@ if(isset($_POST['id'])){
         Main::error('Вы уже зарегистрированы в системе. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/index.php"/>');
     }
 } else {
-    if($db->query('
-            SELECT 
-                * 
-            FROM 
-                students 
-            JOIN
-                stud_group 
-            ON 
-                surname="'.$db->escape($_POST['surname']).'" AND 
-                name="'.$db->escape($_POST['name']).'" AND 
-                thirdName = "'.$db->escape($_POST['thirdName']).'" AND 
-                id_group = "'.$db->escape($_POST['group']).'" AND 
-                year = "'.$db->escape($_POST['step']).'" AND 
-                magistratura = "'.$res.'"
-        ')->num_rows > 0) {
+    if($db->Select(
+        [],
+        "full_info",
+        [
+            "surname" => [$_POST['surname'], mb_ucfirst($_POST['surname'])],
+            "name" => [$_POST['name'], mb_ucfirst($_POST['name'])],
+            "thirdName" => [$_POST['thirdName'], mb_ucfirst($_POST['thirdName'])],
+            "id_group" => $_POST['group'],
+            "year" => $_POST['step'],
+            "magistratura" => $res
+        ]
+    )->num_rows > 0) {
         Main::error('Вы уже зарегистрированы в системе. <META HTTP-EQUIV="REFRESH" CONTENT="1; URL=/index.php"/>');
     }
 }
@@ -69,9 +66,9 @@ if(isset($_POST['id'])){
 else {
     $id = AUser::Add(
         array(
-            "surname" => $_POST['surname'],
-            "name" => $_POST['name'],
-            "thirdName" => $_POST['thirdName'],
+            "surname" => mb_ucfirst($_POST['surname']),
+            "name" => mb_ucfirst($_POST['name']),
+            "thirdName" => mb_ucfirst($_POST['thirdName']),
             "rating" => $_POST['rating'],
             "date_birth" => $_POST['birth'],
             "phone_number" => '8'.$_POST['phone'],

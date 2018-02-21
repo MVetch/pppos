@@ -75,7 +75,7 @@ subm = function(form) {
 
 
 uploadF = function(file, id){
-    if(file.size < 1*1024*1024){
+    if(file.size < 5*1024*1024){
         if(file.type=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
         || file.type=="application/vnd.ms-excel" 
         || file.type=="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -112,7 +112,7 @@ uploadF = function(file, id){
             xhr.send(fd);
         }
         else {
-            document.getElementById('warning' + id).innerHTML =  'Этот формат не поддерживается. Если вы уверены, что это удобно было бы проверять КМС, <a href="contact.php">напишите нам</a>';
+            document.getElementById('warning' + id).innerHTML =  'Этот формат не поддерживается. Если вы уверены, что это удобно было бы проверять КМС, <a href="/contact/">напишите нам</a>';
         }
     }
     else document.getElementById('warning' + id).innerHTML = 'Слишком большой файл';

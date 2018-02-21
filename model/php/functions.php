@@ -177,7 +177,7 @@ function mb_ucfirst($str){
     while(in_array($str[$i], $forbidden)){
         $i++;
     }
-    return mb_strtoupper(mb_substr($str, $i, 1)).mb_substr($str,$i+1);
+    return mb_strtoupper(mb_substr($str, $i, 1)).mb_strtolower(mb_substr($str,$i+1));
 }
 
 function surnameNO($name){

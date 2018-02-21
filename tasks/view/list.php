@@ -20,7 +20,7 @@
                             <input type="file" id="upload" name="uploadfile" onchange="showFN(this)" alt="<?=$task['id_task']?>">
                             <span>
                                 <div id="warning<?=$task['id_task']?>" style="font-size:11px; padding:10px 0; max-width:100%">
-                                    (Файл должен быть в одном из следующих форматов: <b>XLS, XLSX, DOC, DOCX, RTF, TXT</b>; и не более 1МБ)
+                                    (Файл должен быть в одном из следующих форматов: <b>XLS, XLSX, DOC, DOCX, RTF, TXT</b>; и не более <?=MAX_FILE_IN_MB?>МБ)
                                 </div>
                                 <div id="warning1<?=$task['id_task']?>" style="font-size:11px; padding:10px 0; max-width:100%"></div>
                             </span>

@@ -490,7 +490,7 @@ table.sortable tr:nth-child(1) {
 
 .request-holder {
   width: 47%;
-  height: 354px;
+  height: 326px;
   position: relative;
   background-color: #eee;
   margin-bottom: 10px;
@@ -498,7 +498,8 @@ table.sortable tr:nth-child(1) {
   border-radius: 15px;
   border: 2px solid black;
   box-shadow: 5px 5px 15px gray;
-  padding-top: 115px;
+  padding-top: 111px;
+  overflow: hidden;
 }
 
 .request-holder:nth-child(2n+1){
@@ -517,6 +518,16 @@ table.sortable tr:nth-child(1) {
   height: 50px;
 
   z-index:1;
+}
+
+.request-info {
+  height: 60%; 
+  border-radius: 0 0 100% 0; 
+  background-color: #eee;
+  position: absolute; 
+  width: 100%;
+  text-align: left;
+  padding-left: 5px;
 }
 
 .request-deny {
@@ -580,6 +591,15 @@ table.sortable tr:nth-child(1) {
   top:3px;
   position:relative;
   margin-left:5px;
+}
+
+.user-info {
+  position: absolute; 
+  top: 0; 
+  width: 100%; 
+  text-align: left;
+  padding-top: 10px;
+  background-color: #eee;
 }
 
 @keyframes expand {
