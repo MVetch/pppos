@@ -143,7 +143,7 @@ function uploadPhoto(file){
                     document.getElementById('warning').innerHTML = xhr.responseText;
                     document.getElementById('uploadButton').innerHTML = "";
                     setTimeout(kek, 200);
-                } else {
+                } else if(this.status != 0){
                   document.getElementById('warning').innerHTML = "error " + this.status;
                 }
             };

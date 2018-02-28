@@ -72,11 +72,11 @@
             </td>
         </tr>
         </table>
-        <?if($result['isResponsible']):?>
+        <?if($result['isResponsible'] || $user->getLevel() == 1):?>
             <input type="button" onclick="window.location.href='/events/edit<?=$result['event']['id_event']?>'" value="Изменить" class="button">
         <?endif?>
         <?if($user->getLevel() == 1):?>
-            <input type="button" onclick="window.location.href='/events/delete<?=$result['event']['id_event']?>'" value="Удалить" class="button">
+            <br><br><input type="button" onclick="window.location.href='/events/delete<?=$result['event']['id_event']?>'" value="Удалить" class="button">
         <?endif?>
         <?if(!$result['checkedIn']):?>
             <br><br><input type="button" onclick="getElementById('chooseLevel').style.display='block'; getElementById('id_event').value='<?=$result['event']['id_event']?>'" value="Записаться на это мероприятие" class="button">

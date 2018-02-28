@@ -28,9 +28,9 @@ if(isset($_POST['id'])){
         [],
         "full_info",
         [
-            "surname" => [$_POST['surname'], mb_ucfirst($_POST['surname'])],
-            "name" => [$_POST['name'], mb_ucfirst($_POST['name'])],
-            "thirdName" => [$_POST['thirdName'], mb_ucfirst($_POST['thirdName'])],
+            "surname" => [$_POST['surname'], trim(mb_ucfirst($_POST['surname']))],
+            "name" => [$_POST['name'], trim(mb_ucfirst($_POST['name']))],
+            "thirdName" => [$_POST['thirdName'], trim(mb_ucfirst($_POST['thirdName']))],
             "id_group" => $_POST['group'],
             "year" => $_POST['step'],
             "magistratura" => $res
@@ -66,9 +66,9 @@ if(isset($_POST['id'])){
 else {
     $id = AUser::Add(
         array(
-            "surname" => mb_ucfirst($_POST['surname']),
-            "name" => mb_ucfirst($_POST['name']),
-            "thirdName" => mb_ucfirst($_POST['thirdName']),
+            "surname" => trim(mb_ucfirst($_POST['surname'])),
+            "name" => trim(mb_ucfirst($_POST['name'])),
+            "thirdName" => trim(mb_ucfirst($_POST['thirdName'])),
             "rating" => $_POST['rating'],
             "date_birth" => $_POST['birth'],
             "phone_number" => '8'.$_POST['phone'],

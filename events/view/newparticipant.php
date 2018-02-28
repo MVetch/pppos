@@ -32,8 +32,8 @@
                 <option value="<?=$role['id_role']?>"><?=$role['name']?></option>
             <? endforeach ?>
         </select>
-        <input type="checkbox" name="new" id="new">    <label to="getElementById('new')">Инициатор нового мероприятия</label>
+        <input type="checkbox" class="checkbox" name="new" id="new">    <label class = "forcheckbox" for="new">Инициатор нового мероприятия</label>
         <br><br>
-        <input type="submit" name="btn" value = "Добавить">
+        <input type="submit" class="button" name="btn" value = "Добавить">
     </div>
 </form>

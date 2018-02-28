@@ -1,10 +1,46 @@
 <div class="divCenter">
     <div>
-        <h5>Сейчас <?=$semester?> семестр <?=$year_begin_edu?> - <?=($year_begin_edu+1)?> учебного года</h5>
+        <h5>Сейчас <b><?=$semester?> семестр <?=$year_begin_edu?> - <?=($year_begin_edu+1)?></b> учебного года</h5>
         <h1>Итоговый рейтинг: <?=$sum?></h1>
         <input type="button" class = "button" onclick="window.location.href='/GenerateExcel945.php'" value="Сформировать отчет о своем рейтинге">
         <?if($user->getLevel() == 1):?>
-        <button class="button" onclick="window.location.href = 'GenerateStudentRatingList.php'">Рейтинг всех активистов</button>
+        <hr>
+        <form method="POST" action="GenerateStudentRatingList.php" style="margin-top: 20px; display: inline-block; padding-bottom: 5px;min-width: 632px;">
+            <div style="margin-bottom: 20px; position: relative">
+                <table style="margin: auto; border-bottom: 1px solid black; width: 100%;">
+                    <tr style="border-bottom: 1px solid black">
+                        <th>Рейтинг за</th>
+                        <th>Настройки</th>
+                    </tr>
+                    <tr>
+                        <td style="border-right: 1px solid black; padding: 10px; width: 50%;">
+                            <table class="table" style="margin-bottom: 0;">
+                                <tr>
+                                    <td><input type="radio" class="radio" name="numsemester" value="1" id="firstSemester" <?=($semester == 2?'checked':'')?>><label class="forcheckbox" for="firstSemester">1 семестр</label></td>
+                                    <td><input type="radio" class="radio" name="numsemester" value="2" id="secondSemester" <?=($semester == 1?'checked':'')?>><label class="forcheckbox" for="secondSemester">2 семестр</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding-top: 0">
+                                        <select class="form-control" name="year" style="width: 100%">
+                                            <?for($i = $year_begin_edu - 5, $j = $year_begin_edu-1; $i < $j; $i++):?>
+                                            <option value="<?=$i?>"><?=$i?> - <?=($i+1)?></option>
+                                            <?endfor?>
+                                            <option value="<?=($year_begin_edu-1)?>" <?=($semester == 1?'selected':'')?>><?=($year_begin_edu-1)?> - <?=$year_begin_edu?></option>
+                                            <option value="<?=$year_begin_edu?>" <?=($semester == 2?'selected':'')?>><?=$year_begin_edu?> - <?=($year_begin_edu+1)?></option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="border-left: 1px solid black; padding: 10px; text-align: left;">
+                            <div><input type="checkbox" class="checkbox" id="firstSem" name="firstMarch"><label class="forcheckbox" for="firstSem"><b>Крайний</b> зимний семестр закончился в марте</label></div>
+                            <div><input type="checkbox" class="checkbox" id="secondSem" name="secondMarch"><label class="forcheckbox" for="secondSem"><b>Предыдущий</b> зимний семестр начался в марте</label></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="submit" name="generate" class="button" value="Рейтинг всех активистов">
+        </form>
         <?endif?>
     </div>
     <hr>

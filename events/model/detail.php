@@ -41,4 +41,4 @@ $result['roles'] = $db->Select(
     array("*"),
     "roles"
 )->fetchAll(); 
-Main::includeAddWindow("chooseLevel", array("roles" => $result['roles']));
+Main::IncludeAddWindow("chooseLevel", array("roles" => $result['roles']));

@@ -11,9 +11,9 @@
 						<div class="tooltip">
 		            		<b class="tooltiptext" id="tooltip"><?=$request['event']?></b>
 		    				<div class="request-from"><?=$request['event']?></div>
+		    				<div class="request-detail">Уровень: <u><?=$request['level']?></u></div>
 		    				<div class="request-detail">Дата: <u><?=get_date($request['date'])?><?if($request['date_end'] !== "0000-00-00"):?> - <?=get_date($request['date_end'])?><?endif?></u></div>
 		    				<div class="request-detail"><?=$request['place']?></div>
-		    				<div class="request-detail">Уровень: <u><?=$request['level']?></u></div>
 		    				<div class="request-detail">Квота - <?=$request['quota']?></div>
 						</div>
 					</div>

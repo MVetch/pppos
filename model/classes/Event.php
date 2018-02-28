@@ -13,15 +13,27 @@ class Event
 	public static function AddParticipant(int $studID, int $eventID, int $role)
 	{
 		global $db;
-		$db->Add(
-			"event_student", 
-			array(
-				"id_student" => $studID,
-				"id_event" => $eventID,
-				"id_role" => $role,
-				"accepted_by" => User::ID()
-			)
-		);
+		if($db->Select(
+                array("*"),
+                "event_student",
+                array(
+                    "id_student" => $studID,
+                    "id_event" => $eventID,
+                    "id_role" => $role
+                )
+            )->num_rows==0){//Если раньше не было записей об этом студенте на этом мероприятии
+			$db->Add(
+				"event_student", 
+				array(
+					"id_student" => $studID,
+					"id_event" => $eventID,
+					"id_role" => $role,
+					"accepted_by" => User::ID()
+				)
+			);
+			return true;
+		}
+		return false;
 	}
 
 	/**

@@ -70,6 +70,9 @@ class Main
 		),
 		"contact" => array(
 			"form" => array(1,2,3,4,5),
+		),
+		"admin" => array(
+			"messages" => array(1),
 		)
 	);
 
@@ -84,7 +87,7 @@ class Main
 	{
 		global $user, $db;
 		$result = array();
-		if(!isset(self::$permissions[$type][$name]) || (isset($user) && !in_array($user->getLevel(), self::$permissions[$type][$name]))){
+		if(isset(self::$permissions[$type][$name]) && (isset($user) && !in_array($user->getLevel(), self::$permissions[$type][$name]))){
 			include $_SERVER['DOCUMENT_ROOT']."/403.php";
 		}
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/$type/model/$name.php"))
@@ -162,9 +165,9 @@ class Main
 	 * Пересылает пользователя на указанную страницу
 	 * @param  string $link URL страницы, на которую нужно перенаправить пользователя
 	 */
-	public static function redirect(string $link)
+	public static function redirect(string $link, int $delay = 0)
 	{
-		echo "<META HTTP-EQUIV='REFRESH' CONTENT='0; URL=$link'>";
+		echo "<META HTTP-EQUIV='REFRESH' CONTENT='".$delay."; URL=$link'>";
 		die;
 	}
 
@@ -189,7 +192,15 @@ class Main
 	* @param $secure указывает на то, что значение cookie должно передаваться от клиента по защищенному HTTPS соединению
 	* @param $name_prefix префикс к имени
 	*/
-	public static function set_cookie($name, $value, $time=false, $folder="/", $domain=false, $secure=false, $name_prefix=self::COOKIE_PREFIX, $httpOnly=false)
+	public static function set_cookie(
+		$name, 
+		$value, 
+		$time=false, 
+		$folder="/", 
+		$domain=false, 
+		$secure=false, 
+		$name_prefix=self::COOKIE_PREFIX, 
+		$httpOnly=false)
 	{
 		if($time === false)
 			$time = time()+60*60*24*30; // 30 days 
@@ -220,6 +231,40 @@ class Main
 	{
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php"))
 			include $_SERVER['DOCUMENT_ROOT']."/view/addWindow/addWindow.php";
+	}
+
+	public static function Month($format = "m")
+	{
+		return date($format);
+	}
+
+	public static function Year($format = "Y")
+	{
+		return date($format);
+	}
+
+	public static function Day($format = "d")
+	{
+		return date($format);
+	}
+
+	public static function Mail($email_to, 
+								$email_subject, 
+								$email_message, 
+								$headers = [], 
+								$additional_parameters = '-fprofcom@xn--c1anddibeiyke.xn--p1acf'
+							)
+	{
+		$headers = array_merge(array(
+								    "From: ".NOREPLY_EMAIL,
+								    "Reply-to: ".NOREPLY_EMAIL,
+								    'X-Mailer: PHP/'.phpversion(),
+								    'MIME-Version: 1.0',
+								    'Content-type: text/html;',
+								    "mailed-by:	xn--c1anddibeiyke.xn--p1acf"
+								), $headers);
+		$headers = implode("\r\n", $headers);
+		return mail($email_to, $email_subject, wordwrap($email_message, 70, "\r\n"), $headers, $additional_parameters);
 	}
 }
 ?>

@@ -10,23 +10,11 @@ if(isset($_POST['btn'])){
         $_SESSION['last_event'] = $_POST['event'];
         $user = new User();
         if(in_array($_POST['event'], $user->getEventsResponsible())){
-            if($db->Select(
-                    array("*"),
-                    "event_student",
-                    array(
-                        "id_student" => $_POST['id_student'],
-                        "id_event" => $_POST['event'],
-                        "id_role" => $_POST['role']
-                    )
-                )->num_rows==0) {//Если раньше не было записей об этом студенте на этом мероприятии
-
-                Event::AddParticipant($_POST['id_student'], $_POST['event'], $_POST['role']);
-
-                if (isset($_REQUEST['new'])){
-                    Event::AddParticipant($_POST['id_student'], $_POST['event'], "8");
-                }
-
+            if(Event::AddParticipant($_POST['id_student'], $_POST['event'], $_POST['role'])){
                 Request::DeleteEvent($_POST['id_student'], $_POST['event'], $_POST['role']);
+            }
+            if (isset($_REQUEST['new'])){
+                Event::AddParticipant($_POST['id_student'], $_POST['event'], "8");
             }
             Main::redirect('/events/fill');
         } else {

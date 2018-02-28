@@ -11,7 +11,7 @@ if(isset($_POST['inf'])){
       $error_message .= 'Введите отчество.<br />';
     }
     if(empty($_POST['rating'])) {
-      $error_message .= 'Пусть и 0, но рейтинг должен быть.<br />';
+      $_POST['rating'] = 0;
     }
     if(empty($_POST['date_birth'])) {
       $error_message .= 'Все когда-то родились. А Вы когда?<br />';
@@ -22,9 +22,9 @@ if(isset($_POST['inf'])){
     	$db->Update(
     		"students",
     		array(
-    			"surname" => $_POST['surname'],
-    			"name" => $_POST['name'],
-    			"thirdName" => $_POST['thirdName'],
+    			"surname" => trim(mb_ucfirst($_POST['surname'])),
+                "name" => trim(mb_ucfirst($_POST['name'])),
+                "thirdName" => trim(mb_ucfirst($_POST['thirdName'])),
     			"rating" => $_POST['rating'],
     			"date_birth" => $_POST['date_birth']
     		),
