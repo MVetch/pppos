@@ -34,7 +34,7 @@
                         </td>
                         <td style="border-left: 1px solid black; padding: 10px; text-align: left;">
                             <div><input type="checkbox" class="checkbox" id="firstSem" name="firstMarch"><label class="forcheckbox" for="firstSem"><b>Крайний</b> зимний семестр закончился в марте</label></div>
-                            <div><input type="checkbox" class="checkbox" id="secondSem" name="secondMarch"><label class="forcheckbox" for="secondSem"><b>Предыдущий</b> зимний семестр начался в марте</label></div>
+                            <div><input type="checkbox" class="checkbox" id="secondSem" name="secondMarch"><label class="forcheckbox" for="secondSem"><b>Предыдущий</b> зимний семестр закончился в марте</label></div>
                         </td>
                     </tr>
                 </table>

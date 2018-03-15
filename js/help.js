@@ -244,6 +244,20 @@ function delPost(tag) {
         });
     });
 }
+function delEntry(tag) {
+    var id = tag.attributes.value.value;
+    $(function(){
+        $.ajax({
+            type: "POST",
+            url: "/model/ajax/deleteEntry.php",
+            data: {id:id},
+            success: function(data){
+                tag.parentElement.remove();
+                //tag.parentElement.innerHTML = data;
+            }
+        });
+    });
+}
 
 checkfDate = function(tag){
     if(document.getElementById("t").value != "" && document.getElementById("f").value > tag.value){

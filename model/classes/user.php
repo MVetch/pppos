@@ -909,7 +909,7 @@ class User
 	public function DeleteEvent($id, $own = true)
 	{
 		global $db;
-		if($own !== "false"){
+		if($own !== false){
 			$db->Delete("event_student", array("id"=>$id, "id_student" => $this->getId()));
 		} else {
 			if($this->getLevel() < 3){

@@ -1,6 +1,7 @@
 <div class="divCenter">
 	<?if($user->getNewEventsCount() > 0):?>
 		<h1>Новые мероприятия</h1>
+		<div>
 		<?foreach($result['events'] as $request):?>
 			<div class="request-holder" id='newevent<?=$request['id_event']?>' style="background-color: #242533;">
 				<div class="request-deny"><input type="button" name="refuse" value="" class="cancelbtn request-deny-button" onclick="handleRequest('newevent', 'deny', <?=$request['id_event']?>)"></div>
@@ -32,6 +33,7 @@
 				</div>
             </div>
 		<?endforeach?>
+		</div>
 	<?else:?>
 		<h4>Новых заявок нет.</h4>
 	<?endif?>

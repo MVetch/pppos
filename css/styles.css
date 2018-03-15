@@ -193,7 +193,7 @@ table.sortable tr:nth-child(1) {
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
+  display: none;
   width: 70%;
   background-color: #555;
   color: #fff;
@@ -223,7 +223,7 @@ table.sortable tr:nth-child(1) {
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
+  display: block;
   opacity: 1;
 }
 .circle{
@@ -498,14 +498,14 @@ table.sortable tr:nth-child(1) {
   border-radius: 15px;
   border: 2px solid black;
   box-shadow: 5px 5px 15px gray;
-  padding-top: 111px;
+  padding-top: 107px;
   overflow: hidden;
 }
 
-.request-holder:nth-child(2n+1){
+.request-holder:nth-child(2n){
   float: right;
 }
-.request-holder:nth-child(2n){
+.request-holder:nth-child(2n+1){
   float: left;
 }
 .request-holder:after{

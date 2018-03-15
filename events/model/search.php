@@ -1,6 +1,6 @@
 <?
 if (isset($_GET['search'])){
-    $search = $_GET['search'];
+    $search = $db->escape($_GET['search']);
     switch ($_GET['kakIskat']) {
         case 'По названию':
             $where = array("~name" => "%$search%");
