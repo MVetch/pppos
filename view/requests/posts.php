@@ -3,6 +3,7 @@
 		<?if($user->getNumNotes()['posts']['count'] > 0):?>
 			<h1>На должности</h1>
 			<?=$result['pageNav']?>
+			<div>
 			<?foreach($result['requests'] as $request):?>
 				<div class="request-holder" id='post<?=$request['id']?>' style="background-color: #242533;">
 					<div class="request-deny"><input type="button" name="refuse" value="" class="cancelbtn request-deny-button" onclick="handleRequest('post', 'deny', <?=$request['id']?>)"></div>
@@ -27,6 +28,7 @@
     				</div>
 				</div>
 			<?endforeach?>
+			</div>
 		<?endif?>
 	<?else:?>
 		Новых заявок нет.

@@ -42,6 +42,13 @@ switch ($settings['page']) {
 				"active"=>false,
 				"img_src"=>"/images/setting.png"
 			);
+			$result[] =	array(
+				"id"=>"rate",
+				"text"=>"Учебный рейтинг",
+				"active"=>false,
+				"img_src"=>"/images/header-logo.png",
+				"link" => "/soc/stip/calc"
+			);
 		}
 		$showMenu = true;
 		break;

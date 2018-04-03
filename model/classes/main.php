@@ -73,6 +73,8 @@ class Main
 		),
 		"admin" => array(
 			"messages" => array(1),
+			"errors" => array(1),
+			"systemerrors" => array(1),
 		)
 	);
 

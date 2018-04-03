@@ -4,6 +4,7 @@
 			<hr>
 			<h1>На мероприятия</h1>
 			<?=$result['pageNav']?>
+			<div>
 			<?foreach($result['requests'] as $request):?>
 				<div class="request-holder" id='event<?=$request['id']?>' style="background-color: #242533;">
 					<div class="request-deny"><input type="button" name="refuse" value="" class="cancelbtn request-deny-button" onclick="handleRequest('event', 'deny', <?=$request['id']?>)"></div>
@@ -28,6 +29,7 @@
 					</div>
 				</div>
 			<?endforeach?>
+			</div>
 		<?endif?>
 	<?endif?>
 </div>
