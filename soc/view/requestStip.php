@@ -6,11 +6,11 @@
             <h1>Им бы скоро заявление написать</h1>
             <table border = 1 style = "text-align:center" id="sor" class = "sortable table">
                 <tr>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">ФИО</div>             <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата назначения</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата окончания</div>  <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Категория</div>       <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Статус</div>          <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">ФИО             </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата назначения </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата окончания  </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Категория       </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Статус          </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
                 </tr>
                 <?foreach($result['notesRunOut'] as $note):?>
                     <tr>
@@ -27,11 +27,11 @@
             <h1>Им надо вписать дату окончания</h1>
             <table border = 1 style = "text-align:center" id="sor_1" class = "sortable table">
                 <tr>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">ФИО</div>            <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">ФИО            </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
                     <th id="sortable" style="width:23%"><div class = "sortimg">Дата назначения</div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата окончания</div> <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Категория</div>      <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
-                    <th id="sortable" style="width:23%"><div class = "sortimg">Статус</div>         <div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Дата окончания </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Категория      </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
+                    <th id="sortable" style="width:23%"><div class = "sortimg">Статус         </div><div class = "sortimg" id="sort"><img src = "\images\sortArr.png" style = "width:16px"></div></th>
                     <th></th>
                 </tr>
                 <?foreach($result['notesNoData'] as $note):?>

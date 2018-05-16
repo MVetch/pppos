@@ -49,6 +49,13 @@ switch ($settings['page']) {
 				"img_src"=>"/images/header-logo.png",
 				"link" => "/soc/stip/calc"
 			);
+			$result[] =	array(
+				"id"=>"vote",
+				"text"=>"Голосовать",
+				"active"=>false,
+				"img_src"=>"/images/header-logo.png",
+				"link" => "/vote/list"
+			);
 		}
 		$showMenu = true;
 		break;

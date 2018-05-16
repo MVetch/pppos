@@ -2,7 +2,7 @@
 <form method="post" action="<?=FORM_HANDLER_DIR."enter.php"?>">
     <table class = "table">
         <tr>
-            <td style="width:20%"><label>Логин</label></td>
+            <td style="width:30%"><label>Логин/e-mail</label></td>
             <td><input required="required" name="login" id="login" type="text" class="form-control" style="width:80%"></td>
         </tr>
         <tr>

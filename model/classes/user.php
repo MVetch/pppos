@@ -12,6 +12,7 @@ class User
 	{
 		global $db;
 		if($id > 0){
+			$id = $db->escape($id);
 			$params = $db->query('
 			    SELECT 
 			        * 

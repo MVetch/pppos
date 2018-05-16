@@ -1,5 +1,6 @@
 <?if(isset($result['doubleOrg'])):?>
-<h3>На одно мероприятие несколько организаторов:</h3>
+<h3>На одно мероприятие несколько организаторов</h3>
+<h4>Необходимо удалить неверную запись</h4>
 <div>
 <?foreach($result['doubleOrg'] as $key => $entry):?>
     <div class="request-holder" style="height:150px; padding-top: 10px">
@@ -24,7 +25,8 @@
 <hr>
 <?endif?>
 <?if(isset($result['doubleEntry'])):?>
-<h3>Человек записан на мероприятие более одного раза:</h3>
+<h3>Человек записан на мероприятие более одного раза</h3>
+<h4>Необходимо удалить неверную запись</h4>
 <div>
 <?foreach($result['doubleEntry'] as $key => $entry):?>
     <div class="request-holder" style="height:250px;">

@@ -2,8 +2,14 @@
 if(isset($_POST['send'])){
     include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
     if(User::LEVEL() != 1) die();
-
-	if(Main::Mail($_POST['email'], "Ответ на сообщение на сайте профкомлгту.рф", $_POST['answer'])){
+    $message = $db->Select(
+    	[],
+		"contacts",
+		[
+			"id_message" => $_GET['id_message']
+		]
+	)->fetchAll("message");
+	if(Main::Mail($_POST['email'], "Ответ на сообщение на сайте профкомлгту.рф", "Вы написали: '".$db->escape($message[0])."'. "."<br><br>".$_POST['answer'])){
 		$db->Update(
 			"contacts",
 			[
@@ -11,7 +17,8 @@ if(isset($_POST['send'])){
 			],
 			[
 				"id_message" => $_GET['id_message']
-			]);
+			]
+		);
 		Main::success("Ответ успешно отправлен", "/admin/messages/");
 	}
 }

@@ -262,8 +262,8 @@ $temp = semesterFromDate();
 $semester = $temp['semester'];
 $year_begin_edu = $temp['year_begin_edu'];
 
-$semester = 1;
-$year_begin_edu = 2017;
+// $semester = 1;
+// $year_begin_edu = 2017;
 $this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
 $this_sem_end = $semester==1?($year_begin_edu + 1).'-01-31':($year_begin_edu+1).'-08-31';
 $prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';

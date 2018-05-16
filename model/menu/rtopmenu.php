@@ -16,6 +16,12 @@ if($user->getNumNotes()['posts'] !== false || $user->getNumNotes()['events'] !==
 		"link" => "/requests"
 	);
 }
+if($user->getLevel() == 1){
+	$result[] = array(
+		"name" => "Админка",
+		"link" => "/admin"
+	);
+}
 $result[] = array(
 	"name" => "Связаться с нами",
 	"link" => "/contact"

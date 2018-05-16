@@ -134,6 +134,7 @@ class DB extends mysqli
 		}
 		$query = "INSERT INTO ".$table."(".implode(", ", array_keys($insertValues)).") VALUES ('".implode("', '", $insertValues)."')";
 		$this->query($query, false);
+		return $this->insert_id;
 	}
 	
 	/**

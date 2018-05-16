@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^$ index.php [L]
+
+RewriteRule ^([a-zA-Z]+)$ $1.php [L]
+RewriteRule ^([a-zA-Z]+)/$ $1.php [L]
