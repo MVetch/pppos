@@ -22,6 +22,7 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
         <link href="<?=auto_version('/css/styles.css');?>" rel="stylesheet">
         <link rel="stylesheet" href="<?=auto_version('/css/jquery.mCustomScrollbar.css');?>" />
         <link rel="shortcut icon" type="img/x-icon" href="/favicon.ico">
+        <script src="/js/datalist-polyfill.min.js"></script>
     </head>
     <body style="border:1px;">
         <script type="text/javascript" src="<?=auto_version('/js/jquery-2.2.4.js');?>"></script> 

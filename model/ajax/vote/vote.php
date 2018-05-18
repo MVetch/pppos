@@ -13,24 +13,30 @@ if(
 	empty(
 		$db->Select(
 			[],
-			"vote_given",
+			"vote_given_names",
 			[
-				"id_student" => $user->getId(),
+				"id_from" => $user->getId(),
 				"id_vote" => $_POST['vote']
 			]
 		)->fetchAll()
 	)
 ){
-	$student = new User($_POST['id']);
-	if($vote[0]['is_faculty'] == 1 && $student->getFaculty() == $user->getFaculty()){
-		echo 'В этой номинации нельзя голосовать за студента со своего факультета!';
-		die();
+	if($vote[0]['for_faculty'] == 0 and $vote[0]['is_faculty'] == 1){
+		$id_student = $db->Select(
+			["id_student"],
+			"vote_participants",
+			["id" => $_POST['id']]
+		)->fetchAll("id_student");
+		$student = new User($id_student[0]);
+		if($vote[0]['is_faculty'] == 1 && $student->getFaculty() == $user->getFaculty()){
+			echo 'В этой номинации нельзя голосовать за студента со своего факультета!';
+			die();
+		}
 	}
 	$db->Add(
 		"vote_given",
 		[
-			"id_vote" => $_POST['vote'],
-			"id_student" => $user->getId(),
+			"id_from" => $user->getId(),
 			"id_participant" => $_POST['id']
 		]
 	);
