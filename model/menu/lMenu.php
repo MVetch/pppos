@@ -1,6 +1,7 @@
 <?
 $result = array();
 $showMenu = false;
+global $allowedToVote;
 switch ($settings['page']) {
 	case '/account.php':
 		$result = array(
@@ -49,13 +50,15 @@ switch ($settings['page']) {
 				"img_src"=>"/images/header-logo.png",
 				"link" => "/soc/stip/calc"
 			);
-			$result[] =	array(
-				"id"=>"vote",
-				"text"=>"Голосовать",
-				"active"=>false,
-				"img_src"=>"/images/header-logo.png",
-				"link" => "/vote/list"
-			);
+			if(in_array($user->getId(), $allowedToVote)){
+				$result[] =	array(
+					"id"=>"vote",
+					"text"=>"Голосовать",
+					"active"=>false,
+					"img_src"=>"/images/profactiviruisa.png",
+					"link" => "/vote/list"
+				);
+			}
 		}
 		$showMenu = true;
 		break;
