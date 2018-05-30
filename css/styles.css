@@ -193,7 +193,7 @@ table.sortable tr:nth-child(1) {
 }
 
 .tooltip .tooltiptext {
-  display: none;
+  visibility: hidden;
   width: 70%;
   background-color: #555;
   color: #fff;
@@ -223,7 +223,7 @@ table.sortable tr:nth-child(1) {
 }
 
 .tooltip:hover .tooltiptext {
-  display: block;
+  visibility: visible;
   opacity: 1;
 }
 .circle{

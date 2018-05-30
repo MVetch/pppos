@@ -9,7 +9,7 @@
         <?foreach ($result['events'] as $event): ?>
             <div class="event-box" data-mcs-theme="dark" id="<?=$event['id']?>">
                 <li style="height:120px;">
-                    <div onclick="window.location.href='/event<?=$event['id_event']?>'">
+                    <div>
                         <div class="date-box">
                             <?if($event['date_end'] == "0000-00-00"):?>
                                 <div style="font-size:35px;margin:0"><?=substr($event['date'],8,2)?></div>
@@ -23,7 +23,7 @@
                             <?endif?>
                         </div>
                         <div class="event-info">
-                            <div class="event-name"><?=$event['eventName']?></div>
+                            <div class="event-name"><a href='/event<?=$event['id_event']?>' style = "color:black;"><?=$event['eventName']?></a></div>
                             <div class="event-level"><?=$event['level']?>
                             <div style="font-size:12px">
                                 Ответственный: <?if(isset($event['idOrg'])):?><a href="/id<?=$event['idOrg']?>"><?=$event['fioOrg']?></a><?elseif(isset($event['idResp'])):?><a href="/id<?=$event['idResp']?>"><?=$event['fioResp']?></a><?endif?>

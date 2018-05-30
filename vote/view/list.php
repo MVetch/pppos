@@ -1,6 +1,6 @@
 
 <?//dump($result)?>
-<h6>*чтобы увидеть результаты, перезагрузите страницу после, того, как отдадите голос</h6>
+<!-- <h6>*чтобы увидеть результаты, перезагрузите страницу после, того, как отдадите голос</h6> -->
 <? foreach($result['votes'] as $id_vote => $vote):?>
 	<div class="vote">
 		<li style="position: relative; ">
@@ -10,7 +10,7 @@
 				<div style="border-bottom: 1px solid black;">
 				<input type="radio" class="checkbox-vote" name="part<?=$id_vote?>" value="<?=$participant['id_participant']?>" id = "part<?=$participant['id_participant']?><?=$id_vote?>"<? if($vote['given_to'] == $participant['id_participant']): ?> checked style = "background-color: #444;"<?endif?><? if($vote['given_to'] != 0): ?> disabled<? endif ?>>
 					<label for = "part<?=$participant['id_participant']?><?=$id_vote?>" class="forcheckbox" style = "width: 90%; margin: 0; position: relative;">
-						<?if($vote['given_to'] != 0):?>
+						<?if($vote['given_to'] != 0 and $user->getId() == 161 or $user->getId() == 1):?>
 						<div style="background-color: #ddd; width: 100%; height: 100%; position: absolute;">
 							<div style="background-color: #bbb; width: <?=$participant['percentage']?>%; height: 100%; position: absolute;">
 							</div>
@@ -22,17 +22,17 @@
 						<div class = "user-info" style="position: relative; padding-bottom: 10px; background-color: transparent;">
 			    			<div style="display: inline-block; margin-left: 5px;">
 								<? if($vote['for_faculty']): ?>
-									<img src="/images/faculties/<?=$participant['name']?>.png" class = "request-photo">
+									<img src="<?=auto_version("/images/faculties/".$participant['name'].".png")?>" class = "request-photo">
 				    				<div style="display: inline-block;">
 					    				<div class="request-from" style="line-height: 49px">
 					    					<?=$participant['name']?>
 					    				</div>
 					    			</div>
 								<? else: ?>
-				    				<img src="<?=getAvatarPath($participant['photo'], $participant['id_participant'])?>" class = "request-photo">
+				    				<img src="<?=getAvatarPath($participant['photo'], $participant['id'])?>" class = "request-photo">
 				    				<div style="display: inline-block;">
 					    				<div class="request-from">
-					    					<a href="/id<?=$participant['id_participant']?>" style="color: #000"><?=$participant['name']?></a>
+					    					<a href="/id<?=$participant['id']?>" style="color: #000"><?=$participant['name']?></a>
 					    				</div>
 					    				<div class="request-faculty"><?=$participant['faculty']?>, <?=$participant['group']?></div>
 					    			</div>

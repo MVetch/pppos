@@ -13,6 +13,7 @@ $selectFields = array(
     "surname",
     "groups",
     "faculty",
+    "prof_faculty",
     "forma",
     "rating",
     "email",

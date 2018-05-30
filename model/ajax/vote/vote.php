@@ -32,6 +32,17 @@ if(
 			echo 'В этой номинации нельзя голосовать за студента со своего факультета!';
 			die();
 		}
+	} else {
+		$faculty = $db->Select(
+			["id_faculty"],
+			"vote_participants",
+			["id" => $_POST['id']]
+		)->fetchAll("id_faculty");
+
+		if($user->getFaculty() == $faculty[0]){
+			echo 'В этой номинации нельзя голосовать за свой факультет!';
+			die();
+		}
 	}
 	$db->Add(
 		"vote_given",

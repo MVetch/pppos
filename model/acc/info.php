@@ -6,7 +6,7 @@
 		),
 		array(
 			"text" => "Факультет/институт",
-			"value" => $settings['user']['faculty']
+			"value" => $settings['user']['faculty']." (профбюро ".$settings['user']['prof_faculty'].")"
 		),
 		array(
 			"text" => "Форма обучения",

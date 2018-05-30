@@ -19,6 +19,7 @@ spl_autoload_register(function ($class_name) {
 $db = new DB('localhost', 'root', '', 'pppos');
 
 $allowedToVote = array(1,
+	523,
 	192,
 	253,
 	258,
