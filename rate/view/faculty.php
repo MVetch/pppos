@@ -111,3 +111,4 @@
         <input type="submit" value = "Посмореть" class="button">
     </form>
 </div>
+<?=$db->ListAllQueries()?>

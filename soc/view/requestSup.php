@@ -1,5 +1,5 @@
-<?if($user->getNumNotes()['socSup']['count'] > 0):?>
-    <div class = "input-group divCenter">
+<div class = "input-group divCenter">
+    <?if($user->getNumNotes()['socSup']['count'] > 0):?>
         <h1>Писали в прошлом семестре, но не писали в этом</h1>
         <table class="sortable table" border = 1 id = "sor">
             <tr>
@@ -17,7 +17,7 @@
                 </tr>
             <?endforeach?>
         </table>
-    </div>
-<?else:?>
-    Новых оповещений нет
-<?endif?>
+	<?else:?>
+	    Новых оповещений нет
+	<?endif?>
+</div>

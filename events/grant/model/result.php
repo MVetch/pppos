@@ -1,0 +1,2 @@
+<?
+SELECT grant_project.*, grant_criteria.name, SUM(points) FROM grant_project join grant_project_rate on grant_project_rate.id_project = grant_project.id join grant_criteria on grant_project_rate.id_grant_criteria = grant_criteria.id group by grant_project_rate.id_grant_criteria
