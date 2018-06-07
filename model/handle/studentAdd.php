@@ -3,9 +3,9 @@ if(isset($_POST['registration'])){
     include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
     AUser::Add(
         array(
-            "surname" => $_POST['surname'],
-            "name" => $_POST['name'],
-            "thirdName" => $_POST['thirdName']
+            "surname" => trim(mb_ucfirst($_POST['surname'])),
+            "name" => trim(mb_ucfirst($_POST['name'])),
+            "thirdName" => trim(mb_ucfirst($_POST['thirdName']))
         ),
         array(
             "id_group" => $_POST['group'],
