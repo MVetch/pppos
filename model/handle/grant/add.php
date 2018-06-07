@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 if(User::LEVEL() != 2) Main::error403();
 // echo json_encode($_POST['comments']);
 //dump($_POST, true);
-
+$user = new User();
 foreach ($_POST['smeta']['amount'] as $key => $value) {
 	if(!is_numeric($value)) Main::error("Количество должно быть числом!");
 }
@@ -17,7 +17,7 @@ $id_project = $db->Add(
 		"name" => $_POST['name'],
 		"org_id" => $_POST['id_student'],
 		"faculty" => $user->getFaculty(),
-		"description" => json_encode($_POST['comments'])
+		"description" => json_encode($_POST['comments'], JSON_UNESCAPED_UNICODE)
 	]
 );
 

@@ -21,7 +21,7 @@ $result['projectVoted'] = array_unique(
 		[],
 		"grant_project_rate",
 		[
-			"id_from" => $user->getLevel()
+			"id_from" => $user->getId()
 		]
 	)->fetchAll("id_project")
 );

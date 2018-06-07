@@ -47,6 +47,20 @@ class AUser extends User
 	public static function Add(array $values, array $group)
 	{
 		global $db;
+		if($db->Select(
+	        [],
+	        "full_info",
+	        [
+	            "surname" => [$values['surname'], trim(mb_ucfirst($values['surname']))],
+	            "name" => [$values['name'], trim(mb_ucfirst($values['name']))],
+	            "thirdName" => [$values['thirdName'], trim(mb_ucfirst($values['thirdName']))],
+	            "id_group" => $group['id_group'],
+	            "year" => $group['year'],
+	            "magistratura" => $group['magistratura']
+	        ]
+	    )->num_rows > 0) {
+	        Main::error('Этот человек уже зарегистрирован в системе.');
+	    }
 		$db->Add("students", $values);
     	$id = $db->insert_id;
     	$group['id_student'] = $id;

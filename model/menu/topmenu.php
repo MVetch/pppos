@@ -12,8 +12,25 @@ switch ($settings['userLevel']) {
 		);
 		$result[] = array(
 			"name" => "Мероприятия",
-			"isParent" => false,
-			"link" => "/events/"
+			"link" => "",
+			"isParent" => true,
+			"childs" => array(
+				array(
+					"name" => "Посмотреть список",
+					"link" => "/events",
+					"isParent" => false,
+				),
+				array(
+					"name" => "Поиск",
+					"link" => "/events/search",
+					"isParent" => false,
+				),
+				array(
+					"name" => "Добавить новое",
+					"link" => "/events/new",
+					"isParent" => false,
+				)
+			)
 		);
 		break;
 	case 1:
@@ -38,9 +55,54 @@ switch ($settings['userLevel']) {
 		);
 		$result[] = array(
 			"name" => "Мероприятия",
-			"isParent" => false,
-			"link" => "/events/",
-			"numReq" => $newEvents
+			"link" => "",
+			"numReq" => $newEvents,
+			"isParent" => true,
+			"childs" => array(
+				array(
+					"name" => "Посмотреть список",
+					"link" => "/events",
+					"isParent" => false,
+				),
+				array(
+					"name" => "Поиск",
+					"link" => "/events/search",
+					"isParent" => false,
+				),
+				array(
+					"name" => "Добавить",
+					"link" => "/events/new",
+					"isParent" => false,
+				),
+				array(
+					"name" => "Новые",
+					"link" => "/events/requests",
+					"isParent" => false,
+					"numReq" => $newEvents,
+				),
+				array(
+					"name" => "Гранты",
+					"link" => "",
+					"isParent" => true,
+					"childs" => array(
+						array(
+							"name" => "Новый проект",
+							"link" => "/events/grant/new",
+							"isParent" => false,
+						),
+						array(
+							"name" => "Список",
+							"link" => "/events/grant",
+							"isParent" => false,
+						),
+						array(
+							"name" => "Результаты",
+							"link" => "/events/grant/result",
+							"isParent" => false,
+						),
+					)
+				)
+			)
 		);
 		$result[] = array(
 			"name" => "Соц. выплаты",
