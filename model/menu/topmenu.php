@@ -29,6 +29,28 @@ switch ($settings['userLevel']) {
 					"name" => "Добавить новое",
 					"link" => "/events/new",
 					"isParent" => false,
+				),
+				array(
+					"name" => "Гранты",
+					"link" => "",
+					"isParent" => true,
+					"childs" => array(
+						// array(
+						// 	"name" => "Новый проект",
+						// 	"link" => "/events/grant/new",
+						// 	"isParent" => false,
+						// ),
+						array(
+							"name" => "Список",
+							"link" => "/events/grant",
+							"isParent" => false,
+						),
+						array(
+							"name" => "Результаты",
+							"link" => "/events/grant/result",
+							"isParent" => false,
+						),
+					)
 				)
 			)
 		);
@@ -85,11 +107,11 @@ switch ($settings['userLevel']) {
 					"link" => "",
 					"isParent" => true,
 					"childs" => array(
-						array(
-							"name" => "Новый проект",
-							"link" => "/events/grant/new",
-							"isParent" => false,
-						),
+						// array(
+						// 	"name" => "Новый проект",
+						// 	"link" => "/events/grant/new",
+						// 	"isParent" => false,
+						// ),
 						array(
 							"name" => "Список",
 							"link" => "/events/grant",

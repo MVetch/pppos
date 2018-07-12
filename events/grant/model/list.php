@@ -7,7 +7,7 @@ if($settings['pagination']){
 }
 
 $res = $db->Select(
-	array("id", "name", "fio", "faculty", "org_id"),
+	array("id", "name", "fio", "faculty", "rg_name", "org_id", "id_from"),
 	"grant_project_names",
 	array(),
 	array(),//array("date" => "DESC"),

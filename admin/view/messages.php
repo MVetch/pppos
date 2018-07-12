@@ -1,9 +1,9 @@
 <?foreach($result as $key => $student):?>
-	<div class="request-holder" style="height: 230px">
+	<div class="request-holder" style="height: 230px;<?if(!empty($student['answer'])):?> background-color: #ccc;<?endif?>">
 		<div class="request-deny"><input type="button" name="refuse" value="Ответить" class="cancelbtn" onclick="document.getElementById('messageBox<?=$student['id_message']?>').style.display ='block';"></div>
 		<div class="request-what"><?=htmlspecialchars_decode($student['message'])?></div>
 
-		<div class = "user-info">
+		<div class = "user-info"<?if(!empty($student['answer'])):?> style=" background-color: #ccc;"<?endif?>>
 			<div style="display: inline-block; margin-left: 5px;">
 				<img src="<?=getAvatarPath($student['photo'], $student['id_student'])?>" class = "request-photo">
 				<div style="display: inline-block;">

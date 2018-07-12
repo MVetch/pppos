@@ -1,5 +1,6 @@
-<div style="width: 60%; margin: auto;">
-<table class="table" border="1">
+<div style="width: 100%; margin: auto;">
+
+<table class="table" border="1" style="text-align: justify;">
 	<tbody>
 		<tr>
 			<td>Наименование</td>
@@ -71,6 +72,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<?if(!$result['project']['isVoted'] and (in_array($user->getId(), [326, 309, 189]) or $user->getFaculty() !== $result['project']["faculty"] and $result['project']['isProforg'])):?>
 	<hr>
 	<h4>Оценка</h4>
 	<form action="<?=FORM_HANDLER_DIR?>grant/givepoints.php" method="post">
@@ -110,4 +112,5 @@
 		<input type="hidden" name="proj" value="<?=$_GET['id']?>">
 		<input type="submit" name="subm" class="button">
 	</form>
+	<?endif?>
 </div>

@@ -196,6 +196,7 @@ class DB extends mysqli
 			$cWhere = count($where);
 			foreach ($where as $key => $value) {
 				$cWhere--;
+				$value = $this->escape($value);
 				$first = substr($key, 0, 1);
 				switch ($first) {
 					case '>':
@@ -223,13 +224,15 @@ class DB extends mysqli
 				if($first == "~") {
 					$query .= $key." LIKE '".$value."'";
 				} elseif($first == "!") {
-					$query .= "NOT ".$key." = '".$value."'";
-				} elseif(in_array($first, array("=", "*"))) {
-					if(is_array($value)){ 
-						$value = implode("', '", $this->escape($value));
-						$query .= $key." IN('".$value."')";
+					if(is_array($value)) {
+						$query .= "NOT ".$key." IN('".implode("', '", $value)."')";
 					} else {
-						$value = $this->escape($value);
+						$query .= "NOT ".$key." = '".$value."'";
+					}
+				} elseif(in_array($first, array("=", "*"))) {
+					if(is_array($value)) {
+						$query .= $key." IN('".implode("', '", $value)."')";
+					} else {
 						$query .= $key." = '".$value."'";
 					}
 				} elseif($first == "><") {

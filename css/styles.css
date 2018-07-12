@@ -23,8 +23,8 @@
  *
  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);
-@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);
+@import url(https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1192,7 +1192,6 @@ label.forcheckbox {
   font-weight: normal;
   cursor: pointer;
   position: relative;
-    top: 3px;
 }
 
 input[type="radio"].radio,
