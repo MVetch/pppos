@@ -33,23 +33,6 @@
                         <div style="float: right; height: 65px; padding-right: 15px;">
                             <div class="cancelbtn white-krestik" onclick="deleteProj(<?=$project['id']?>)"></div>
                         </div>
-                        <script type="text/javascript">
-                            function deleteProj(id) {
-                                document.getElementById("event" + id).innerHTML="<img src='/images/loading.gif'>";
-                                $(function(){
-                                    $.ajax({
-                                        type: "POST",
-                                        url: '/model/ajax/grant/delete.php',
-                                        data: {
-                                            id:id
-                                        },
-                                        success: function(data){
-                                            document.getElementById("event" + id).remove();
-                                        }
-                                    });
-                                });
-                            }
-                        </script>
                         <?endif?>
                     </div>
                     <hr style="margin-top: 10px">
@@ -59,3 +42,20 @@
     </div>
     <?=$result['pageNav']?>
 </div>
+<script type="text/javascript">
+    function deleteProj(id) {
+        document.getElementById("event" + id).innerHTML="<img src='/images/loading.gif'>";
+        $(function(){
+            $.ajax({
+                type: "POST",
+                url: '/model/ajax/grant/delete.php',
+                data: {
+                    id:id
+                },
+                success: function(data){
+                    document.getElementById("event" + id).remove();
+                }
+            });
+        });
+    }
+</script>

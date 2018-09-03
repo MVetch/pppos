@@ -20,6 +20,9 @@ class Main
 			"search" => array(1,2,3,4,5),
 			"requests" => array(1),
 		),
+		"events/grant" => array(
+			"newgrant" => array(1),
+		),
 		"acc" => array(
 			"nothing" => array(1,2,3,4,5),
 			"accInfo" => array(1,2,3,4,5),
@@ -62,6 +65,7 @@ class Main
 		"students" => array(
 			"add" => array(1,2,3,4,5),
 			"search" => array(1,2,3,4,5),
+			"alcometer" => array(null,1,2,3,4,5),
 		),
 		"tasks" => array(
 			"add" => array(1),
@@ -85,7 +89,7 @@ class Main
 	* @param array $settings параметры для подключения. В зависимости от этих данных может меняться контент на странице.
 	* @return array $result полученный массив, который можно использовать далее на странице и передавать его (или его части) как параметр для следующего элемента (например, какие разделы показывать, исходя из доступных разделов меню)
 	*/
-	public static function IncludeThing($type, $name, $settings = array())
+	public static function includeThing($type, $name, $settings = array())
 	{
 		global $user, $db;
 		$result = array();
