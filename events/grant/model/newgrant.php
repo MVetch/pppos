@@ -1,11 +1,20 @@
 <?
-$result['grants'] = $db->Select([], "grants")->fetchAll();
-foreach ($result['grants'] as $key => $grant) {
-	$date_end = new DateTime($grant['date_start']);
-	$date_end->add(new DateInterval('P'.$grant['duration_request'].'D'));
-	$result['grants'][$key]['date_end_request'] = $date_end->format('Y-m-d');
-	$date_end->add(new DateInterval('P1D'));
-	$result['grants'][$key]['date_start_vote'] = $date_end->format('Y-m-d');
-	$date_end->add(new DateInterval('P'.$grant['duration_vote'].'D'));
-	$result['grants'][$key]['date_end_vote'] = $date_end->format('Y-m-d');
+$res = $db->Select([], "grants")->fetchAll();
+foreach ($res as $key => $grant) {
+	$result['grants'][] = Grant::full(
+		$grant['id'], 
+		$grant['date_start'], 
+		$grant['duration_request'], 
+		$grant['duration_vote'], 
+		$grant['is_on']
+	);
 }
+$res = $db->Select(
+	[], 
+	"grants", 
+	[
+		"is_on" => 1,
+		">=ADDDATE(date_start, duration_request)" => date("Y-m-d")
+	]
+)->fetchAll("id");
+$result['grant_active'] = empty($res) ? -1 : $res[0];

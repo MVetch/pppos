@@ -160,7 +160,7 @@
     var temp;
     buttons = document.getElementsByClassName("toDisable");
     function deletePers(tag){
-        document.getElementById("div"+tag.id).innerHTML = "<img src='/images/loading.gif' style='width:40px; height:40px'>";
+        document.getElementById("div"+tag.id).innerHTML = "<img src='<?=auto_version('/images/loading.gif');?>' style='width:40px; height:40px'>";
         $(function(){
             $.ajax({
                 type: "POST",
@@ -175,7 +175,7 @@
     }
     
     function deletePersPod(tag){
-        document.getElementById("div_pod"+tag.id).innerHTML = "<img src='/images/loading.gif' style='width:40px; height:40px'>";
+        document.getElementById("div_pod"+tag.id).innerHTML = "<img src='<?=auto_version('/images/loading.gif');?>' style='width:40px; height:40px'>";
         $(function(){
             $.ajax({
                 type: "POST",
@@ -236,7 +236,7 @@
     }
     
     function updatePersPod(tag) {
-        document.getElementById("pupdBut"+tag.id).innerHTML = "<img src='/images/loading.gif' style='width:40px; height:40px'>";
+        document.getElementById("pupdBut"+tag.id).innerHTML = "<img src='<?=auto_version('/images/loading.gif');?>' style='width:40px; height:40px'>";
         var e = document.getElementById("pstatus"+tag.id);
         var status = e.options[e.selectedIndex].text;
         var statusId = e.options[e.selectedIndex].value;
@@ -326,7 +326,7 @@
     }
     
     function updatePersStip(tag) {
-        document.getElementById("supdBut"+tag.id).innerHTML = "<img src='/images/loading.gif' style='width:40px; height:40px'>";
+        document.getElementById("supdBut"+tag.id).innerHTML = "<img src='<?=auto_version('/images/loading.gif');?>' style='width:40px; height:40px'>";
         var e = document.getElementById("sstatus"+tag.id);
         var status = e.options[e.selectedIndex].text;
         var statusId = e.options[e.selectedIndex].value;
@@ -363,7 +363,7 @@
         });
     }
     function set_do(tag) {
-        //document.getElementById("supdBut"+tag.id).innerHTML = "<img src=\"/images/loading.gif\" style=\"width:40px; height:40px\">";
+        //document.getElementById("supdBut"+tag.id).innerHTML = "<img src=\"<?=auto_version('/images/loading.gif');?>\" style=\"width:40px; height:40px\">";
         
         $(function(){
             $.ajax({

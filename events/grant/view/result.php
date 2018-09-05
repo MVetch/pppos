@@ -1,4 +1,5 @@
 <div class="divCenter">
+	<h3></h3>
 <?if($user->getId() == 159 || $user->getId() == 1):?>
 <h4>Оценки</h4>
 <table class="table" border="1" style="font-size: 7pt;">

@@ -22,6 +22,7 @@ class Main
 		),
 		"events/grant" => array(
 			"newgrant" => array(1),
+			"add" => array(1,2,3,4,5),
 		),
 		"acc" => array(
 			"nothing" => array(1,2,3,4,5),

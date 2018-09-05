@@ -4,8 +4,14 @@ $result['faculties'] = $db->Select([],"faculty")->fetchAll("name");
 
 $res = $db->Select(
 	array(),
-	"grant_project_points"
+	"grant_project_points",
+	["id_grant" => $_GET['id']]
 );
+
+if($res->num_rows == 0) {
+	Main::errorMessage("Проекты еще не оценивали");
+}
+$result['empty'] = false;
 
 $ids_project = [];
 
@@ -17,8 +23,6 @@ while($list = $res->fetch()) {
 	$result['points'][$list['id']]["points"][$list['id_from']]["points"][$list['criteria']] = $list['points'];
 	$ids_project[] = $list['id'];
 }
-
-//if()
 
 foreach ($result['criterias'] as $criteria) {
 	$result['total_avg'][$criteria] = 0;
@@ -76,6 +80,5 @@ while($list = $res->fetch()) {
 foreach ($result['points'] as $id_project => $project) {
 	$result['total_sum_money'] += $result['points'][$id_project]['more_than_total_koef'] * $result['points'][$id_project]['money'];
 }
-
 
 //dump($result['points']);

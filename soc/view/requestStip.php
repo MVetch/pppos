@@ -75,7 +75,7 @@
 </div>
 <script>
     function updatePersStip(tag) {
-        document.getElementById("supdBut"+tag.id).innerHTML = "<img src=\"/images/loading.gif\" style=\"width:40px; height:40px\">";
+        document.getElementById("supdBut"+tag.id).innerHTML = "<img src=\"<?=auto_version('/images/loading.gif');?>\" style=\"width:40px; height:40px\">";
         
         $(function(){
             $.ajax({

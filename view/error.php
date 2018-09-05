@@ -1,1 +1,1 @@
-<div style = "margin:auto; text-align:center"><p><?=$error?></p></div>
+<div style = "margin:auto; text-align:center"><h4><?=$error?></h4></div>

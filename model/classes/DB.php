@@ -144,7 +144,7 @@ class DB extends mysqli
 	 */
 	public function throw_error($query = "")
 	{
-		global $user;
+		global $user, $db;
 		$id = isset($user)?$user->getId():"1";
 	    $this->query('
 	        INSERT 
@@ -164,7 +164,9 @@ class DB extends mysqli
 	            "'.$this->escape($query).'"
 	        )
 	    ', false, false);
-	    die('<META HTTP-EQUIV="REFRESH" CONTENT="0; URL=/ups.php">');
+	    include_once $_SERVER['DOCUMENT_ROOT']."/ups.php";
+	    include_once $_SERVER['DOCUMENT_ROOT']."/footer.php";
+	    die();
 	}
 	
 	/**
@@ -238,7 +240,7 @@ class DB extends mysqli
 				} elseif($first == "><") {
 					$query .= $key." BETWEEN '".$value[0]."' AND '".$value[1]."'";
 				} else {
-					$query .= $key.$first.'"'.$value.'"';
+					$query .= $key.$first."'".$value."'";
 				}
 				if($cWhere){
 					$query .= " AND ";

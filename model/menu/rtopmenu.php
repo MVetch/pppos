@@ -21,6 +21,10 @@ if($user->getLevel() == 1){
 		"name" => "Админка",
 		"link" => "/admin"
 	);
+	$result[] = array(
+		"name" => "Новый грант",
+		"link" => "/events/grant/newgrant"
+	);
 }
 $result[] = array(
 	"name" => "Связаться с нами",

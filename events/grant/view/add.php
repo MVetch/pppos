@@ -9,14 +9,6 @@
 			<option value="<?=$rg['id_rg']?>"><?=$rg['name']?></option>
 			<?endforeach?>
 		</select>
-		<!-- <div id="faculty">
-		<p>Факультет</p>
-		<select class="form-control" name="faculty">
-			<?foreach($result['faculties'] as $rg):?>
-			<option value="<?=$rg['name']?>"><?=$rg['name']?></option>
-			<?endforeach?>
-		</select>
-		</div> -->
 		<p>Название</p>
 		<input type="text" name="name" class="form-control" required>
 

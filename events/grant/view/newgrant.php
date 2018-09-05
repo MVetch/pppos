@@ -22,24 +22,29 @@
 </div>
 <hr>
 <?foreach($result['grants'] as $grant):?>
-	<div class="request-holder" id='grant<?=$grant['id']?>' style="background-color: <?if($grant['is_on'] == 1):?>green<?else:?>red;<?endif?>">
+	<div class="request-holder" id='grant<?=$grant->getId()?>' style="background-color: <?if($grant->isActive()):?>green<?else:?>red;<?endif?>">
         <div class="request-info">
-            <div class="request-from" style="font-size: 20px; position: relative;">Прием заявок: <?=get_date($grant['date_start'])?> - <?=get_date($grant['date_end_request'])?></div>
-            <div class="request-from" style="font-size: 20px; position: relative;">Голосование: <?=get_date($grant['date_start_vote'])?> - <?=get_date($grant['date_end_vote'])?></div>
+            <div class="request-from" style="font-size: 20px; position: relative;">Прием заявок: <?=$grant->getDateStart("d.m.Y")?> - <?=$grant->getDateEndRequests("d.m.Y")?></div>
+            <div class="request-from" style="font-size: 20px; position: relative;">Голосование: <?=$grant->getDateStartVote("d.m.Y")?> - <?=$grant->getDateEndVote("d.m.Y")?></div>
     	</div>
     	<div class = "user-info divCenter">
-    		<h2 id="grantOpenHeader<?=$grant['id']?>">Прием заявок <?if($grant['is_on'] == 1):?>открыт<?else:?>закрыт<?endif?></h2>
+    		<h2 id="grantOpenHeader<?=$grant->getId()?>">Прием заявок <?if($grant->isActive()):?>открыт<?else:?>закрыт<?endif?></h2>
     	</div>
         <div class="request-apply">
-            <div class="button" onclick="window.location.href = 'grant<?=$grant['id']?>'" style="width: 100%; height: 100%"><div style="width: 0;
+            <div class="button" onclick="window.location.href = '<?=$grant->getId()?>'" style="width: 100%; height: 100%"><div style="width: 0;
                                                                                                         height: 0;
                                                                                                         border-top: 20px solid transparent;
                                                                                                         border-bottom: 20px solid transparent;
                                                                                                         border-left: 30px solid white;"></div></div>
         </div>
-        <div class="request-deny">
-        	<div class="button request-deny-button" id="switchButton<?=$grant['id']?>" style="background-image: url('/images/on-off-black.png')" onclick="switchGrantOpen(<?=$grant['id']?>, <?if($grant['is_on'] == 1):?>0<?else:?>1<?endif?>)"></div>
+        <div class="request-deny" style="right: 65px">
+            <div class="button request-deny-button" style="background-image: url('/images/vote.png')" onclick="window.location.href = '<?=$grant->getId()?>/result'"></div>
         </div>
+        <?if($grant->isActivatable()):?>
+            <div class="request-deny" style="right: 125px">
+                <div class="button request-deny-button" id="switchButton<?=$grant->getId()?>" style="background-image: url('/images/on-off-black.png')" onclick="switchGrantOpen(<?=$grant->getId()?>, <?if($grant->isActive()):?>0<?else:?>1<?endif?>)"></div>
+            </div>
+        <?endif?>
     </div>
 <?endforeach?>
 <script type="text/javascript">
@@ -60,7 +65,7 @@
 	presentationCalc()
 
 	function newGrant() {
-        document.getElementById("load").innerHTML="<img src='/images/loading.gif'>";
+        document.getElementById("load").innerHTML="<img src='<?=auto_version('/images/loading.gif');?>'>";
         $(function(){
             $.ajax({
                 type: "POST",
@@ -76,8 +81,10 @@
             });
         });
     }
-
+    var oldId = <?=$result['grant_active']?>;
     function switchGrantOpen(id, switchTo){
+        var oldIdTemp = oldId //ну потому что при смене oldId оно заново (зачем-то) подставляется в измененную функцию. такие дела
+        document.getElementById("switchButton" + id).style.backgroundImage = "url('<?=auto_version('/images/loading.gif');?>')";
     	$(function(){
             $.ajax({
                 type: "POST",
@@ -87,9 +94,17 @@
                     switchTo:switchTo
                 },
                 success: function(data){
+                    if(oldId > 0) {
+                        document.getElementById("grant" + oldId).style.backgroundColor = "red";
+                        document.getElementById("grantOpenHeader" + oldId).innerHTML = "Прием заявок закрыт";
+                        document.getElementById("switchButton" + oldId).onclick = function () { switchGrantOpen(oldIdTemp, 1); };
+                    }
                     document.getElementById("grant" + id).style.backgroundColor = (switchTo == 0 ? "red" : "green");
                     document.getElementById("grantOpenHeader" + id).innerHTML = "Прием заявок " + (switchTo == 0 ? "закрыт" : "открыт");
                     document.getElementById("switchButton" + id).onclick = function () { switchGrantOpen(id, (switchTo == 1 ? 0 : 1)); };
+                    document.getElementById("switchButton" + id).style.backgroundImage = "url(<?=auto_version('/images/on-off-black.png');?>)";
+                    oldId = id;
+                    document.getElementById("load").innerHTML = data;
                 }
             });
         });

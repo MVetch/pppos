@@ -1,9 +1,10 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^new$ add.php [L]
-RewriteRule ^newgrant$ newgrant.php [L]
-RewriteRule ^detail([0-9]+)$ detail.php?id=$1 [L]
 RewriteRule ^$ list.php [L]
-RewriteRule ^([0-9]+)/$ list.php?page=$1 [L]
-RewriteRule ^result$ result.php [L]
+RewriteRule ^([0-9]+)/new$ add.php [L]
+RewriteRule ^newgrant$ newgrant.php [L]
+RewriteRule ^([0-9]+)$ list.php?id=$1 [L]
+RewriteRule ^([0-9]+)/([0-9]+)/$ list.php?id=$1&page=$1 [L]
+RewriteRule ^detail([0-9]+)$ detail.php?id=$1 [L]
+RewriteRule ^([0-9]+)/result$ result.php?id=$1 [L]

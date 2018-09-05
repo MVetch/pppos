@@ -1,8 +1,6 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-//dump($_POST['comments']);
-//dump(json_encode($_POST['comments'], JSON_UNESCAPED_UNICODE), true);
-if(User::LEVEL() < 3) Main::error403();
+//if(User::LEVEL() < 3) Main::error403();
 if(!isset($_POST['id_student']) || empty($_POST['id_student'])){
     Main::error("Такого студента нет.");
 }
@@ -13,16 +11,18 @@ foreach ($_POST['smeta']['amount'] as $key => $value) {
 foreach ($_POST['smeta']['price'] as $key => $value) {
 	if(!is_numeric($value)) Main::error("Цена должна быть числом!");
 }
+$grant = GrantList::getActive();
+if(!$grant){ die(); }
 
 foreach ($_POST['comments'] as $key => $value) {
 	$_POST['comments'][$key] = test_input($value);
 }
-
 $id_project = $db->Add(
 	"grant_project",
 	[
 		"name" => $_POST['name'],
 		"org_id" => $_POST['id_student'],
+		"id_grant" => $grant->getId(),
 		isset($_POST['napr'])?"id_rg":"faculty" => isset($_POST['napr'])?$_POST['rg']:$user->getFaculty(),
 		"id_from" => $user->getId(),
 		"description" => json_encode($_POST['comments'], JSON_UNESCAPED_UNICODE)
@@ -40,4 +40,4 @@ foreach ($_POST['smeta']['name'] as $key => $name) {
 		]
 	);
 }
-Main::redirect("/events/grant/new");
+Main::redirect("/events/grant/0/new");

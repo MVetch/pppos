@@ -44,7 +44,7 @@
 </div>
 <script type="text/javascript">
     function deleteProj(id) {
-        document.getElementById("event" + id).innerHTML="<img src='/images/loading.gif'>";
+        document.getElementById("event" + id).innerHTML="<img src='<?=auto_version('/images/loading.gif');?>'>";
         $(function(){
             $.ajax({
                 type: "POST",

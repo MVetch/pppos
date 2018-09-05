@@ -20,8 +20,7 @@ $db->Add(
 	[
 		"date_start" => $_POST['date_start'],
 		"duration_request" => $_POST['duration_request'],
-		"duration_vote" => $_POST['duration_vote'],
-		"is_on" => 1
+		"duration_vote" => $_POST['duration_vote']
 	]
 );
 echo "Грант успешно добавлен. Проекты можно будет загружать с момента начала их приема.";

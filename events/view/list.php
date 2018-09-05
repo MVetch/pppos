@@ -54,7 +54,7 @@
     fetchMore = function (){
         if ( $('#events').scrollTop() >= $('#evcont').height()-$('#events').height()){
             $('#events').unbind('scroll', fetchMore);
-            document.getElementById('load').innerHTML="<img src='/images/loading.gif' style = 'text-align:center'>";
+            document.getElementById('load').innerHTML="<img src='<?=auto_version('/images/loading.gif');?>' style = 'text-align:center'>";
             $.post(
             	'/model/ajax/fetchMoreEvents.php',{'er':ec},
                 function(data) {

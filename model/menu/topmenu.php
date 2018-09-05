@@ -29,28 +29,6 @@ switch ($settings['userLevel']) {
 					"name" => "Добавить новое",
 					"link" => "/events/new",
 					"isParent" => false,
-				),
-				array(
-					"name" => "Гранты",
-					"link" => "",
-					"isParent" => true,
-					"childs" => array(
-						// array(
-						// 	"name" => "Новый проект",
-						// 	"link" => "/events/grant/new",
-						// 	"isParent" => false,
-						// ),
-						array(
-							"name" => "Список",
-							"link" => "/events/grant",
-							"isParent" => false,
-						),
-						array(
-							"name" => "Результаты",
-							"link" => "/events/grant/result",
-							"isParent" => false,
-						),
-					)
 				)
 			)
 		);
@@ -101,28 +79,6 @@ switch ($settings['userLevel']) {
 					"link" => "/events/requests",
 					"isParent" => false,
 					"numReq" => $newEvents,
-				),
-				array(
-					"name" => "Гранты",
-					"link" => "",
-					"isParent" => true,
-					"childs" => array(
-						// array(
-						// 	"name" => "Новый проект",
-						// 	"link" => "/events/grant/new",
-						// 	"isParent" => false,
-						// ),
-						array(
-							"name" => "Список",
-							"link" => "/events/grant",
-							"isParent" => false,
-						),
-						array(
-							"name" => "Результаты",
-							"link" => "/events/grant/result",
-							"isParent" => false,
-						),
-					)
 				)
 			)
 		);
@@ -188,4 +144,32 @@ if($settings['userLevel'] == 4){
 			"numReq" => $settings['requests']['tasks']['count']
 		);
 	}
+}
+
+$grant = GrantList::getActive();
+if(!$grant) $grant = GrantList::getLast();
+if($grant) {
+	$result[1]["childs"][] = array(
+		"name" => "Гранты",
+		"link" => "",
+		"isParent" => true,
+		"childs" => array(
+			array(
+				"name" => "Новый проект",
+				"link" => "/events/grant/".$grant->getId()."/new",
+				"isParent" => false,
+				"active" => $grant->isOn()
+			),
+			array(
+				"name" => "Список",
+				"link" => "/events/grant/".$grant->getId(),
+				"isParent" => false,
+			),
+			array(
+				"name" => "Результаты",
+				"link" => "/events/grant/".$grant->getId()."/result",
+				"isParent" => false,
+			),
+		)
+	);
 }
