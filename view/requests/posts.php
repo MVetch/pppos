@@ -29,6 +29,8 @@
 				</div>
 			<?endforeach?>
 			</div>
+			<div style="clear: both"></div>
+			<?=$result['pageNav']?>
 		<?endif?>
 	<?else:?>
 		Новых заявок нет.

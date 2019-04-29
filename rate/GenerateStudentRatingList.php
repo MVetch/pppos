@@ -1,16 +1,16 @@
 <?
 include_once $_SERVER['DOCUMENT_ROOT']."/model/start.php";
-if(User::LEVEL() != 1) error403();
+if(User::LEVEL() != 1) Main::error403();
 
 $semester = $db->escape($_POST['numsemester']);
 $year_begin_edu = $db->escape($_POST['year']);
 
-$this_sem_start = $semester==1?$year_begin_edu.'-08-01':($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'03':'02').'-01';
-$this_sem_end = $semester==1?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):($year_begin_edu+1).'-07-31';
-$prev_sem_start = $semester==2?$year_begin_edu.'-08-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
-$prev_sem_end = $semester==2?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):$year_begin_edu.'-07-31';
-$prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-08-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
-$prev_prev_sem_end = $semester==1?$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'02-28':'01-31'):$year_begin_edu.'-07-31';
+$this_sem_start = $semester==1?$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'09':'08').'-01':($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'03':'02').'-01';
+$this_sem_end = $semester==1?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):($year_begin_edu+1).'-'.(isset($_POST['secondAugust'])?'08':'07').'-31';
+$prev_sem_start = $semester==2?$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'09':'08').'-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
+$prev_sem_end = $semester==2?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'08':'07').'-31';
+// $prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-08-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
+// $prev_prev_sem_end = $semester==1?$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'02-28':'01-31'):$year_begin_edu.'-07-31';
 
 $students = $db->query('
     SELECT 

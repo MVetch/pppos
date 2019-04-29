@@ -45,6 +45,7 @@ class User
 			$this->password = $params['password'];
 			$this->level = $params['level'];
 			$this->photo = $params['photo'];
+			$this->lastOnline = !empty($params['last_online'])?new DateTime($params['last_online']):'';
 	        $this->CountNumNotes();
 	    }
 	}
@@ -171,6 +172,12 @@ class User
 	 * @var string
 	 */
 	public $photo;
+
+	/**
+	 * Время последнего посещения страницы
+	 * @var DateTime
+	 */
+	public $lastOnline;
 
 	public function getId()
 	{

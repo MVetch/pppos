@@ -95,7 +95,7 @@ $result['events'] = $db->query('
         event_points.id_role = roles.id_role AND 
         event_points.id_level = event_levels.id_level
     WHERE
-        events.date > '.$prev_prev_sem_start.'
+        events.date > "'.$prev_prev_sem_start.'"
     ORDER BY 
         events.date DESC
 ')->fetchAll();

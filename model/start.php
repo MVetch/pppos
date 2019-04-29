@@ -10,6 +10,8 @@ define("MAX_PHOTO_IN_MB", 5);
 define("MAX_FILE_IN_MB", 5);
 define("NOREPLY_EMAIL", "profcom@xn--c1anddibeiyke.xn--p1ai");
 
+date_default_timezone_set('Europe/Moscow');
+
 include_once "php/functions.php";
 spl_autoload_register(function ($class_name) {
 	if(file_exists($_SERVER['DOCUMENT_ROOT'].'/model/classes/'.$class_name.'.php')){

@@ -18,7 +18,8 @@ $selectFields = array(
     "rating",
     "email",
     "phone_number",
-    "photo"
+    "photo",
+    "last_online"
 );
 if(!$is_mine) {
     $result = AUser::getInfo(
@@ -35,6 +36,9 @@ if(!$is_mine) {
         $selectFields
     );
 }
+
+$result['last_online'] = !empty($result['last_online'])?new DateTime($result['last_online']):'';
+
 if(!empty($result['photo'])){
     if (file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$result['photo'])){
     } elseif(file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$_GET['id'].".".$result['photo'])){

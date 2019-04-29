@@ -96,8 +96,9 @@ class DBResult
 	/**
 	 * Генерирует навигационную панель для вывода разбитой на страницы выборки
 	 * @param int $curPage текущая страница
+	 * @param string $prefix дополнение к GET-запросу, если нужно
 	 */
-	public function GeneratePageNav(int $curPage)
+	public function GeneratePageNav(int $curPage, string $prefix = '')
 	{
 		$nav = '';
 		parse_str($_SERVER['QUERY_STRING'], $output);
@@ -105,51 +106,51 @@ class DBResult
 			$nav .= '<div class="divCenter">';
 			if($curPage < 5){
 				for ($i=1; $i < $curPage + 2; $i++) { 
-					$output['page'] = $i;
+					$output[$prefix . 'page'] = $i;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.$i.'</a> ';
 				}
 			} else {
-				$output['page'] = 1;
+				$output[$prefix . 'page'] = 1;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>1</a> ';
-				$output['page'] = 2;
+				$output[$prefix . 'page'] = 2;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>2</a> ';
 			}
 			if($curPage > 4) {
 				$nav .= ' ... ';
 				if ($curPage < $this->num_pages - 3) {
-					$output['page'] = $curPage - 1;
+					$output[$prefix . 'page'] = $curPage - 1;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage - 1).'</a> ';
-					$output['page'] = $curPage;
+					$output[$prefix . 'page'] = $curPage;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage).'</a> ';
-					$output['page'] = $curPage + 1;
+					$output[$prefix . 'page'] = $curPage + 1;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($curPage + 1).'</a> ';
 					$nav .= ' ... ';
-					$output['page'] = $this->num_pages - 1;
+					$output[$prefix . 'page'] = $this->num_pages - 1;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages - 1).'</a> ';
-					$output['page'] = $this->num_pages;
+					$output[$prefix . 'page'] = $this->num_pages;
 					$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages).'</a> ';
 				} else {
 					for ($i = $curPage - 1; $i < $this->num_pages + 1; $i++) { 
-						$output['page'] = $i;
+						$output[$prefix . 'page'] = $i;
 						$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.$i.'</a> ';
 					}
 				}
 			} else {
 				$nav .= ' ... ';
-				$output['page'] = $this->num_pages - 1;
+				$output[$prefix . 'page'] = $this->num_pages - 1;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages - 1).'</a> ';
-				$output['page'] = $this->num_pages;
+				$output[$prefix . 'page'] = $this->num_pages;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'>'.($this->num_pages).'</a> ';
 			}
 			$nav .= '</div>';
 		} else {
 			$nav .= '<div class="divCenter">';
 			if($curPage > 1){
-				$output['page'] = $curPage - 1;
+				$output[$prefix . 'page'] = $curPage - 1;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'> <-- '.($curPage - 1).'</a> | ';
 			}
 			if($curPage < $this->num_pages){
-				$output['page'] = $curPage + 1;
+				$output[$prefix . 'page'] = $curPage + 1;
 				$nav .= '<a href = '.$_SERVER['REDIRECT_URL']."?".http_build_query($output).'> '.($curPage + 1).' --> </a>';
 			}
 			$nav .= '</div>';

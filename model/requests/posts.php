@@ -1,7 +1,8 @@
 <?
 if(isset($user->getNumNotes()['posts']['notes'])){
+	$prefix = 'posts_';
 	if($settings['pagination']){
-	    $page = isset($_GET['page'])?($_GET['page']):1;
+	    $page = isset($_GET[$prefix . 'page'])?($_GET[$prefix . 'page']):1;
 	    $limit = array(($page - 1) * PAGINATION_PER_PAGE, PAGINATION_PER_PAGE);
 	} else {
 	    $limit = array();
@@ -16,6 +17,6 @@ if(isset($user->getNumNotes()['posts']['notes'])){
 		[],
 		$limit
 	);
-	$result['pageNav'] = $settings['pagination']?$res->GeneratePageNav($page):'';
+	$result['pageNav'] = $settings['pagination']?$res->GeneratePageNav($page, $prefix):'';
 	$result['requests'] = $res->fetchAll();
 }

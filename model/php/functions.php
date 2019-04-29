@@ -145,6 +145,26 @@ function semesterFromDate($month = false, $year = false) {
     return array('year_begin_edu' => $year_begin_edu, 'semester' => $semester);
 }
 
+function prevSemesterFromDate($month = false, $year = false) {
+    if(!$month){
+        $month = date("m");
+    }
+    if(!$year){
+        $year = date("Y");
+    }
+    if($month>=8 and $month<=12){
+      $year_begin_edu = $year;//год, в котором начался учебный
+      $semester=1;
+    } else if ($month < 2){
+        $year_begin_edu = $year-1;//год, в котором начался учебный
+        $semester=1;
+    } else {
+        $year_begin_edu = $year-1;
+        $semester=2;
+    }
+    return array('year_begin_edu' => $year_begin_edu, 'semester' => $semester);
+}
+
 function died($error) {
     echo '<div class="divCenter">'.$error.'</div>';
 }
@@ -178,6 +198,22 @@ function mb_ucfirst($str){
         $i++;
     }
     return mb_strtoupper(mb_substr($str, $i, 1)).mb_strtolower(mb_substr($str,$i+1));
+}
+
+function mb_firstCapital($str) {
+    $i = 0;
+    $forbidden = [
+        " ",
+        ",",
+        ".",
+        "/",
+        "\\"
+    ];
+    while(in_array($str[$i], $forbidden)){
+        $i++;
+    }
+    return mb_strtoupper(mb_substr($str, $i, 1)).mb_substr($str,$i+1);
+
 }
 
 function surnameNO($name){

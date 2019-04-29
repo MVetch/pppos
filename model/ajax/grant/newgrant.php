@@ -3,9 +3,9 @@ include $_SERVER['DOCUMENT_ROOT']."/model/start.php";
 if(User::LEVEL() >= 2) {
 	Main::error403();
 }
-if(date("Y-m-d") > $_POST['date_start']){
-	$_POST['date_start'] = date("Y-m-d");
-}
+// if(date("Y-m-d") > $_POST['date_start']){
+// 	$_POST['date_start'] = date("Y-m-d");
+// }
 if($_POST['duration_request'] < 3){
 	$_POST['duration_request'] = 3;
 }

@@ -85,7 +85,7 @@
                     <td style="width:20%">
                         <select name="budget" required="required" align="center" style="width:100px" class="form-control">
                             <option value="1">Бюджет</option>
-                            <option value="0">Контракт</option>        
+                            <option value="0">Контракт</option>
                         </select>
                     </td>   
                     
@@ -95,7 +95,7 @@
                             <option>1</option>
                             <option>1.4</option>
                             <option>1.7</option>
-                            <option>2.0</option>        
+                            <option>2.0</option>
                         </select>
                     </td>
                     <td></td>

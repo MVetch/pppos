@@ -30,6 +30,8 @@
 				</div>
 			<?endforeach?>
 			</div>
+			<div style="clear: both"></div>
+			<?=$result['pageNav']?>
 		<?endif?>
 	<?endif?>
 </div>

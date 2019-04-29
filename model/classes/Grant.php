@@ -55,6 +55,11 @@ class Grant
 		return $this->getDateEndRequests("Y-m-d") > date("Y-m-d");
 	}
 
+	public function isVotable()
+	{
+		return !(bool)$this->isOn or betweenInclude(date("Y-m-d"), $this->getDateStartVote("Y-m-d"), $this->getDateEndVote("Y-m-d"));
+	}
+
 	public function getId()
 	{
 		return $this->id;

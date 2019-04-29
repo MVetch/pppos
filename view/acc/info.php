@@ -9,7 +9,11 @@
             </div>
         <?endif?>
     </div>
-    <div style = "display:inline-block; position:relative; left:20px;vertical-align: text-bottom;">
+    <div style = "display:inline-block; position:relative; left:20px;vertical-align: text-bottom;width: calc(100% - 235px)">
+        <?if(!empty($settings['user']['last_online'])):?>
+            <div style="float: right;"><?if($settings['user']['last_online'] > (new DateTime())->sub(new DateInterval("PT5M"))):?>Сейчас на сайте<?else:?>Последний визит <?=$settings['user']['last_online']->format("d.m.Y в H:i")?><?endif?></div>
+            <div style="clear: both"></div>
+        <?endif?>
         <p style="font-size:20pt; text-transform: uppercase; font-weight:bold"><?=$settings['user']['surname']?> <?=$settings['user']['name']?></p>
         <?foreach($result as $row):?>
             <p><?=$row['text']?>: <?=$row['value']?></p>

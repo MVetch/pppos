@@ -4,6 +4,11 @@ $result['project'] = $db->Select(
 	"grant_project_names",
 	array("id" => $_GET['id'])
 )->fetch();
+
+if(isset($result['project']['id_grant'])){
+	$result['grant'] = Grant::fromID($result['project']['id_grant']);
+}
+
 //dump(preg_replace("/[\n\r]+/", "<br />", $result['project']['description'])));
 $result['project']['description'] = json_decode(preg_replace("/[\t]/", " ", preg_replace("/[\n\r]+/", "<br />", $result['project']['description'])), true);
 

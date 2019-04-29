@@ -72,7 +72,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<?if(!$result['project']['isVoted'] and (in_array($user->getId(), [326, 309, 189]) or $user->getFaculty() !== $result['project']["faculty"] and $result['project']['isProforg'])):?>
+	<?if(!$result['grant']->isVotable() and !$result['project']['isVoted'] and (in_array($user->getId(), [326, 309, 189]) or $user->getFaculty() !== $result['project']["faculty"] and $result['project']['isProforg'])):?>
 	<hr>
 	<h4>Оценка</h4>
 	<form action="<?=FORM_HANDLER_DIR?>grant/givepoints.php" method="post">

@@ -208,14 +208,13 @@ $style_header_blue_bottom = array(
 	)
 );
 
+//Выравнивание
 $style = array(
-	//Шрифт
 	'font'=>array(
 		'bold' => false,
 		'name' => 'Times New Roman',
 		'size' => 11
 	),
-//Выравнивание
 	'alignment' => array(
 		'horizontal' => PHPExcel_STYLE_ALIGNMENT::HORIZONTAL_CENTER,
 		'vertical' => PHPExcel_STYLE_ALIGNMENT::VERTICAL_CENTER,
@@ -236,8 +235,6 @@ $style = array(
 	)
 );
 
-// for ( $j=2; $j<51; $j++)
-//  $active_sheet->getStyle('A'.$j.':B'.$j)->applyFromArray($style);
 //Создаем шапку таблички данных
 $active_sheet->getStyle('A1')->applyFromArray($style_header);
 $active_sheet->getStyle('B1')->applyFromArray($style_header);
@@ -258,18 +255,28 @@ $active_sheet->getStyle('D2')->applyFromArray($style_header_orange);
 $active_sheet->setCellValue('C2','Отчетный период');
 $counter = 3;
 
-$temp = semesterFromDate();
-$semester = $temp['semester'];
-$year_begin_edu = $temp['year_begin_edu'];
+// $temp = semesterFromDate();
+// $semester = $temp['semester'];
+// $year_begin_edu = $temp['year_begin_edu'];
 
+// $this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
+// $this_sem_end = $semester==1?($year_begin_edu + 1).'-01-31':($year_begin_edu+1).'-08-31';
+// $prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';
+// $prev_sem_end = $semester==2?($year_begin_edu+1).'-01-31':$year_begin_edu.'-08-31';
+// $prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-09-01':$year_begin_edu.'-02-01';
+// $prev_prev_sem_end = $semester==1?$year_begin_edu.'-01-31':$year_begin_edu.'-08-31';
+
+$semester = $db->escape($_POST['numsemester']);
+$year_begin_edu = $db->escape($_POST['year']);
 // $semester = 1;
 // $year_begin_edu = 2017;
-$this_sem_start = $semester==1?$year_begin_edu.'-09-01':($year_begin_edu+1).'-02-01';
-$this_sem_end = $semester==1?($year_begin_edu + 1).'-01-31':($year_begin_edu+1).'-08-31';
-$prev_sem_start = $semester==2?$year_begin_edu.'-09-01':$year_begin_edu.'-02-01';
-$prev_sem_end = $semester==2?($year_begin_edu+1).'-01-31':$year_begin_edu.'-08-31';
-$prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-09-01':$year_begin_edu.'-02-01';
-$prev_prev_sem_end = $semester==1?$year_begin_edu.'-01-31':$year_begin_edu.'-08-31';
+
+$this_sem_start = $semester==1?$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'09':'08').'-01':($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'03':'02').'-01';
+$this_sem_end = $semester==1?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):($year_begin_edu+1).'-'.(isset($_POST['secondAugust'])?'08':'07').'-31';
+$prev_sem_start = $semester==2?$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'09':'08').'-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
+$prev_sem_end = $semester==2?($year_begin_edu+1).'-'.(isset($_POST['firstMarch'])?'02-28':'01-31'):$year_begin_edu.'-'.(isset($_POST['secondAugust'])?'08':'07').'-31';
+// $prev_prev_sem_start = $semester==1?($year_begin_edu-1).'-08-01':$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'03':'02').'-01';
+// $prev_prev_sem_end = $semester==1?$year_begin_edu.'-'.(isset($_POST['secondMarch'])?'02-28':'01-31'):$year_begin_edu.'-07-31';
 
 /*---за отчетный период---*/
 
@@ -333,7 +340,7 @@ if($count_events > 0){
 				while ($pointer_events < $count_events and $result_events[$pointer_events]['id_level'] == $cur_level) {//перечисляем все уровни мероприятий
 					$active_sheet->getStyle('C'.$counter)->applyFromArray($style);
 					$active_sheet->getStyle('D'.$counter)->applyFromArray($style);
-					$active_sheet->setCellValue('C'.$counter, htmlspecialchars_decode(mb_ucfirst($result_events[$pointer_events]['event'])));
+					$active_sheet->setCellValue('C'.$counter, htmlspecialchars_decode(mb_firstCapital($result_events[$pointer_events]['event'])));
 					$active_sheet->setCellValue('D'.$counter, mb_ucfirst($result_events[$pointer_events]['this']));
 					$total+=$result_events[$pointer_events]['this'];
 					$counter++;
@@ -412,7 +419,7 @@ if($count_events > 0){
 				while ($pointer_events < $count_events and $result_events[$pointer_events]['id_level'] == $cur_level) {//перечисляем все уровни мероприятий
 					$active_sheet->getStyle('C'.$counter)->applyFromArray($style);
 					$active_sheet->getStyle('D'.$counter)->applyFromArray($style);
-					$active_sheet->setCellValue('C'.$counter, htmlspecialchars_decode(mb_ucfirst($result_events[$pointer_events]['event'])));
+					$active_sheet->setCellValue('C'.$counter, htmlspecialchars_decode(mb_firstCapital($result_events[$pointer_events]['event'])));
 					$active_sheet->setCellValue('D'.$counter, mb_ucfirst($result_events[$pointer_events]['past']));
 					$total+=$result_events[$pointer_events]['past'];
 					$counter++;
