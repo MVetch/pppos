@@ -34,20 +34,8 @@
             <div class="event-box" data-mcs-theme="dark" id="events" style = "min-height:0;max-height:100%;height:auto">
             <?foreach($result['students'] as &$student):?>
                 <li style="height:120px" onclick="window.location.href='/id<?=$student['id_student']?>'">
-                    <div class="date-box circleDiv">
-                        <?
-                        if(!empty($student['photo'])){
-                            if (file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$student['photo'])){
-                            } elseif(file_exists($_SERVER['DOCUMENT_ROOT'].AVATAR_DIR.$student['id_student'].".".$student['photo'])){
-                                $student['photo'] = $student['id_student'].".".$student['photo'];
-                            } else {
-                                $student['photo'] = "no_photo.png";
-                            }
-                        } else {
-                            $student['photo'] = "no_photo.png";
-                        }
-                        ?>
-                        <img src="<?=AVATAR_DIR.$student['photo']?>" style="height:100%;width:100%" class="avatar">
+                    <div style="border-width: 3px; float: left; width: 100px; height: 100px;" class="avatar request-photo">
+                        <img src="<?=getAvatarPath($student['photo'], $student['id_student'])?>" class="avatar-photo">
                     </div>
                     <div style="margin-left:7px;">
                         <div class="event-name"><?=$student['surname']?> <?=$student['name']?> <?=$student['thirdName']?></div>

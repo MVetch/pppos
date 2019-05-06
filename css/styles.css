@@ -1193,7 +1193,6 @@ label.forcheckbox {
   font-weight: normal;
   cursor: pointer;
   position: relative;
-  top: 3px;
 }
 
 input[type="radio"].radio,

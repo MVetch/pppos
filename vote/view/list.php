@@ -4,7 +4,12 @@
 <? foreach($result['votes'] as $id_vote => $vote):?>
 	<div class="vote">
 		<li style="position: relative; ">
-			<h1 style="text-align: center; color: red; font-weight: bold;"><?=$vote['vote_name']?></h1>
+            <div style="position:relative;">
+			    <h1 style="text-align: center; color: red; font-weight: bold; width: 80%; margin-left: 10%"><?=$vote['vote_name']?></h1>
+                <?if($user->getLevel() <= 1):?>
+                <button class="button edit" style="right: 5%; position: absolute; top: 0;" onclick="window.location.href = '/vote/edit?vote=<?=$id_vote?>'"></button>
+                <?endif;?>
+            </div>
 			<hr>
 			<? foreach ($vote['parts'] as $id => $participant): ?>
 				<div style="border-bottom: 1px solid black;">
@@ -29,7 +34,10 @@
 					    				</div>
 					    			</div>
 								<? else: ?>
-				    				<img src="<?=getAvatarPath($participant['photo'], $participant['id'])?>" class = "request-photo">
+                                    <div style="border-width: 2px" class="avatar request-photo">
+                                        <img src="<?=getAvatarPath($participant['photo'], $participant['id'])?>" class="avatar-photo">
+                                    </div>
+
 				    				<div style="display: inline-block;">
 					    				<div class="request-from">
 					    					<a href="/id<?=$participant['id']?>" style="color: #000"><?=$participant['name']?></a>

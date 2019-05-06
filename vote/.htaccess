@@ -5,3 +5,4 @@ RewriteRule ^$ index.php [L]
 
 RewriteRule ^([a-zA-Z]+)$ $1.php [L]
 RewriteRule ^([a-zA-Z]+)/$ $1.php [L]
+RewriteRule ^edit([0-9]+)$ edit.php?vote=$1 [L]

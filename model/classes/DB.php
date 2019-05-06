@@ -120,6 +120,7 @@ class DB extends mysqli
 			$setVal[] = $key." = '".$value."'";
 		}
 		$this->query("UPDATE ".$table." SET ".implode(", ", $setVal).$this->GenerateWherePart($where));
+        return $this->insert_id;
 	}
 	
 	/**

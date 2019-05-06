@@ -20,7 +20,9 @@
 					</div>
 					<div class = "user-info">
 	    				<div style="display: inline-block; margin-left: 5px;">
-		    				<img src="<?=getAvatarPath($request['photo'], $request['id_student'])?>" class = "request-photo">
+                            <div style="border-width: 2px" class="avatar request-photo">
+                                <img src="<?=getAvatarPath($request['photo'], $request['id_student'])?>" class="avatar-photo">
+                            </div>
 		    				<div style="display: inline-block;">
 			    				<div class="request-from">
 			    					<a href="/id<?=$request['id_student']?>"><?=$request['created_by']?></a>
