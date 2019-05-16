@@ -1,6 +1,9 @@
 
 <?//dump($result)?>
 <!-- <h6>*чтобы увидеть результаты, перезагрузите страницу после, того, как отдадите голос</h6> -->
+<? if($user->getLevel() <= 1 or $user->getId() == (new Vote())->getResponsible()->getId()): ?>
+    <div class="button" style="margin-left: 70%; width: 30%" onclick="window.location.href = '/vote/settings'">Настроить голосование</div>
+<?endif;?>
 <? foreach($result['votes'] as $id_vote => $vote):?>
 	<div class="vote">
 		<li style="position: relative; ">
@@ -27,7 +30,7 @@
 						<div class = "user-info" style="position: relative; padding-bottom: 10px; background-color: transparent;">
 			    			<div style="display: inline-block; margin-left: 5px;">
 								<? if($vote['for_faculty']): ?>
-									<img src="<?=auto_version("/images/faculties/".$participant['name'].".png")?>" class = "request-photo">
+									<img src="<?=auto_version("/images/faculties/".$participant['name'].".png")?>" class = "request-photo" style="border-radius: 0">
 				    				<div style="display: inline-block;">
 					    				<div class="request-from" style="line-height: 49px">
 					    					<?=$participant['name']?>

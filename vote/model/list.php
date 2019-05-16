@@ -1,4 +1,5 @@
 <?
+global $vote;
 $result['vote_given'] = $db->Select(
 	[],
 	"vote_given_names",
@@ -82,5 +83,4 @@ while ($list = $res->fetch()) {
 uasort($result['votes'], function($v1, $v2){
 	return $v1['given_to'] == 0 ? -1 : 1;
 });
-
 //dump($result['votes']);

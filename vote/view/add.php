@@ -1,6 +1,6 @@
 <form method="POST">
 	<div class="input-group divCenter" style="width: 60%">
-		<h2>Название</h2>
+		<h2>Название номинации</h2>
 		<div class="tooltip">
 			<input required type="text" name="Name" style="width:100%" class="form-control" id="name" <?if(!empty($settings["idVote"])): ?> value="<?=$result["vote"]["name"]?>" <?endif?>>
 			<b style="font-weight:bold; font-size:10px" class="tooltiptext" id="tooltip">Введите название номинации</b>
@@ -32,9 +32,7 @@
 				<input list="students" class="form-control fio" name="fio">
 				<datalist id="students">
 				<? foreach ($result['students'] as $student): ?>
-					<option id="<?=$student['id_student']?>">
-                        <?=$student['surname']?> <?=$student['name']?> <?if(!empty($student['thirdName'])):?><?=$student['thirdName']?> <?endif?>(<?=$student['faculty']?>, <?=$student['groups']?>)
-                    </option>
+					<option id="<?=$student['id_student']?>"><?=$student['surname']?> <?=$student['name']?> <?if(!empty($student['thirdName'])):?><?=$student['thirdName']?> <?endif?>(<?=$student['faculty']?>, <?=$student['groups']?>)</option>
 				<? endforeach ?>
 				</datalist>
 				<input type="hidden" name="id_student" id="id_student">
@@ -47,11 +45,11 @@
                   <?if(!empty($result['vote_participants'])):?>
                     <?foreach ($result['vote_participants'] as $participant): ?>
                       <div>
-                        <li>
+                        <li style="position:relative;">
                           <div><?=$participant[$result['vote']['for_faculty']?'faculty_to_vote':'fio']?><?if(!$result['vote']['for_faculty']):?> (<?=$participant['faculty']?>, <?=$participant['group']?>)<?endif;?></div>
                             <div
                                 class="cancelbtn white-krestik"
-                                style="float: right; position: relative; top: -25px;"
+                                style="position: absolute; top: 2.5px; right: 12.5px"
                                 id = "<?=$participant[$result['vote']['for_faculty']?'faculty':'id_student']?>"
                                 onclick="this.parentElement.remove(); parts.splice(parts.indexOf('<?=$participant[$result['vote']['for_faculty']?'faculty_to_vote':'id_student']?>'), 1)"
                             >
@@ -78,17 +76,17 @@
     <?endforeach;?>
   <?endif;?>
 	var show = true
-	function addPart() {
-		var student = document.getElementsByName('fio')[0].value;
-		var id = document.getElementById('id_student').value;
-		if (student !== '' && id !== '' && id !== '0'){
-			parts.push(document.getElementById('id_student').value);
-			$('#partList').append('<li><div>' + student + '</div>' + 
-					'<div class="cancelbtn white-krestik" style="float: right; position: relative; top: -25px;" id = "' + id + '" onclick="this.parentElement.remove(); parts.splice(parts.indexOf(' + id + '), 1)"></div></li>');
-			document.getElementsByName('fio')[0].value  = '';
-			document.getElementById('id_student').value = '';
-		}
-	}
+    function addPart() {
+        var student = document.getElementsByName('fio')[0].value;
+        var id = document.getElementById('id_student').value;
+        if (student !== '' && id !== '' && id !== '0'){
+            parts.push(document.getElementById('id_student').value);
+            $('#partList').append('<li style="position:relative;"><div>' + student + '</div>' +
+                '<div class="cancelbtn white-krestik" style="position: absolute; top: 2.5px; right: 12.5px" id = "' + id + '" onclick="this.parentElement.remove(); parts.splice(parts.indexOf(' + id + '), 1)"></div></li>');
+            document.getElementsByName('fio')[0].value  = '';
+            document.getElementById('id_student').value = '';
+        }
+    }
 	function send(){
 		var name = document.getElementsByName('Name')[0].value
 		if (name === ''){
@@ -116,7 +114,7 @@
 					},
 					success: function(data){
 						document.getElementById('temp').innerHTML = data;
-						window.location.href = <?if(!empty($settings["idVote"])):?>'/vote/edit' + <?=$settings['idVote']?><?else:?>'/vote/add';<?endif;?>
+						window.location.href = <?if(!empty($settings["idVote"])):?>'/vote/edit?vote=' + <?=$settings['idVote']?><?else:?>'/vote/add';<?endif;?>
 
 					}
 				});

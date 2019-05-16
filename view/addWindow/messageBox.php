@@ -24,7 +24,7 @@
 	<div style="width: 100%">
 		<form method="POST" action="<?=FORM_HANDLER_DIR?>sendAnswer.php?id_message=<?=$settings['id']?>">
 			<h5>e-mail отправителя</h5>
-			<input type="text" class="form-control" style="width: 100%" name="email" value="<?=($settings['email']!='0'?$settings['email']:$settings['contact_email'])?>">
+			<input type="text" class="form-control" style="width: 100%" name="email" value="<?=$settings['contact_email']?>">
 			<h5>Отправить ответ</h5>
 			<textarea class="form-control" style="width: 100%" name="answer"></textarea>
 			<div class="divCenter">

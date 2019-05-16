@@ -1,4 +1,5 @@
 <?
+global $vote;
 if (!empty($settings["idVote"])){
     $result["vote"] = $db->Select(
         [],

@@ -284,6 +284,10 @@ class User
 	 */
 	public function getGroups()
 	{
+	    if(!isset($this->groups)){
+	        global $db;
+            $this->groups = $db->Select(["groups"], "full_info", ["id_student" => $this->getId()])->fetch()['groups'];
+        }
 		return $this->groups;
 	}
 
