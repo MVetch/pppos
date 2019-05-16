@@ -13,6 +13,14 @@
     </div>
     <hr>
 <? endif ?>
+<div style="display: table;width: 100%;">
+    <div style="display: table-cell;">
+        <div class="button" style="width: 60%;" onclick="window.location.href = '/vote/list'">Посмотреть список номинаций</div>
+    </div>
+    <div style="display: table-cell;">
+        <div class="button" style="margin-left: 40%; width: 60%;" onclick="window.location.href = '/vote/add'">Добавить номинации</div>
+    </div>
+</div>
 <div class="input-group divCenter" style="width: 100%">
     <h3>Могут участвовать в голосовании</h3>
     <div style="float: left; width: 45%">

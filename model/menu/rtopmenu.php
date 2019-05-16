@@ -16,6 +16,12 @@ if($user->getNumNotes()['posts'] !== false || $user->getNumNotes()['events'] !==
 		"link" => "/requests"
 	);
 }
+if($user->getLevel() == 1 or $user->getId() == $vote->getResponsible()->getId()){
+    $result['menu'][] = array(
+        "name" => "ПрофАКТИВируйся",
+        "link" => "/vote/settings"
+    );
+}
 if($user->getLevel() == 1){
 	$result['menu'][] = array(
 		"name" => "Админка",

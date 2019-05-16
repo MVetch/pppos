@@ -1,7 +1,7 @@
 
 <?//dump($result)?>
 <!-- <h6>*чтобы увидеть результаты, перезагрузите страницу после, того, как отдадите голос</h6> -->
-<? if($user->getLevel() <= 1 or $user->getId() == (new Vote())->getResponsible()->getId()): ?>
+<? if($user->getLevel() <= 1 or $user->getId() == $vote->getResponsible()->getId()): ?>
     <div class="button" style="margin-left: 70%; width: 30%" onclick="window.location.href = '/vote/settings'">Настроить голосование</div>
 <?endif;?>
 <? foreach($result['votes'] as $id_vote => $vote):?>

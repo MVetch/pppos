@@ -1,6 +1,5 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/header.php";
-$vote = new Vote();
 if($user->getLevel() <= 1 or $user->getId() == $vote->getResponsible()->getId()){
     Main::includeThing(
         "vote",
