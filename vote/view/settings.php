@@ -1,4 +1,10 @@
 <? if($user->getLevel() <= 1)://просто ответственному нельзя ?>
+    <div class="input-group divCenter">
+        <form action="<?=FORM_HANDLER_DIR?>voteSettings.php" method="post"">
+            <input type="submit" class="button" style="width: 100%" value="<?if($result['isOn']):?>Отключить<?else:?>Включить<?endif;?> голосование" name="submit">
+        </form>
+    </div>
+    <hr>
     <div class="input-group divCenter" style="width: 45%">
         <h2>Ответственный</h2>
         <?if($result['responsible']->getId() !== '1'):?>

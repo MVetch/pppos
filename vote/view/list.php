@@ -4,21 +4,21 @@
 <? if($user->getLevel() <= 1 or $user->getId() == $vote->getResponsible()->getId()): ?>
     <div class="button" style="margin-left: 70%; width: 30%" onclick="window.location.href = '/vote/settings'">Настроить голосование</div>
 <?endif;?>
-<? foreach($result['votes'] as $id_vote => $vote):?>
+<? foreach($result['votes'] as $id_vote => $nomination):?>
 	<div class="vote">
 		<li style="position: relative; ">
             <div style="position:relative;">
-			    <h1 style="text-align: center; color: red; font-weight: bold; width: 80%; margin-left: 10%"><?=$vote['vote_name']?></h1>
+			    <h1 style="text-align: center; color: red; font-weight: bold; width: 80%; margin-left: 10%"><?=$nomination['vote_name']?></h1>
                 <?if($user->getLevel() <= 1):?>
                 <button class="button edit" style="right: 5%; position: absolute; top: 0;" onclick="window.location.href = '/vote/edit?vote=<?=$id_vote?>'"></button>
                 <?endif;?>
             </div>
 			<hr>
-			<? foreach ($vote['parts'] as $id => $participant): ?>
+			<? foreach ($nomination['parts'] as $id => $participant): ?>
 				<div style="border-bottom: 1px solid black;">
-				<input type="radio" class="checkbox-vote" name="part<?=$id_vote?>" value="<?=$participant['id_participant']?>" id = "part<?=$participant['id_participant']?><?=$id_vote?>"<? if($vote['given_to'] == $participant['id_participant']): ?> checked style = "background-color: #444;"<?endif?><? if($vote['given_to'] != 0): ?> disabled<? endif ?>>
+				<input type="radio" class="checkbox-vote" name="part<?=$id_vote?>" value="<?=$participant['id_participant']?>" id = "part<?=$participant['id_participant']?><?=$id_vote?>"<? if($nomination['given_to'] == $participant['id_participant']): ?> checked style = "background-color: #444;"<?endif?><? if($nomination['given_to'] != 0): ?> disabled<? endif ?>>
 					<label for = "part<?=$participant['id_participant']?><?=$id_vote?>" class="forcheckbox" style = "width: 90%; margin: 0; position: relative;">
-						<?if($vote['given_to'] != 0 and $user->getId() == 161 or $user->getId() == 1):?>
+						<?if($nomination['given_to'] != 0 and $user->getId() == $vote->getResponsible()->getId() or $user->getLevel() == 1):?>
 						<div style="background-color: #ddd; width: 100%; height: 100%; position: absolute;">
 							<div style="background-color: #bbb; width: <?=$participant['percentage']?>%; height: 100%; position: absolute;">
 							</div>
@@ -29,7 +29,7 @@
 						<?endif?>
 						<div class = "user-info" style="position: relative; padding-bottom: 10px; background-color: transparent;">
 			    			<div style="display: inline-block; margin-left: 5px;">
-								<? if($vote['for_faculty']): ?>
+								<? if($nomination['for_faculty']): ?>
 									<img src="<?=auto_version("/images/faculties/".$participant['name'].".png")?>" class = "request-photo" style="border-radius: 0">
 				    				<div style="display: inline-block;">
 					    				<div class="request-from" style="line-height: 49px">
@@ -56,7 +56,7 @@
 		</li>
 		<div id="temp<?=$id_vote?>"></div>
 	</div>
-	<? if($vote['given_to'] == 0): ?>
+	<? if($nomination['given_to'] == 0): ?>
 		<button name="apply" class="button" onclick="giveVote(<?=$id_vote?>)" style = "margin: auto; display: block;" id = "button<?=$id_vote?>">Отдать голос!</button>
 	<? endif ?>
 <? endforeach ?>

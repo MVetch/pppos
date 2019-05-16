@@ -50,7 +50,7 @@ switch ($settings['page']) {
 				"img_src"=>"/images/header-logo.png",
 				"link" => "/soc/stip/calc"
 			);
-            if(in_array($user->getId(), $vote->getAllowed())){
+            if($vote->isOn() and in_array($user->getId(), $vote->getAllowed())){
                 $result[] =	array(
                     "id"=>"vote",
                     "text"=>"Голосовать",

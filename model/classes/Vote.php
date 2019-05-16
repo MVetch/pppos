@@ -31,15 +31,31 @@ class Vote {
      */
     private $participants;
 
+    /*
+     * bool
+     */
+    private $isOn;
+
     public function getResponsible(){
         if(!isset($this->responsible)){
             global $db;
             $this->responsible = new User($db->Select(
                 [],
-                "vote_responsible"
-            )->fetch()['id']);
+                "vote_settings"
+            )->fetch()['id_responsible']);
         }
         return $this->responsible;
+    }
+
+    public function isOn(){
+        if(!isset($this->isOn)){
+            global $db;
+            $this->isOn = (bool)($db->Select(
+                [],
+                "vote_settings"
+            )->fetch()['is_on']);
+        }
+        return $this->isOn;
     }
 
     public function getAllowed(){

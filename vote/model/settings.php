@@ -14,3 +14,5 @@ $result['voters'] = $db->Select(
         "id_student" => $vote->getAllowed()
     ]
 )->fetchAll();
+
+$result['isOn'] = $vote->isOn();
