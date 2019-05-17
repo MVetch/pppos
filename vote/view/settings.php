@@ -28,7 +28,7 @@
     </div>
 </div>
 <div class="input-group divCenter" style="width: 100%">
-    <h3>Могут участвовать в голосовании</h3>
+    <h3>Могут голосовать</h3>
     <div style="float: left; width: 45%">
         <input list="students" class="form-control fio" name="fio">
         <datalist id="students">
@@ -42,7 +42,7 @@
         <div id="temp"></div>
     </div>
     <div style="float: right; width: 50%">
-        <div style="background-color: orange; height:30px"><b>Список участников</b></div>
+        <div style="background-color: orange; height:30px"><b>Список голосующих</b></div>
         <div class="side-bar right-side" style="max-width: 100%; float: none;" id='partList'>
             <?if(!empty($result['voters'])):?>
                 <?foreach ($result['voters'] as $voter): ?>
