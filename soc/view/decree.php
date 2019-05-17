@@ -41,6 +41,7 @@
                                                 </tr>
                                             </table>
                                         </div>
+                                        <p id = psdos<?=$stip['id_socstip']?>></p>
                                     <?else:?>
                                         <div id = sdos<?=$stip['id_socstip']?> style="display: inline-block;">
                                             <p id = psdos<?=$stip['id_socstip']?>><?=get_date($stip['date_end'])?></p>
@@ -287,14 +288,18 @@
             <?endforeach?>
         "</datalist><input type='hidden' name='id_student' id='id_student' value='"+id_student+"'>";
         document.getElementById("sifio" + id).value = temp;
-        
+
         temp = document.getElementById('psdz'+id).innerHTML;
         document.getElementById("psdz" + id).innerHTML = "<input type = 'date' id = 'sidz" + id + "' class='form-control' max='<?=$now?>'>";
         document.getElementById("sidz" + id).value = convDateBack(temp);
 
-        temp = document.getElementById('psdos'+id).innerHTML;
-        document.getElementById("psdos" + id).innerHTML = "<input type = 'date' id = 'sidos" + id + "' class='form-control'>";
-        document.getElementById("sidos" + id).value = convDateBack(temp);
+        if(document.getElementById('psdos'+id).innerHTML !== '') {
+            temp = document.getElementById('psdos'+id).innerHTML;
+            document.getElementById("psdos" + id).innerHTML = "<input type = 'date' id = 'sido" + id + "' class='form-control' max='<?=$now?>'>";
+            document.getElementById("sido" + id).value = convDateBack(temp);
+        } else {
+            document.getElementById(id).style.display = 'none';
+        }
         
         temp = document.getElementById('psss'+id).innerHTML;
         document.getElementById("psss" + id).innerHTML = temp=='отказано'?"<select name='status' id = 'sstatus" + id + "' class='form-control'>"+
@@ -344,14 +349,21 @@
                     fio:document.getElementById("sifio" + tag.id).value,
                     id_student:document.getElementById("id_student").value,
                     dz:document.getElementById("sidz" + tag.id).value,
-                    do:document.getElementById("sidos" + tag.id).value,
+                    do:document.getElementById("sido" + tag.id).value,
                     status:statusId,
                     categ:kategId,
                 },
                 success: function(data){
                     document.getElementById("psfio" + tag.id).innerHTML = document.getElementById("sifio" + tag.id).value;
                     document.getElementById("psdz" + tag.id).innerHTML = get_date(document.getElementById("sidz" + tag.id).value);
-                    document.getElementById("psdos" + tag.id).innerHTML = get_date(document.getElementById("sidos" + tag.id).value);
+                    if(document.getElementById("sido" + tag.id).value !== '') {
+                        document.getElementById("psdos" + tag.id).innerHTML = get_date(document.getElementById("sido" + tag.id).value);
+                        if (document.getElementById("sdo" + tag.id)) {
+                            document.getElementById("sdo" + tag.id).remove();
+                        }
+                    } else {
+                        document.getElementById(tag.id).style.display = 'unset';
+                    }
                     document.getElementById("psss" + tag.id).innerHTML = status;
                     document.getElementById("psks" + tag.id).innerHTML = kateg;
                     document.getElementById("supdBut" + tag.id).innerHTML = data + "<p id = psupdBut"+tag.id+"><input type='button' class = 'edit button toDisable' onclick = 'updateStip("+tag.id+")'></p>";
@@ -374,8 +386,10 @@
                     do:document.getElementById("sido" + tag.id).value
                 },
                 success: function(data){
-                    if(data == "")
-                        document.getElementById("sdo" + tag.id).innerHTML = get_date(document.getElementById("sido" + tag.id).value);
+                    if(data == "") {
+                        document.getElementById("psdos" + tag.id).innerHTML = get_date(document.getElementById("sido" + tag.id).value);
+                        document.getElementById("sdo" + tag.id).remove();
+                    }
                     else
                         document.getElementById("sdo" + tag.id).innerHTML += "<br>" + data;
                     //document.getElementById("supdBut"+tag.id).innerHTML = "<input class='galochka button' id='" + tag.id + "' type='button' onclick = 'updatePersStip(this)'>"

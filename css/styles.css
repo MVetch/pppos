@@ -684,7 +684,7 @@ table.sortable tr:nth-child(1) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow:ellipsis;
-  max-width:100%;
+  width:520px;
 }
 
 .event-level {
