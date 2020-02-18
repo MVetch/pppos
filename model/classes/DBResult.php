@@ -30,7 +30,7 @@ class DBResult
 		$this->mysqli_result = $res;
 		if($paginated > 0) {
 			global $db;
-			$this->all_rows = $db->query("SELECT FOUND_ROWS() AS rows")->fetch()['FOUND_ROWS()'];
+			$this->all_rows = $db->query("SELECT FOUND_ROWS()")->fetch()['FOUND_ROWS()'];
 			$this->num_pages = ceil($this->all_rows / $paginated);
 		}
 	}
