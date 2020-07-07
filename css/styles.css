@@ -172,14 +172,14 @@ table.sortable tr:nth-child(1) {
 }
 
 .enterText {
-  margin:10px;
-  font-size: 100px; 
+  margin: 10px;
+  font-size: 100px;
   background-color: black;
-  font-weight:bold;
-  border-radius:5%;
-  max-width:800px;
-  min-width:603px;
-  color:#fff;
+  font-weight: bold;
+  border-radius: 4rem;
+  max-width: 800px;
+  min-width: 700px;
+  color: #fff;
 }
 
 .edit-button-holder {
@@ -356,6 +356,7 @@ table.sortable tr:nth-child(1) {
 
 
 .button {
+  width: 97%;
   padding: 5px 10px;
   font-size: 18px;
   text-align: center;
@@ -1031,11 +1032,12 @@ label {
 }
 
 .container {
+  
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  min-height:70vh;
+  min-height: 70vh;
 }
 .container:before, .container:after {
   content: " ";
@@ -1636,6 +1638,15 @@ tr.border-bottom {
   font-weight: bold;
 }
 
+.form-control{
+  width: 95% !important;
+}
+
+.site-navigation li ul.submenu {
+  left: 0;
+  top: 0;
+  width: 35%;
+}
 
 }
 

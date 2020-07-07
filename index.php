@@ -1,5 +1,11 @@
 <? include "headerwnl.php";?>
-
+<style>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
 <div class="enter">
     <div>
         <div class="enterText">П<a href="/soc/stip/calc" style="cursor: inherit; color: inherit; text-decoration: inherit;">Р</a>ОФКОМ<br>СТУДЕНТОВ</div>
