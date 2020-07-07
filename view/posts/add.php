@@ -188,7 +188,7 @@
             case 16://"Физорг" 
             case 18://"Наставник факультета"
             case 17://"Наставник старшего куратора"
-                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого факультета?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ФАИ</option><option>ФИТ</option><option>ИМ</option><option>МИ</option><option>ФТФ</option><option>ФГСНиП</option><option>ЭФ</option><option>ИСФ</option></select>";
+                document.getElementById("comment_"+ (c.id).toString()).innerHTML="<h5 align='center'>Какого факультета?</h5><select id='comment"+(c.id)+"' class='form-control' name='comment[]' style='width:80%'><option>ФАИ</option><option>ФИТ</option><option>ИМ</option><option>МИ</option><option>ФТФ</option><option>ФГСНиП</option><option>ЭФ</option><option>ИСФ</option><option>УК</option></select>";
                 break;
             case 3://"Куратор" 
             case 4://"Староста группы" 

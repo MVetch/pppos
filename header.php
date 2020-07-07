@@ -23,8 +23,9 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
         <link rel="stylesheet" href="<?=auto_version('/css/jquery.mCustomScrollbar.css');?>" />
         <link rel="shortcut icon" type="img/x-icon" href="/favicon.ico">
         <script src="/js/datalist-polyfill.min.js"></script>
+        <script src="/js/mobile-main.js"></script>
     </head>
-    <body style="border:1px;">
+    <body>
         <script type="text/javascript" src="<?=auto_version('/js/jquery-2.2.4.js');?>"></script> 
         <script type="text/javascript" src="<?=auto_version('/js/help.js');?>"></script> 
         <script src="<?=auto_version('/js/jquery.mCustomScrollbar.concat.min.js');?>"></script>
@@ -45,9 +46,16 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
         <header id="masthead" class="site-header navbar-fixed-top">
             <div class="row" style="max-width:1024px;margin:auto">
             	<div class="logo navbar-brand">
-            		<img src="<?=auto_version('/images/Logo.png');?>" style="height:63px;width:auto;cursor: pointer;" onclick="window.location.href='/index.php'">
+                    <img class="main__logo" src="<?=auto_version('/images/Logo.png');?>" style="height:63px;width:auto;cursor: pointer;" onclick="window.location.href='/index.php'">
+                    <div class="menu__bar-mobile">
+                        <span class="bar__mobile-item"></span>
+                        <span class="bar__mobile-item"></span>
+                        <span class="bar__mobile-item"></span>
+
+
+                    </div>
             	</div><!-- end logo -->
-            	<nav class="site-navigation" role="navigation" style="height:1px;">
+            	<nav class="site-navigation" role="navigation">
             		<ul>
                         <?Main::IncludeThing(
                             "menu",
@@ -69,8 +77,9 @@ if (!empty(Main::get_cookie("LOG")) && !empty(Main::get_cookie("HPS")))
                 </nav><!-- primary-navigation -->
             </div><!-- end row -->
         </header><!-- end #masthead -->
+       
 		<section class="home-service">
-			<div class="container">
+			<div class="container content__container">
 				<div class="row">
                     <?$lmenu = Main::IncludeThing(
                         "menu",

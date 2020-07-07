@@ -1,7 +1,7 @@
 <? include "headerwnl.php";?>
 
 <div class="enter">
-    <div style="padding:30px; max-width:800px;min-width:641px; margin:auto;">
+    <div>
         <div class="enterText">П<a href="/soc/stip/calc" style="cursor: inherit; color: inherit; text-decoration: inherit;">Р</a>ОФКОМ<br>СТУДЕНТОВ</div>
         <?
         if(!empty(Main::get_cookie("LOG"))) {
@@ -16,9 +16,9 @@
         }
         ?>
         <?if($logged):?>
-            <input type="button" class="button" value="Перейти в личный кабинет" style="width:98%" onclick="window.location.href = 'id<?=$user->getId()?>'">
+            <input type="button" class="button" value="Перейти в личный кабинет" onclick="window.location.href = 'id<?=$user->getId()?>'">
         <?else:?>
-            <input type="button" class="button" value="Войти" style="width:98%" onclick="document.getElementById('enter').style.display='block'">
+            <input type="button" class="button" value="Войти"  onclick="document.getElementById('enter').style.display='block'">
         <?endif?>
     </div>
 </div>

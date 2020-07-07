@@ -32,6 +32,7 @@
                             <option>ФГСНиП</option>
                             <option>ЭФ</option>
                             <option>ИСФ</option>
+                            <option>УК</option>
                         </select>
                     </td>
                     

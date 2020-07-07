@@ -11,6 +11,6 @@
         <?endforeach?>
     </div>
 
-    <div style="width:75%;">
+    <div class="main__page-content">
         <div style="margin:auto;">
 <?endif?>

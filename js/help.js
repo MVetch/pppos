@@ -362,6 +362,7 @@ function checkName(form){
         if(name.substring(name.lastIndexOf(" ")+1) == "ФАИ"||
             name.substring(name.lastIndexOf(" ")+1) == "ФИТ"||
             name.substring(name.lastIndexOf(" ")+1) == "ИСФ"||
+            name.substring(name.lastIndexOf(" ")+1) == "УК"||
             name.substring(name.lastIndexOf(" ")+1) == "ФТФ"||
             name.substring(name.lastIndexOf(" ")+1) == "ФГСНиП"||
             name.substring(name.lastIndexOf(" ")+1) == "ИМ"||

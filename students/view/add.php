@@ -1,7 +1,7 @@
 <div class="divCenter">
     <h1>Новый студент</h1>
     <form method=POST action="<?=FORM_HANDLER_DIR?>studentAdd.php">
-        <div class="input-group" style="margin:auto">
+        <div class="input-group"z>
             <table style="width:100%; margin:auto">
                 <tr>
                     <td>
@@ -43,6 +43,7 @@
                             <option>ФГСНиП</option>
                             <option>ЭФ</option>
                             <option>ИСФ</option>
+                            <option>УК</option>
                         </select>
                     </td>
                     
